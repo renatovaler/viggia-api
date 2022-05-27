@@ -2,4 +2,4 @@
 
 namespace App\Domains\User\Actions\GetUserProfileInformation;
 
-class GetUserProfileInformationHandler {}
+final class GetUserProfileInformationHandler {}

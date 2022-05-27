@@ -2,6 +2,7 @@
 
 namespace App\Domains\User\Http\Auth\Controllers;
 
+use Illuminate\Http\Request;
 use App\Domains\User\Models\User;
 use App\Kernel\Http\Controllers\Controller;
 
@@ -12,5 +13,8 @@ class GetAuthenticatedUserProfileInformationController extends Controller
      *
      * @return \App\Domains\User\Models\User
      */
-    public function __invoke(): User {}
+    public function __invoke(Request $request): User
+    {
+        return $request->user();
+    }
 }
