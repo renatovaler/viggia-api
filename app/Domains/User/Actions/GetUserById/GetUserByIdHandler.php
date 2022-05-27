@@ -8,35 +8,16 @@ use App\Domains\User\Actions\GetUserById\GetUserByIdResponse;
 
 final class GetUserByIdHandler
 {
-
-    public $query;
-    /**
-     * Método construtor da classe
-     *
-     * @param \App\Domains\User\Actions\GetUserById\GetUserByIdQuery $query
-     * @return void (implicit)
-     */
-    public function __construct(GetUserByIdQuery $query)
-    {
-        $this->query = $query;
-    }
-
     /**
      * Executa a ação
      *
-     * @param \App\Domains\User\Actions\GetUserById\GetUserByIdCommand $command
-     * @return \App\Domains\User\Actions\GetUserById\GetUserByIdResponse
+     * @param \App\Domains\User\Actions\GetUserById\GetUserById $query
+     * @return \App\Domains\User\Actions\GetUserById\UserDto
      */
-    public function handle(GetUserByIdCommand $command): GetUserByIdResponse
+    public function handle(GetUserById $command): UserDto
     {
-        $user = $this->query->getUserById($command->id);
-        return (
-            new GetUserByIdResponse(
-                $user->id,
-                $user->name,
-                $user->email,
-                $user->email_verified_at
-            )
-        );
+        $user = User::findUserByIdOrFail($query->userId)
+
+        return UserDto::fromModel($user);
     }
 }

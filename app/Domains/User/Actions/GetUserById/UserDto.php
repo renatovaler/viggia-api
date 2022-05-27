@@ -2,7 +2,7 @@
 
 namespace App\Domains\User\Actions\GetUserById;
 
-final class GetUserByIdResponse
+final class UserDto
 {
     /**
      * Método construtor da classe
@@ -10,7 +10,7 @@ final class GetUserByIdResponse
      * @param readonly string $id
      * @param readonly string $name
      * @param readonly string $email
-     * @param readonly string $email_verified_at
+     * @param readonly string $emailVerifiedAt
      *
      * @return void (implicit)
      */
@@ -18,6 +18,16 @@ final class GetUserByIdResponse
         public readonly string $id,
         public readonly string $name,
         public readonly string $email,
-        public readonly string $email_verified_at
+        public readonly string $emailVerifiedAt
     ) {}
+
+    public static function fromModel(User $user): self
+    {
+        return new self(
+            $user->id,
+            $user->name,
+            $user->email,
+            $user->email_verified_at
+        );
+    }
 }

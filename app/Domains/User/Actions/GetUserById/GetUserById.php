@@ -4,7 +4,7 @@ namespace App\Domains\User\Actions\GetUserById;
 
 use Illuminate\Foundation\Bus\Dispatchable;
 
-final class GetUserByIdCommand
+final class GetUserById
 {
     use Dispatchable;
 
