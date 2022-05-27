@@ -2,9 +2,10 @@
 
 namespace App\Domains\User\Providers;
 
-use App\Domains\User\Actions\GetUserProfileInformation;
-use App\Domains\User\Contracts\iGetUserProfileInformation;
+use App\Domains\User\Actions\GetUserById\GetUserByIdCommand;
+use App\Domains\User\Actions\GetUserById\GetUserByIdHandler;
 
+use Illuminate\Support\Facades\Bus;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
@@ -72,6 +73,21 @@ class UserServiceProvider extends ServiceProvider
 
         // map routes
         $this->map();
+
+        // commands and handlers
+        $this->registerCommandsAndHandlers();
+    }
+
+    /**
+     * Mapeia os comandos e handlers respectivos
+     *
+     * @return void
+     */
+    public function registerCommandsAndHandlers(): void
+    {
+        Bus::map([
+            GetUserByIdCommand::class => GetUserByIdHandler::class,
+        ]);
     }
 
     /**

@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace App\Domains\User\Actions\GetUserProfileInformation;
+namespace App\Domains\User\Actions\GetUserById;
 
-final class GetUserProfileInformationDTO
+final class GetUserByIdResponse
 {
     /**
      * Método construtor da classe
