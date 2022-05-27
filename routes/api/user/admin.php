@@ -26,15 +26,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
-	
+	/*
 	// Another users		
 	// Get another user profile information
+	
 	Route::get('{user}/profile', [GetUserProfileInformationController::class, '__invoke'])
 	->name('api.admin.users.profile.show');
 	
 	// Update another user profile information
 	Route::put('{user}/profile', [UpdateUserProfileInformationController::class, '__invoke'])
 	->name('api.admin.users.profile.update');
-	
+	*/
 });
 

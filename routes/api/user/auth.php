@@ -2,9 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Domains\User\Http\Auth\Controllers\UpdateAuthenticatedUserPasswordController;
 use App\Domains\User\Http\Auth\Controllers\GetAuthenticatedUserProfileInformationController;
-use App\Domains\User\Http\Auth\Controllers\UpdateAuthenticatedUserProfileInformationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,15 +25,12 @@ use App\Domains\User\Http\Auth\Controllers\UpdateAuthenticatedUserProfileInforma
 */
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
-		// Get authenticated user profile information
-		Route::get('my-profile', [GetAuthenticatedUserProfileInformationController::class, '__invoke'])
-		->name('api.users.auth.myprofile.show');
-
-		// Update authenticated user profile information
-		Route::put('my-profile', [UpdateAuthenticatedUserProfileInformationController::class, '__invoke'])
-		->name('api.users.auth.myprofile.update');
-
-		// Update authenticated user password
-		Route::put('my-password', [UpdateAuthenticatedUserPasswordController::class, '__invoke'])
-		->name('api.users.auth.mypassword.update');
+    // Myself user group
+	Route::group(['prefix' => 'myself'], function () {
+		
+        // Get authenticated user profile information
+        Route::get('profile', [GetAuthenticatedUserProfileInformationController::class, '__invoke'])
+        ->name('api.users.myself.profile.show');
+		
+	});
 });

@@ -2,6 +2,9 @@
 
 namespace App\Domains\User\Providers;
 
+use App\Domains\User\Actions\GetUserProfileInformation;
+use App\Domains\User\Contracts\iGetUserProfileInformation;
+
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
@@ -62,7 +65,7 @@ class UserServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         // register policies
         $this->registerPolicies();
@@ -76,14 +79,14 @@ class UserServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function register() {}
+    public function register(): void {}
 
     /**
      * Define as rotas do provedor de serviços.
      *
      * @return void
      */
-    public function map()
+    public function map(): void
     {
 		// Auth routes
         Route::middleware(['web'])
