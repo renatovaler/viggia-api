@@ -17,9 +17,9 @@ final class GetUserByIdQuery
     {
         $this->model = $user;
     }
-	
+
 	public function getUserById(int $id): User
 	{
-		return $this->model->getUserById($id);
+		return $this->model->findUserByIdOrFail($id);
 	}
 }
