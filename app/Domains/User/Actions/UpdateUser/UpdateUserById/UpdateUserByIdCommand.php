@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace App\Domains\User\Actions\GetUserById;
+namespace App\Domains\User\Actions\UpdateUser\UpdateUserById;
 
 use Illuminate\Foundation\Bus\Dispatchable;
 
-final class GetUserById
+final class UpdateUserByIdCommand
 {
     use Dispatchable;
 

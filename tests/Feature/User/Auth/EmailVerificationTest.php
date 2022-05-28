@@ -1,9 +1,9 @@
 <?php
 
-namespace Tests\Feature\Auth;
+namespace Tests\Feature\Users\Auth;
 
-use App\Models\User;
-use App\Providers\RouteServiceProvider;
+use App\Domains\User\Models\User;
+use App\Kernel\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Event;

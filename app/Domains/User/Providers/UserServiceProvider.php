@@ -2,8 +2,10 @@
 
 namespace App\Domains\User\Providers;
 
-use App\Domains\User\Actions\GetUserById\GetUserByIdCommand;
-use App\Domains\User\Actions\GetUserById\GetUserByIdHandler;
+use App\Domains\User\Actions\GetUser\GetUserById\GetUserByIdCommand;
+use App\Domains\User\Actions\GetUser\GetUserById\GetUserByIdHandler;
+use App\Domains\User\Actions\GetUser\GetUserByEmail\GetUserByEmailCommand;
+use App\Domains\User\Actions\GetUser\GetUserByEmail\GetUserByEmailHandler;
 
 use Illuminate\Support\Facades\Bus;
 use Illuminate\Support\Facades\Route;
@@ -87,6 +89,7 @@ class UserServiceProvider extends ServiceProvider
     {
         Bus::map([
             GetUserByIdCommand::class => GetUserByIdHandler::class,
+            GetUserByEmailCommand::class => GetUserByEmailHandler::class,
         ]);
     }
 

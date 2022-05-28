@@ -2,19 +2,18 @@
 
 namespace App\Domains\User\Http\Auth\Controllers;
 
-use Illuminate\Http\Request;
-use App\Domains\User\Models\User;
 use App\Kernel\Http\Controllers\Controller;
+use App\Domains\User\Http\Resources\UserResource;
 
 class GetAuthenticatedUserProfileInformationController extends Controller
 {
     /**
      * Get user profile information
      *
-     * @return \App\Domains\User\Models\User
+     * @return \App\Domains\User\Http\Resources\UserResource
      */
-    public function __invoke(Request $request): User
+    public function __invoke(): UserResource
     {
-        return $request->user();
+        return new UserResource(auth()->user());
     }
 }

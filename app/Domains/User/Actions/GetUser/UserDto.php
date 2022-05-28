@@ -1,24 +1,27 @@
 <?php declare(strict_types=1);
 
-namespace App\Domains\User\Actions\GetUserById;
+namespace App\Domains\User\Actions\GetUser;
+
+use App\Domains\User\Models\User;
+use Illuminate\Support\Carbon;
 
 final class UserDto
 {
     /**
      * Método construtor da classe
      *
-     * @param readonly string $id
+     * @param readonly int $id
      * @param readonly string $name
      * @param readonly string $email
-     * @param readonly string $emailVerifiedAt
+     * @param readonly Carbon $emailVerifiedAt
      *
      * @return void (implicit)
      */
     public function __construct(
-        public readonly string $id,
+        public readonly int $id,
         public readonly string $name,
         public readonly string $email,
-        public readonly string $emailVerifiedAt
+        public readonly Carbon $emailVerifiedAt
     ) {}
 
     public static function fromModel(User $user): self
