@@ -3,7 +3,7 @@
 namespace Tests\Feature\Users\Auth;
 
 use App\Domains\User\Models\User;
-use App\Kernel\Providers\RouteServiceProvider;
+use App\Structure\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Event;

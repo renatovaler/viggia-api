@@ -192,16 +192,16 @@ return [
         /*
          * Application Service Providers...
          */
-        App\Domains\User\Providers\UserServiceProvider::class,
+        App\Domain\User\Providers\UserServiceProvider::class,
 
         /*
          * Kernel Service Providers...
          */
-        App\Kernel\Providers\AppServiceProvider::class,
-        App\Kernel\Providers\AuthServiceProvider::class,
-        // App\Kernel\Providers\BroadcastServiceProvider::class,
-        App\Kernel\Providers\EventServiceProvider::class,
-        App\Kernel\Providers\RouteServiceProvider::class,
+        App\Structure\Providers\AppServiceProvider::class,
+        App\Structure\Providers\AuthServiceProvider::class,
+        // App\Structure\Providers\BroadcastServiceProvider::class,
+        App\Structure\Providers\EventServiceProvider::class,
+        App\Structure\Providers\RouteServiceProvider::class,
     ],
 
     /*
