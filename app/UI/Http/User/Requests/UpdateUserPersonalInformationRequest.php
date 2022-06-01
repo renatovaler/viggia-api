@@ -27,7 +27,6 @@ class UpdateUserPersonalInformationRequest extends FormRequest
         return [
             'id' => ['required', 'numeric', 'exists:users,id'],
             'name' => ['required', 'string', 'max:255'],
-            /*
             'email' => [
                 'required',
                 'string',
@@ -35,7 +34,6 @@ class UpdateUserPersonalInformationRequest extends FormRequest
                 'max:255',
                 Rule::unique('users')->ignore($this->input('id'))
             ]
-            */
         ];
     }
 
@@ -50,11 +48,9 @@ class UpdateUserPersonalInformationRequest extends FormRequest
             'id.required' => 'É necessário informar o ID do usuário.',
             'id.exists' => 'O usuário informado não existe em nosso banco de dados.',
             'name.required' => 'É necessário informar um nome para o usuário.',
-            /*
             'email.required' => 'É necessário informar um e-mail para o usuário.',
             'email.email' => 'É necessário informar um e-mail válido para o usuário.',
-            'email.unique' => 'Esse e-mail já está em uso por outro usuário.',
-            */
+            'email.unique' => 'Esse e-mail já está em uso por outro usuário.'
         ];
     }
 }

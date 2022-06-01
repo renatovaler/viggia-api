@@ -28,9 +28,7 @@ class GetMyselfProfileInformationTest extends TestCase
                 'id',
                 'name',
                 'email',
-                'email_verified_at',
-                'created_at',
-                'updated_at'
+                'email_verified_at'
             ]
         ])
         ->assertOk();

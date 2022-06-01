@@ -21,8 +21,9 @@ class UpdateMyselfProfileInformationController extends Controller
     public function __invoke(UpdateUserPersonalInformationRequest $request): JsonResponse
     {
         $userUpdated = dispatch_sync(new UpdateUserPersonalInformationCommand(
-            intval( $request->input('id') ),
-            $request->input('name')
+            intval($request->input('id')),
+            $request->input('name'),
+            $request->input('email')
         ));
         return (new UserResource($userUpdated))->response($request);
     }

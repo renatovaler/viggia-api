@@ -16,18 +16,27 @@ final class UpdateUserPersonalInformationHandler
     /**
      * Executa a ação
      *
-     * @param \App\Domain\User\Actions\UpdateUser\UpdateUserPersonalInformation\UpdateUserPersonalInformationCommand $query
+     * @param \App\Domain\User\Actions\UpdateUser\UpdateUserPersonalInformation\UpdateUserPersonalInformationCommand $command
      * @return \App\Domain\User\Actions\GetUser\UserDto
      */
     public function handle(UpdateUserPersonalInformationCommand $command): UserDto
     {
         try {
             DB::beginTransaction();
+
 				$user = User::findUserByIdOrFail($command->id);
+
                 $user->forceFill([
-                    'name' => $command->name
+                    'name' => $command->name,
+                    'email' => $command->email,
+                    'email_verified_at' => ($command->email !== $user->email ? null : $user->email_verified_at)
                 ])->save();
+
             DB::commit();
+
+            // Configurar serviço de envio de e-mail antes de ativar isso aqui
+            //$user->sendEmailVerificationNotification();
+
 			return UserDto::fromModel($user);
 		} catch(QueryException $e) {
 			DB::rollBack();

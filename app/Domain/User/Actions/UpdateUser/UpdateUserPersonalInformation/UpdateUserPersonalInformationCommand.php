@@ -13,11 +13,13 @@ final class UpdateUserPersonalInformationCommand
      *
      * @param readonly int $id
      * @param readonly string $name
+     * @param readonly string $email
      *
      * @return void (implicit)
      */
     public function __construct(
         public readonly int $id,
-        public readonly string $name
+        public readonly string $name,
+        public readonly string $email
     ) {}
 }

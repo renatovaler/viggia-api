@@ -19,10 +19,7 @@ class UpdateMyselfProfileInformationTest extends TestCase
         $response = $this->putJson('/myself/profile', [
             'id' => $this->faker->randomDigitNotNull(),
             'name' => $this->faker->name(),
-            'email' => $this->faker->unique()->safeEmail(),
-            'email_verified_at' => $now,
-            'created_at' =>$now,
-            'updated_at' => $now,
+            'email' => $this->faker->unique()->safeEmail()
         ]);
         $response->assertUnauthorized();
     }
@@ -35,19 +32,14 @@ class UpdateMyselfProfileInformationTest extends TestCase
                     ->putJson('/myself/profile', [
                         'id' => $user->id,
                         'name' => $this->faker->name(),
-                        'email' => $user->email,
-                        'email_verified_at' => $now,
-                        'created_at' =>$now,
-                        'updated_at' => $now,
+                        'email' => $user->email
                     ]);
         $response->assertJsonStructure([
             'data' => [
                 'id',
                 'name',
                 'email',
-                'email_verified_at',
-                'created_at',
-                'updated_at'
+                'email_verified_at'
             ]
         ])
         ->assertOk();
