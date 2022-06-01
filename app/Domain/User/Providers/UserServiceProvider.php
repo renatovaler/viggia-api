@@ -7,6 +7,9 @@ use App\Domain\User\Actions\GetUser\GetUserById\GetUserByIdHandler;
 use App\Domain\User\Actions\GetUser\GetUserByEmail\GetUserByEmailCommand;
 use App\Domain\User\Actions\GetUser\GetUserByEmail\GetUserByEmailHandler;
 
+use App\Domain\User\Actions\UpdateUser\UpdateUserPersonalInformation\UpdateUserPersonalInformationCommand;
+use App\Domain\User\Actions\UpdateUser\UpdateUserPersonalInformation\UpdateUserPersonalInformationHandler;
+
 use Illuminate\Support\Facades\Bus;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -58,6 +61,7 @@ class UserServiceProvider extends ServiceProvider
         Bus::map([
             GetUserByIdCommand::class => GetUserByIdHandler::class,
             GetUserByEmailCommand::class => GetUserByEmailHandler::class,
+            UpdateUserPersonalInformationCommand::class => UpdateUserPersonalInformationHandler::class,
         ]);
     }
 
@@ -79,7 +83,6 @@ class UserServiceProvider extends ServiceProvider
 			->group(base_path('routes/user/web.php'));
 
         Route::middleware(['api'])
-            ->prefix('api')
             ->group(base_path('routes/user/api.php'));
 
         require base_path('routes/user/channels.php');

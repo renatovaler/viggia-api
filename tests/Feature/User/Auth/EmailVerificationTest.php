@@ -1,8 +1,8 @@
 <?php
 
-namespace Tests\Feature\Users\Auth;
+namespace Tests\Feature\User\Auth;
 
-use App\Domains\User\Models\User;
+use App\Domain\User\Models\User;
 use App\Structure\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -17,7 +17,7 @@ class EmailVerificationTest extends TestCase
     public function test_email_can_be_verified()
     {
         $user = User::factory()->create([
-            'email_verified_at' => null,
+            'email_verified_at' => null
         ]);
 
         Event::fake();

@@ -1,8 +1,8 @@
 <?php
 
-namespace Tests\Feature\Users\Auth;
+namespace Tests\Feature\User\Auth;
 
-use App\Domains\User\Models\User;
+use App\Domain\User\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -14,7 +14,7 @@ class AuthenticationTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $response = $this->post('/users/auth/login', [
+        $response = $this->post('/auth/login', [
             'email' => $user->email,
             'password' => 'password',
         ]);
@@ -27,7 +27,7 @@ class AuthenticationTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $this->post('/users/auth/login', [
+        $this->post('/auth/login', [
             'email' => $user->email,
             'password' => 'wrong-password',
         ]);

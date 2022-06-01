@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace App\Domains\User\Actions\GetUser;
+namespace App\Domain\User\Actions\UpdateUser;
 
-use App\Domains\User\Models\User;
+use App\Domain\User\Models\User;
 use Illuminate\Support\Carbon;
 
 final class UserDto
@@ -13,7 +13,7 @@ final class UserDto
      * @param readonly int $id
      * @param readonly string $name
      * @param readonly string $email
-     * @param readonly Carbon $emailVerifiedAt
+     * @param readonly Carbon|null $emailVerifiedAt
      *
      * @return void (implicit)
      */
@@ -21,7 +21,7 @@ final class UserDto
         public readonly int $id,
         public readonly string $name,
         public readonly string $email,
-        public readonly Carbon $emailVerifiedAt
+        public readonly Carbon|null $emailVerifiedAt
     ) {}
 
     public static function fromModel(User $user): self
