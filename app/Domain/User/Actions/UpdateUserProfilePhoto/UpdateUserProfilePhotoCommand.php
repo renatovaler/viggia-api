@@ -1,10 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace App\Domain\User\Actions\UpdateUser\UpdateUserPersonalInformation;
+namespace App\Domain\User\Actions\UpdateUserProfilePhoto;
 
+use Illuminate\Http\UploadedFile;
 use Illuminate\Foundation\Bus\Dispatchable;
 
-final class UpdateUserPersonalInformationCommand
+final class UpdateUserProfilePhotoCommand
 {
     use Dispatchable;
 
@@ -12,14 +13,12 @@ final class UpdateUserPersonalInformationCommand
      * Método construtor da classe
      *
      * @param readonly int $id
-     * @param readonly string $name
-     * @param readonly string $email
+     * @param readonly UploadedFile $profilePhoto
      *
      * @return void (implicit)
      */
     public function __construct(
         public readonly int $id,
-        public readonly string $name,
-        public readonly string $email
+        public readonly UploadedFile $profilePhoto
     ) {}
 }

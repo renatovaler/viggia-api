@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace App\Domain\User\Actions\UpdateUser\UpdateUserPersonalInformation;
+namespace App\Domain\User\Actions\UpdateUserPersonalInformation;
 
 use Exception;
 use Illuminate\Support\Facades\DB;
@@ -8,16 +8,16 @@ use Illuminate\Database\QueryException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 use App\Domain\User\Models\User;
-use App\Domain\User\Actions\UpdateUser\UserDto;
-use App\Domain\User\Actions\UpdateUser\UpdateUserPersonalInformation\UpdateUserPersonalInformationCommand;
+use App\Domain\User\Actions\UserDto;
+use App\Domain\User\Actions\UpdateUserPersonalInformation\UpdateUserPersonalInformationCommand;
 
 final class UpdateUserPersonalInformationHandler
 {
     /**
      * Executa a ação
      *
-     * @param \App\Domain\User\Actions\UpdateUser\UpdateUserPersonalInformation\UpdateUserPersonalInformationCommand $command
-     * @return \App\Domain\User\Actions\GetUser\UserDto
+     * @param \App\Domain\User\Actions\UpdateUserPersonalInformation\UpdateUserPersonalInformationCommand $command
+     * @return \App\Domain\User\Actions\UserDto
      */
     public function handle(UpdateUserPersonalInformationCommand $command): UserDto
     {
@@ -34,8 +34,7 @@ final class UpdateUserPersonalInformationHandler
 
             DB::commit();
 
-            // Configurar serviço de envio de e-mail antes de ativar isso aqui
-            //$user->sendEmailVerificationNotification();
+			$user->sendEmailVerificationNotification();
 
 			return UserDto::fromModel($user);
 		} catch(QueryException $e) {

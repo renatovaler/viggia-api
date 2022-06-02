@@ -2,6 +2,9 @@
 
 namespace App\Domain\User\Models;
 
+use App\Domain\User\Notifications\QueuedVerifyEmail;
+use App\Domain\User\Notifications\QueuedResetPassword;
+
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -43,7 +46,41 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'password_changed_at' => 'datetime',
     ];
+
+    /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = [
+        'profile_photo_path',
+    ];
+
+    /**
+     * Overrideen sendEmailVerificationNotification implementation
+     * present in Illuminate\Auth\MustVerifyEmail trait
+     *
+     * @return void
+     */
+    public function sendEmailVerificationNotification(): void
+    {
+		// Configurar serviço de envio de e-mail antes de ativar isso aqui
+        //$this->notify(new QueuedVerifyEmail);
+    }
+
+    /**
+     * Overrideen sendPasswordResetNotification implementation
+     * present in Illuminate\Auth\Passwords\CanResetPassword trait
+     *
+     * @return void
+     */
+    public function sendPasswordResetNotification($token): void
+    {
+		// Configurar serviço de envio de e-mail antes de ativar isso aqui
+        //$this->notify(new QueuedResetPassword($token));
+    }
 
     /**
      * Define custom factory to the model

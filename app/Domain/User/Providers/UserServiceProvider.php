@@ -6,9 +6,12 @@ use App\Domain\User\Actions\GetUser\GetUserById\GetUserByIdCommand;
 use App\Domain\User\Actions\GetUser\GetUserById\GetUserByIdHandler;
 use App\Domain\User\Actions\GetUser\GetUserByEmail\GetUserByEmailCommand;
 use App\Domain\User\Actions\GetUser\GetUserByEmail\GetUserByEmailHandler;
-
-use App\Domain\User\Actions\UpdateUser\UpdateUserPersonalInformation\UpdateUserPersonalInformationCommand;
-use App\Domain\User\Actions\UpdateUser\UpdateUserPersonalInformation\UpdateUserPersonalInformationHandler;
+use App\Domain\User\Actions\UpdateUserProfilePhoto\UpdateUserProfilePhotoCommand;
+use App\Domain\User\Actions\UpdateUserProfilePhoto\UpdateUserProfilePhotoHandler;
+use App\Domain\User\Actions\DeleteUserProfilePhoto\DeleteUserProfilePhotoCommand;
+use App\Domain\User\Actions\DeleteUserProfilePhoto\DeleteUserProfilePhotoHandler;
+use App\Domain\User\Actions\UpdateUserPersonalInformation\UpdateUserPersonalInformationCommand;
+use App\Domain\User\Actions\UpdateUserPersonalInformation\UpdateUserPersonalInformationHandler;
 
 use Illuminate\Support\Facades\Bus;
 use Illuminate\Support\Facades\Route;
@@ -31,7 +34,7 @@ class UserServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        'App\Domain\User\Model' => 'App\Domain\User\Policies\UserPolicy',
+        'App\Domain\User\Models\User' => 'App\Domain\User\Policies\UserPolicy',
     ];
 
     /**
@@ -62,6 +65,8 @@ class UserServiceProvider extends ServiceProvider
             GetUserByIdCommand::class => GetUserByIdHandler::class,
             GetUserByEmailCommand::class => GetUserByEmailHandler::class,
             UpdateUserPersonalInformationCommand::class => UpdateUserPersonalInformationHandler::class,
+            UpdateUserProfilePhotoCommand::class => UpdateUserProfilePhotoHandler::class,
+            DeleteUserProfilePhotoCommand::class => DeleteUserProfilePhotoHandler::class
         ]);
     }
 

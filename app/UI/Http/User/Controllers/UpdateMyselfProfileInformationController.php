@@ -6,7 +6,7 @@ use App\UI\Http\User\Resources\UserResource;
 use App\Structure\Http\Controllers\Controller;
 use App\UI\Http\User\Requests\UpdateUserPersonalInformationRequest;
 
-use App\Domain\User\Actions\UpdateUser\UpdateUserPersonalInformation\UpdateUserPersonalInformationCommand;
+use App\Domain\User\Actions\UpdateUserPersonalInformation\UpdateUserPersonalInformationCommand;
 use Illuminate\Http\JsonResponse;
 
 class UpdateMyselfProfileInformationController extends Controller
@@ -14,7 +14,7 @@ class UpdateMyselfProfileInformationController extends Controller
     /**
      * Update authenticated user profile information (myself information)
      *
-     * @param UpdateUserPersonalInformationRequest $request
+     * @param App\UI\Http\User\Requests\UpdateUserPersonalInformationRequest $request
      *
      * @return \Illuminate\Http\JsonResponse
      */
