@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace App\Domain\Company\Actions\UpdateCompanyInformation;
+namespace App\Domain\Company\Actions\AddCompanyMember;
 
 use Exception;
 use Illuminate\Support\Facades\DB;
@@ -8,27 +8,23 @@ use Illuminate\Database\QueryException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 use App\Domain\Company\Models\Company;
-use App\Domain\Company\Actions\CompanyDto;
-use App\Domain\Company\Actions\UpdateCompanyInformation\UpdateCompanyInformationCommand;
+use App\Domain\Company\Actions\AddCompanyMember\AddCompanyMemberCommand;
 
-final class UpdateCompanyInformationHandler
+final class AddCompanyMemberHandler
 {
     /**
      * Executa a ação
      *
-     * @param \App\Domain\Company\Actions\UpdateCompanyInformation\UpdateCompanyInformationCommand $command
-     * @return \App\Domain\Company\Actions\CompanyDto
+     * @param \App\Domain\Company\Actions\AddCompanyMember\AddCompanyMemberCommand $command
+     * @return void
      */
-    public function handle(UpdateCompanyInformationCommand $command): CompanyDto
+    public function handle(AddCompanyMemberCommand $command): void
     {
         try {
             DB::beginTransaction();
-                $company = Company::where('id', $command->id)->firstOrFail();
-                $company->forceFill([
-                    'name' => $command->name
-                ])->save();
+				$company = Company::where('id', $command->companyId)->firstOrFail();
+				$company->onlyCompanyMembers()->attach($command->userId);
             DB::commit();
-			return CompanyDto::fromModel($company);
 		} catch(QueryException $e) {
 			DB::rollBack();
 			throw new Exception(__('An internal error occurred during our database search.'), 403);

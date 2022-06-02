@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace App\Domain\User\Actions\GetCompany;
+namespace App\Domain\Company\Actions\GetCompany;
 
 use App\Domain\Company\Models\Company;
 use App\Domain\Company\Actions\CompanyDto;

@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('password');
             $table->timestamp('password_changed_at')->nullable();
             $table->boolean('can_be_impersonated')->default(1); // true
+            $table->text('profile_photo_path')->nullable();
             $table->integer('current_company_id')->nullable()->unsigned();
             $table->rememberToken();
             $table->timestamps();

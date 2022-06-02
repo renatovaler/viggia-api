@@ -21,7 +21,7 @@ class UpdateCurrentCompanyInformationController extends Controller
     public function __invoke(UpdateCompanyInformationRequest $request): JsonResponse
     {
         $companyUpdated = dispatch_sync(new UpdateCompanyInformationCommand(
-            intval($request->input('id')),
+            auth()->user()->current_company_id,
             $request->input('name')
         ));
         return (new CompanyResource($companyUpdated))->response($request);
