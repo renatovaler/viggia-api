@@ -36,6 +36,14 @@ class UpdateMyselfProfileInformationTest extends TestCase
                         'name' => $this->faker->name(),
                         'email' => $user->email
                     ]);
-        $response->assertOk();
+        $response->assertJsonStructure([
+            'data' => [
+                'id',
+                'name',
+                'email',
+                'email_verified_at'
+            ]
+        ])
+        ->assertOk();
     }
 }

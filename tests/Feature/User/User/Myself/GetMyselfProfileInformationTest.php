@@ -26,6 +26,14 @@ class GetMyselfProfileInformationTest extends TestCase
 
         $response = $this->actingAs($user)
         ->getJson('/users/myself/profile');
-        $response->assertOk();
+        $response->assertJsonStructure([
+            'data' => [
+                'id',
+                'name',
+                'email',
+                'email_verified_at'
+            ]
+        ])
+        ->assertOk();
     }
 }
