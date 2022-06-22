@@ -23,23 +23,18 @@ final class UpdateUserPersonalInformationHandler
     {
         try {
             DB::beginTransaction();
-
 				$user = User::findUserByIdOrFail($command->id);
-
                 $user->forceFill([
                     'name' => $command->name,
                     'email' => $command->email,
                     'email_verified_at' => ($command->email !== $user->email ? null : $user->email_verified_at)
                 ])->save();
-
             DB::commit();
-
 			$user->sendEmailVerificationNotification();
-
 			return UserDto::fromModel($user);
 		} catch(QueryException $e) {
 			DB::rollBack();
-			throw new Exception(__('An internal error occurred during our database search.'), 403);
+			throw new Exception(__('An internal error occurred while storing information in the database.'), 403);
         } catch(ModelNotFoundException $e) {
 			DB::rollBack();
 			throw new Exception(__('The informed user does not exist in our database.'), 404);

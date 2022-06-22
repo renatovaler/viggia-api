@@ -27,7 +27,7 @@ final class AddCompanyBranchMemberHandler
             DB::commit();
 		} catch(QueryException $e) {
 			DB::rollBack();
-			throw new Exception(__('An internal error occurred while executing the action on the database'), 403);
+			throw new Exception(__('An internal error occurred while storing information in the database.'), 403);
         } catch(ModelNotFoundException $e) {
 			DB::rollBack();
 			throw new Exception(__('The informed company branch does not exist in our database.'), 404);

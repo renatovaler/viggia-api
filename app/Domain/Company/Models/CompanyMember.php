@@ -2,8 +2,9 @@
 
 namespace App\Domain\Company\Models;
 
-use Illuminate\Database\Eloquent\Relations\Pivot;
+use App\Domain\User\Models\User;
 
+use Illuminate\Database\Eloquent\Relations\Pivot;
 use Database\Factories\Company\CompanyMemberFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -33,5 +34,15 @@ class CompanyMember extends Pivot
     protected static function newFactory(): CompanyMemberFactory
     {
         return CompanyMemberFactory::new();
+    }
+	
+	/**
+     * Get the company of this member
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function company(): BelongsTo
+    {
+        return $this->belongsTo(Company::class, 'company_id');
     }
 }

@@ -192,7 +192,9 @@ return [
         /*
          * Application Service Providers...
          */
-        App\Domain\User\Providers\UserServiceProvider::class,
+        App\UI\Auth\Providers\AuthServiceProvider::class,
+        App\UI\User\Providers\UserServiceProvider::class,
+        App\UI\Company\Providers\CompanyServiceProvider::class,
 
         /*
          * Kernel Service Providers...

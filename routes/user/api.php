@@ -2,9 +2,14 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\UI\Http\User\Controllers\GetMyselfProfileInformationController;
-use App\UI\Http\User\Controllers\UpdateMyselfProfileInformationController;
-//use App\UI\Http\User\Controllers\UpdateMyselfPasswordController;
+// Myself
+use App\UI\User\Http\Controllers\UpdateMyselfPasswordController;
+use App\UI\User\Http\Controllers\GetMyselfProfileInformationController;
+use App\UI\User\Http\Controllers\UpdateMyselfProfileInformationController;
+
+// Another users
+use App\UI\User\Http\Controllers\UpdateUserProfileInformationController;
+use App\UI\User\Http\Controllers\GetUserProfileInformationByIdController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,37 +33,66 @@ use App\UI\Http\User\Controllers\UpdateMyselfProfileInformationController;
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
 
-    // Myself user group
-	Route::group(['prefix' => 'myself'], function () {
+	Route::group(['prefix' => 'users'], function () {
 
-        /**
-         * Get authenticated user profile information
-         *
-         * @method  GET
-         * @route   domain.example/myself/profile
-         * @name    myself.profile.show
-         */
-        Route::get('profile', [GetMyselfProfileInformationController::class, '__invoke'])
-        ->name('myself.profile.show');
+        // Myself user group
+        Route::group(['prefix' => 'myself'], function () {
 
-        /**
-         * Update authenticated user profile information
-         *
-         * @method  PUT
-         * @route   domain.example/myself/profile
-         * @name    myself.profile.update
-         */
-        Route::put('profile', [UpdateMyselfProfileInformationController::class, '__invoke'])
-        ->name('myself.profile.update');
+            /**
+             * Get authenticated user profile information
+             *
+             * @method  GET
+             * @route   domain.example/users/myself/profile
+             * @name    users.myself.profile.show
+             */
+            Route::get('profile', [GetMyselfProfileInformationController::class, '__invoke'])
+            ->name('users.myself.profile.show');
 
-        /**
-         * Update authenticated user password
-         *
-         * @method  PUT
-         * @route   domain.example/myself/password
-         * @name    myself.password.update
-         */
-        //Route::put('password', [UpdateMyselfPasswordController::class, '__invoke'])
-        //->name('myself.password.update');
-	});
-});
+            /**
+             * Update authenticated user profile information
+             *
+             * @method  PUT
+             * @route   domain.example/users/myself/profile
+             * @name    users.myself.profile.update
+             */
+            Route::put('profile', [UpdateMyselfProfileInformationController::class, '__invoke'])
+            ->name('users.myself.profile.update');
+
+            /**
+             * Update authenticated user password
+             *
+             * @method  PUT
+             * @route   domain.example/users/myself/password
+             * @name    users.myself.password.update
+             */
+            Route::put('password', [UpdateMyselfPasswordController::class, '__invoke'])
+            ->name('users.myself.password.update');
+        }); // End prefix "myself" (users/myself) route group
+
+        // Another users group
+        Route::group(['prefix' => 'user'], function () {
+
+            /**
+             * Get another user profile information by user_id
+             *
+             * @method  GET
+             * @route   domain.example/users/user/{userId}/profile
+             * @name    users.user.profile.show
+             */
+            Route::get('{userId}/profile', [GetUserProfileInformationByIdController::class, '__invoke'])
+            ->name('users.user.profile.show');
+
+            /**
+             * Update another user profile information
+             *
+             * @method  PUT
+             * @route   domain.example/users/user/{userId}/profile
+             * @name    users.user.profile.update
+             */
+            Route::put('{userId}/profile', [UpdateUserProfileInformationController::class, '__invoke'])
+            ->name('users.user.profile.update');
+        }); // End prefix "user" (users/user) route group
+
+    }); // End prefix "users" (/users/...) route group
+
+}); // End middleware route group

@@ -5,6 +5,10 @@ namespace App\Domain\User\Models;
 use App\Domain\User\Notifications\QueuedVerifyEmail;
 use App\Domain\User\Notifications\QueuedResetPassword;
 
+use App\Domain\Role\Traits\ToUserModel\RoleToUserForSystem;
+use App\Domain\Role\Traits\ToUserModel\RoleToUserForCompany;
+//use App\Domain\Role\Traits\ToUserModel\RoleToUserForCompanyBranch;
+
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -17,6 +21,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable;
+	use RoleToUserForSystem;
+	use RoleToUserForCompany;
+	//use RoleToUserForCompanyBranch;
 
     /**
      * The attributes that are mass assignable.

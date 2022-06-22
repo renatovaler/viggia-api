@@ -17,7 +17,7 @@ final class CompanyBranchDto
      */
     public function __construct(
         public readonly int $id,
-        public readonly int $ownerCompanyId
+        public readonly int $ownerCompanyId,
         public readonly string $name
     ) {}
 

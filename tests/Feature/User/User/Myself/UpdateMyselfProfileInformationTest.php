@@ -16,7 +16,7 @@ class UpdateMyselfProfileInformationTest extends TestCase
     public function test_update_myself_profile_information_with_not_authenticated_user()
     {
         $now = now();
-        $response = $this->putJson('/myself/profile', [
+        $response = $this->putJson('/users/myself/profile', [
             'id' => $this->faker->randomDigitNotNull(),
             'name' => $this->faker->name(),
             'email' => $this->faker->unique()->safeEmail()
@@ -26,22 +26,16 @@ class UpdateMyselfProfileInformationTest extends TestCase
 
     public function test_update_myself_profile_information_with_an_authenticated_user()
     {
-        $user = User::factory()->create();
         $now = now();
+        $user = User::factory()->create();
+        $user->password_changed_at = $now;
+        $user->save();
         $response = $this->actingAs($user)
-                    ->putJson('/myself/profile', [
+                    ->putJson('/users/myself/profile', [
                         'id' => $user->id,
                         'name' => $this->faker->name(),
                         'email' => $user->email
                     ]);
-        $response->assertJsonStructure([
-            'data' => [
-                'id',
-                'name',
-                'email',
-                'email_verified_at'
-            ]
-        ])
-        ->assertOk();
+        $response->assertOk();
     }
 }

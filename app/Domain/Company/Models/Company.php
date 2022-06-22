@@ -105,7 +105,7 @@ class Company extends Model
     }
 
     /**
-     * Determina se o usuário é membro ou proprietário da empresa.. Busca por ID do usuário.
+     * Determina se o usuário é membro ou proprietário da empresa. Busca por ID do usuário.
      *
      * @param  int $userId
      * @return bool
@@ -126,6 +126,18 @@ class Company extends Model
         return $this->companyMembersAndOwner()->contains('email', $email);
     }
 
+    /**
+     * Retorna informações de determinado membro da empresa (inclusive o proprietário).
+	 * A busca é feita por ID do usuário.
+     *
+     * @param  int $companyMemberId
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function companyMemberById($companyMemberId): Collection
+    {
+        return $this->->companyMembersAndOwner()->where('id', $companyMemberId)->firstOrFail();
+    }
+	
     /**
      * Remove membro da empresa.
      *

@@ -10,12 +10,14 @@ final class CompanyDto
      * Método construtor da classe
      *
      * @param readonly int $id
+     * @param readonly int $ownerUserId
      * @param readonly string $name
      *
      * @return void (implicit)
      */
     public function __construct(
         public readonly int $id,
+        public readonly int $ownerUserId,
         public readonly string $name
     ) {}
 
@@ -23,6 +25,7 @@ final class CompanyDto
     {
         return new self(
             $company->id,
+            $company->owner_user_id,
             $company->name
         );
     }
