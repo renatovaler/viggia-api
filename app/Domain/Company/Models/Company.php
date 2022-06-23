@@ -135,7 +135,7 @@ class Company extends Model
      */
     public function companyMemberById($companyMemberId): Collection
     {
-        return $this->->companyMembersAndOwner()->where('id', $companyMemberId)->firstOrFail();
+        return $this->companyMembersAndOwner()->where('id', $companyMemberId)->firstOrFail();
     }
 	
     /**

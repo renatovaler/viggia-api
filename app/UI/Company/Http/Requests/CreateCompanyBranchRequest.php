@@ -4,7 +4,7 @@ namespace App\UI\Company\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateCompanyInformationRequest extends FormRequest
+class CreateCompanyBranchRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -14,19 +14,6 @@ class UpdateCompanyInformationRequest extends FormRequest
     public function authorize(): bool
     {
         return ( auth()->user()->id == auth()->user()->currentCompany->owner_user_id );
-    }
-
-    /**
-     * Prepare validation and override request if necessary
-     *
-     * @return void
-     */
-    public function prepareForValidation(): void
-    {
-        if( $this->route()->currentRouteName() === 'company.current.profile.update') ){
-			$companyId = auth()->user()->current_company_id;
-			$this->replace(['company_id' => $companyId]);
-		}
     }
 	
     /**
@@ -50,9 +37,9 @@ class UpdateCompanyInformationRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'company_id.required' => __('É necessário informar o ID da empresa.'),
+            'company_id.required' => __('É necessário informar o ID da empresa titular da filial.'),
             'company_id.exists' => __('A empresa informada não existe em nosso banco de dados.'),
-            'name.required' => __('É necessário informar um nome para a empresa.')
+            'name.required' => __('É necessário informar um nome para a filial da empresa.')
         ];
     }
 }

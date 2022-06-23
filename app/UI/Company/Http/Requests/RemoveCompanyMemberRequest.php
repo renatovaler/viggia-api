@@ -4,7 +4,7 @@ namespace App\UI\Company\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateCompanyInformationRequest extends FormRequest
+class RemoveCompanyMemberRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -38,7 +38,7 @@ class UpdateCompanyInformationRequest extends FormRequest
     {
         return [
             'company_id' => ['required', 'numeric', 'exists:companies,id'],
-            'name' => ['required', 'string', 'max:255']
+            'user_id' => ['required', 'numeric', 'exists:users,id'],
         ];
     }
 
@@ -52,7 +52,8 @@ class UpdateCompanyInformationRequest extends FormRequest
         return [
             'company_id.required' => __('É necessário informar o ID da empresa.'),
             'company_id.exists' => __('A empresa informada não existe em nosso banco de dados.'),
-            'name.required' => __('É necessário informar um nome para a empresa.')
+            'user_id.required' => __('É necessário informar o ID do usuário a ser removido da lista de membros.'),
+            'user_id.exists' => __('O usuário informado não existe em nosso banco de dados.'),
         ];
     }
 }

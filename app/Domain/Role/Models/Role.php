@@ -39,6 +39,30 @@ class Role extends Model
     }
 
     /**
+     * Retorna informações de determinada "role".
+	 * A busca é feita por ID.
+     *
+     * @param  int $roleId
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function roleById($roleId): Collection
+    {
+        return $this->where('id', $roleId)->firstOrFail();
+    }
+
+    /**
+     * Exclui determinada "role"
+	 * A busca é feita por ID.
+     *
+     * @param  int $roleId
+     * @return bool
+     */
+    public function removeRole($roleId): bool
+    {
+        return $this->roleById($roleId)->delete();
+    }
+	
+    /**
      * Create a new factory instance for the model.
      *
      * @return \Illuminate\Database\Eloquent\Factories\Factory

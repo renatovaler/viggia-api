@@ -2,8 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\UI\Http\Company\Controllers\AddCompanyMemberController;
+use App\UI\Http\Company\Controllers\RemoveCompanyMemberController;
+use App\UI\Http\Company\Controllers\UpdateCompanyInformationController;
 use App\UI\Http\Company\Controllers\GetCurrentCompanyInformationController;
-use App\UI\Http\Company\Controllers\UpdateCurrentCompanyInformationController;
 
 use App\UI\Http\Company\Controllers\GetCompanyMemberInformationController;
 use App\UI\Http\Company\Controllers\GetCurrentCompanyMemberListController;
@@ -56,7 +58,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 			 * @route   domain.example/company/current/profile
 			 * @name    company.current.profile.update
 			 */
-			Route::put('profile', [UpdateCurrentCompanyInformationController::class, '__invoke'])
+			Route::put('profile', [UpdateCompanyInformationController::class, '__invoke'])
 			->name('company.current.profile.update');
 			
 			// Current company members route group
@@ -65,6 +67,26 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 				// Single member route group
 				Route::group(['prefix' => 'member'], function () {
 					
+					/**
+					 * Add new member to the current company
+					 *
+					 * @method  PUT
+					 * @route   domain.example/company/current/members/member/add-member
+					 * @name    company.current.members.member.add
+					 */
+					Route::put('add-member', [AddCompanyMemberController::class, '__invoke'])
+					->name('company.current.members.member.add');
+					
+					/**
+					 * Remove member to the current company
+					 *
+					 * @method  PUT
+					 * @route   domain.example/company/current/members/member/remove-member
+					 * @name    company.current.members.member.remove
+					 */
+					Route::put('remove-member', [RemoveCompanyMemberController::class, '__invoke'])
+					->name('company.current.members.member.remove');
+				
 					/**
 					 * Get company member profile information by companyMemberId
 					 *

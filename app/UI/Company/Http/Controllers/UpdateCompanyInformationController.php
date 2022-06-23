@@ -8,7 +8,7 @@ use App\UI\Company\Http\Resources\CompanyResource;
 use App\UI\Company\Http\Requests\UpdateCompanyInformationRequest;
 use App\Domain\Company\Actions\UpdateCompanyInformation\UpdateCompanyInformationCommand;
 
-class UpdateCurrentCompanyInformationController extends Controller
+class UpdateCompanyInformationController extends Controller
 {
     /**
      * Update current user company information
@@ -20,7 +20,7 @@ class UpdateCurrentCompanyInformationController extends Controller
     public function __invoke(UpdateCompanyInformationRequest $request): JsonResponse
     {
         $companyUpdated = dispatch_sync(new UpdateCompanyInformationCommand(
-            auth()->user()->current_company_id,
+            $request->input('company_id'),
             $request->input('name')
         ));
         return (new CompanyResource($companyUpdated))->response($request);
