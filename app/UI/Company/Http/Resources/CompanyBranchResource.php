@@ -15,9 +15,9 @@ class CompanyBranchResource extends JsonResource
     public function toArray($request): array
     {
         return [
-            'id' => $this->id,
-            'owner_company_id' => $this->owner_company_id,
-            'name' => $this->name
+			'id' => $this->id,
+			'owner_company_id' => $this->owner_company_id,
+			'name' => $this->name
         ];
     }
 }

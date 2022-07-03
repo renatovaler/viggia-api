@@ -14,6 +14,7 @@ class GetMyselfProfileInformationController extends Controller
      */
     public function __invoke(): UserResource
     {
-        return (new UserResource(auth()->user()));
+        $user = auth()->user();
+        return (new UserResource($user));
     }
 }

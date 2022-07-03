@@ -10,6 +10,7 @@ use App\UI\User\Http\Controllers\UpdateMyselfProfileInformationController;
 // Another users
 use App\UI\User\Http\Controllers\UpdateUserProfileInformationController;
 use App\UI\User\Http\Controllers\GetUserProfileInformationByIdController;
+use App\UI\User\Http\Controllers\GetUserListController;
 
 /*
 |--------------------------------------------------------------------------
@@ -93,6 +94,15 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
             ->name('users.user.profile.update');
         }); // End prefix "user" (users/user) route group
 
+		/**
+		 * Get list of users
+		 *
+		 * @method  GET
+		 * @route   domain.example/users/list
+		 * @name    users.list
+		 */
+		Route::get('list', [GetUserListController::class, '__invoke'])
+		->name('users.list');
     }); // End prefix "users" (/users/...) route group
 
 }); // End middleware route group

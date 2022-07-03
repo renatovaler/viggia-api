@@ -14,7 +14,9 @@ class UpdateUserPersonalInformationRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        $inputUserId = intval( $this->input('id') );
+        $routeUserId = $this->get('userId');
+        return $routeUserId === $inputUserId;
     }
 
     /**

@@ -27,7 +27,7 @@ class CompanyBranchFactory extends Factory
     {
         return [
             'owner_company_id' => Company::all()->random()->id,
-            'name' => $this->faker->name
+            'name' => $this->faker->company
         ];
     }
 }

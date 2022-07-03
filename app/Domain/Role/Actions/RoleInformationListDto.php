@@ -2,12 +2,14 @@
 
 namespace App\Domain\Role\Actions;
 
-use App\Domain\Role\Models\Role;
+use Illuminate\Support\Collection as SupportCollection;
+use Illuminate\Database\Eloquent\Collection as EloquentCollection;
+
 use App\Domain\Role\Actions\RoleInformationDto;
 
 final class RoleInformationListDto
 {
-    public static function fromCollection(Role $roles): self
+    public static function fromCollection(EloquentCollection $roles): SupportCollection
     {
         return $roles->map(function ($role) {
 			return RoleInformationDto::fromModel($role);

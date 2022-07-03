@@ -24,7 +24,7 @@ class AddCompanyMemberController extends Controller
 				$request->input('user_id'),
 			)
         );
-		return response()->json([
+		return api()->success([
 			'message' => __('Success! The user has been added as a member of this company.')
 		], 200);
     }

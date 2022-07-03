@@ -14,6 +14,8 @@ class CompanyBranchCollection extends ResourceCollection
      */
     public function toArray($request): array
     {
-        return parent::toArray($request);
+		return [
+            'data' => $this->collection
+        ];
     }
 }

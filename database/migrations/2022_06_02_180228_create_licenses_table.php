@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('edge_device_licenses', function (Blueprint $table) {
+        Schema::create('licenses', function (Blueprint $table) {
             $table->id();
             $table->string('slave_key');
             $table->integer('user_id')->nullable()->unsigned();
@@ -24,6 +24,7 @@ return new class extends Migration
             $table->timestamp('activated_at')->nullable();
             $table->timestamp('deactivated_at')->nullable();
             $table->timestamps();
+			$table->softDeletes();
         });
     }
 
@@ -34,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('edge_device_licenses');
+        Schema::dropIfExists('licenses');
     }
 };

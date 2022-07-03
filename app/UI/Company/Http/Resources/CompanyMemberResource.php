@@ -22,9 +22,9 @@ class CompanyMemberResource extends JsonResource
     public function toArray($request): array
     {
         return [
-            'id' => $this->id,
-            'user_id' => $this->user_id,
-            'company_id' => $this->company_id,
+			'id' => $this->id,
+			'user_id' => $this->user_id,
+			'company_id' => $this->company_id,
 			'is_company_owner' => ($this->user_id === $this->companyOwner()->owner_user_id),
 			//'roles' => $this->companyRoles
         ];

@@ -35,7 +35,7 @@ final class DeleteUserProfilePhotoHandler
 			return UserDto::fromModel($user);
 		} catch(QueryException $e) {
 			DB::rollBack();
-			throw new Exception(__('An internal error occurred while storing information in the database.'), 403);
+			throw new Exception(__('An internal error occurred while storing information in the database.'), 500);
         } catch(ModelNotFoundException $e) {
 			DB::rollBack();
 			throw new Exception(__('The informed user does not exist in our database.'), 404);

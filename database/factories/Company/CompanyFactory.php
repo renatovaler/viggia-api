@@ -7,7 +7,7 @@ use App\Domain\Company\Models\Company;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Company\Company>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Domain\Company\Models\Company>
  */
 class CompanyFactory extends Factory
 {
@@ -27,7 +27,7 @@ class CompanyFactory extends Factory
     {
         return [
             'owner_user_id' => User::all()->random()->id,
-            'name' => $this->faker->name
+            'name' => $this->faker->company
         ];
     }
 }

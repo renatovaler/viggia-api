@@ -28,7 +28,8 @@ class FirstLogin
                         is_null($user->password_changed_at)
                     ) {
                         return response()->json([
-                            'message' => __('Not authorized. This is the first login for this user and to proceed it is necessary to change the password for the first time.')
+                            'type' => 'error',
+                            'message' => __('Unauthorized! This is the first login for this user and to proceed it is necessary to change the password for the first time.')
                         ], 403);
                     }
                 }

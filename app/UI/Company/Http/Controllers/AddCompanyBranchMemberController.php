@@ -25,6 +25,7 @@ class AddCompanyBranchMemberController extends Controller
 			)
         );
 		return response()->json([
+			'error' => false,
 			'message' => __('Success! The user has been added as a member of this company branch.')
 		], 200);
     }

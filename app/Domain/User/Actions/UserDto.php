@@ -6,6 +6,7 @@ use App\Domain\User\Models\User;
 
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 
 final class UserDto
 {
@@ -15,7 +16,7 @@ final class UserDto
      * @param readonly int $id
      * @param readonly string $name
      * @param readonly string $email
-     * @param readonly Carbon|null $
+     * @param readonly Carbon|null $emailVerifiedAt
      * @param readonly string $profilePhotoPath
      *
      * @return void (implicit)
@@ -25,6 +26,7 @@ final class UserDto
         public readonly string $name,
         public readonly string $email,
         public readonly Carbon|null $emailVerifiedAt,
+        public readonly EloquentCollection $systemRoles,
         public readonly string $profilePhotoPath,
     ) {}
 
@@ -36,8 +38,9 @@ final class UserDto
             $user->name,
             $user->email,
             $user->email_verified_at,
+            $user->roles,
             ($user->profile_photo_path
-                    ? $storage->url($user->profile_photo_path)
+                    ? Storage::url($user->profile_photo_path)
                     : 'https://ui-avatars.com/api/?name='.urlencode($user->name).'&color=7F9CF5&background=EBF4FF')
         );
     }

@@ -30,7 +30,7 @@ final class CreateCompanyBranchHandler
 			return CompanyBranchDto::fromModel($companyBranch);
 		} catch(QueryException $e) {
 			DB::rollBack();
-			throw new Exception(__('An internal error occurred while storing information in the database.'), 403);
+			throw new Exception(__('An internal error occurred while storing information in the database.'), 500);
         } catch(Exception $e) {
 			DB::rollBack();
 			throw new Exception(__('An unknown internal error has occurred.'), 500);

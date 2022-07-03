@@ -9,7 +9,7 @@ use Illuminate\Database\QueryException;
 use App\Domain\Role\Models\Role;
 use App\Domain\Role\Actions\DeleteRole\DeleteRoleCommand;
 
-final class CreateRoleHandler
+final class DeleteRoleHandler
 {
     /**
      * Executa a ação
@@ -21,11 +21,11 @@ final class CreateRoleHandler
     {
         try {
             DB::beginTransaction();
-				Role::removeRole($roleId);
+				Role::removeRole($command->roleId);
             DB::commit();
 		} catch(QueryException $e) {
 			DB::rollBack();
-			throw new Exception(__('An internal error occurred while storing information in the database.'), 403);
+			throw new Exception(__('An internal error occurred while storing information in the database.'), 500);
         } catch(Exception $e) {
 			DB::rollBack();
 			throw new Exception(__('An unknown internal error has occurred.'), 500);

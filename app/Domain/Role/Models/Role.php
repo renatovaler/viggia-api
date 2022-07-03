@@ -3,8 +3,11 @@
 namespace App\Domain\Role\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Database\Factories\Role\RoleFactory;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+
+use Database\Factories\Role\RoleFactory;
 
 class Role extends Model
 {
@@ -61,7 +64,7 @@ class Role extends Model
     {
         return $this->roleById($roleId)->delete();
     }
-	
+
     /**
      * Create a new factory instance for the model.
      *

@@ -2,6 +2,8 @@
 
 namespace App\UI\User\Providers;
 
+use App\Domain\User\Actions\GetUserList\GetUserListCommand;
+use App\Domain\User\Actions\GetUserList\GetUserListHandler;
 use App\Domain\User\Actions\GetUser\GetUserById\GetUserByIdCommand;
 use App\Domain\User\Actions\GetUser\GetUserById\GetUserByIdHandler;
 use App\Domain\User\Actions\GetUser\GetUserByEmail\GetUserByEmailCommand;
@@ -14,6 +16,10 @@ use App\Domain\User\Actions\DeleteUserProfilePhoto\DeleteUserProfilePhotoCommand
 use App\Domain\User\Actions\DeleteUserProfilePhoto\DeleteUserProfilePhotoHandler;
 use App\Domain\User\Actions\UpdateUserPersonalInformation\UpdateUserPersonalInformationCommand;
 use App\Domain\User\Actions\UpdateUserPersonalInformation\UpdateUserPersonalInformationHandler;
+
+
+//use Illuminate\Support\Facades\Event;
+//use App\Domain\User\Events\UserCreated;
 
 use Illuminate\Support\Facades\Bus;
 use Illuminate\Support\Facades\Route;
@@ -54,6 +60,9 @@ class UserServiceProvider extends ServiceProvider
 
         // commands and handlers
         $this->registerCommandsAndHandlers();
+
+        // events
+        $this->registerEventsAndHandlers();
     }
 
     /**
@@ -64,6 +73,7 @@ class UserServiceProvider extends ServiceProvider
     public function registerCommandsAndHandlers(): void
     {
         Bus::map([
+            GetUserListCommand::class => GetUserListHandler::class,
             GetUserByIdCommand::class => GetUserByIdHandler::class,
             GetUserByEmailCommand::class => GetUserByEmailHandler::class,
             UpdateUserPasswordCommand::class => UpdateUserPasswordHandler::class,
@@ -73,6 +83,21 @@ class UserServiceProvider extends ServiceProvider
         ]);
     }
 
+
+    /**
+     * Mapeia os eventos e handlers respectivos
+     *
+     * @return void
+     */
+    public function registerEventsAndHandlers(): void
+    {
+        /*
+        Event::listen(
+            UserCreated::class,
+            [CreatePersonalCompany::class, 'handle']
+        );
+        */
+    }
     /**
      * Registra os serviços utilizados por esse provedor de serviços.
      *
