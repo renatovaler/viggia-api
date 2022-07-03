@@ -23,12 +23,12 @@ class RemoveCompanyMemberRequest extends FormRequest
      */
     public function prepareForValidation(): void
     {
-        if( $this->route()->currentRouteName() === 'company.current.profile.update') ){
+        if( $this->route()->getName() === 'company.current.profile.update') {
 			$companyId = auth()->user()->current_company_id;
 			$this->replace(['company_id' => $companyId]);
 		}
     }
-	
+
     /**
      * Get the validation rules that apply to the request.
      *

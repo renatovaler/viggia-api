@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\UI\Company\Http\Controllers\CreateCompanyController;
 use App\UI\Company\Http\Controllers\AddCompanyMemberController;
 use App\UI\Company\Http\Controllers\RemoveCompanyMemberController;
 use App\UI\Company\Http\Controllers\UpdateCompanyInformationController;
@@ -119,6 +120,17 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 			}); // End company members route group
 
 		}); //End "current" company route group
+
+    /**
+     * Creates a new company
+     *
+     * @method  POST
+     * @route   domain.example/company/create
+     * @name    company.create
+     */
+    Route::post('create', [CreateCompanyController::class, '__invoke'])
+    ->name('company.create');
+
 
 	}); //End company route group
 });

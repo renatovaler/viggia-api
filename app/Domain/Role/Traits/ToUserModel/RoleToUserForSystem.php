@@ -5,6 +5,8 @@ namespace App\Domain\Role\Traits\ToUserModel;
 use App\Domain\Role\Models\Role;
 use App\Domain\Role\Models\RoleUser;
 
+use Illuminate\Support\Collection as SupportCollection;
+use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
@@ -15,28 +17,39 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 trait RoleToUserForSystem
 {
     /**
-     * Get all user roles
+     * Get relation of user system roles
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function roles(): BelongsToMany
+    public function systemRoles(): BelongsToMany
     {
         return $this->belongsToMany(Role::class, RoleUser::class, 'user_id', 'role_id');
     }
 
     /**
-     * Checks if the user has a specific role
+     * Get all user system roles
+     *
+     * @return SupportCollection|EloquentCollection
+     */
+    public function getSystemRoles(): SupportCollection|EloquentCollection
+    {
+        $systemRoles = $this->systemRoles()->get();
+        return $systemRoles->isEmpty() ? collect([]) : $systemRoles;
+    }
+
+    /**
+     * Checks if the user has a specific system role
      *
      * @param string $name
      * @return bool
      */
     public function hasUserRoleByName(string $name = null): bool
     {
-        return $this->roles->contains('name', $name);
+        return $this->getSystemRoles()->contains('name', $name);
     }
 
     /**
-     * Attach role to user
+     * Attach system role to user
      *
      * @param int|array $roleIds
      * @return void
@@ -46,14 +59,14 @@ trait RoleToUserForSystem
         ! is_array($roleIds) ? $roleIds = [$roleIds]: '';
         foreach($roleIds as $role => $id)
         {
-            if (! $this->roles->contains('role_id', $id)) {
-                $this->roles()->attach($roleIds);
+            if (! $this->getSystemRoles()->contains('role_id', $id)) {
+                $this->systemRoles()->attach($roleIds);
             }
         }
     }
 
     /**
-     * Attach role to user by role name
+     * Attach system role to user by role name
      *
      * @param string $name
      * @return bool
@@ -65,7 +78,7 @@ trait RoleToUserForSystem
     }
 
     /**
-     * Remove role to user
+     * Remove system role to user
      *
      * @param int|array $roleIds
      * @return void
@@ -75,14 +88,14 @@ trait RoleToUserForSystem
         ! is_array($roleIds) ? $roleIds = [$roleIds]: '';
         foreach($roleIds as $role => $id)
         {
-            if (! $this->roles->contains('role_id', $id)) {
-                $this->roles()->detach($roleIds);
+            if (! $this->getSystemRoles()->contains('role_id', $id)) {
+                $this->systemRoles()->detach($roleIds);
             }
         }
     }
 
     /**
-     * Remove role to user by role name
+     * Remove system role to user by role name
      *
      * @param string $name
      * @return bool
@@ -94,17 +107,17 @@ trait RoleToUserForSystem
     }
 
     /**
-     * Remove all roles to user
+     * Remove all system roles to user
      *
      * @return void
      */
     public function flushRolesToUser(): void
     {
-        $this->roles()->detach();
+        $this->systemRoles()->detach();
     }
 
     /**
-     * Sync roles to user
+     * Sync system roles to user
      *
      * @param int|array $roleIds
      * @return void
@@ -114,8 +127,8 @@ trait RoleToUserForSystem
         ! is_array($roleIds) ? $roleIds = [$roleIds]: '';
         foreach($roleIds as $role => $id)
         {
-            if (! $this->roles->contains('role_id', $id)) {
-                $this->roles()->sync($roleIds);
+            if (! $this->getSystemRoles()->contains('role_id', $id)) {
+                $this->systemRoles()->sync($roleIds);
             }
         }
     }

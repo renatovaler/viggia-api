@@ -4,7 +4,8 @@ namespace App\Domain\Role\Traits\ToUserModel;
 
 use App\Domain\Role\Models\Role;
 use App\Domain\Role\Models\RoleUser;
-
+use Illuminate\Support\Collection as SupportCollection;
+use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
@@ -15,7 +16,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 trait RoleToUserForCompanyBranch
 {
     /**
-     * Get all the functions of the current company branch
+     * Get relation of roles of the company branch
      *
      * @param int $companyBranchId
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
@@ -27,6 +28,18 @@ trait RoleToUserForCompanyBranch
     }
 
     /**
+     * Get all the roles of the company branch
+     *
+     * @param null|int $companyId
+     * @return SupportCollection|EloquentCollection
+     */
+    public function getCompanyBranchRoles(null|int $companyBranchId): SupportCollection|EloquentCollection
+    {
+        return is_null($companyBranchId) ?
+                collect([]) : $this->companyBranchRoles($companyBranchId)->get();
+    }
+
+    /**
      * Checks if the user has a specific company branch role
      *
      * @param string $name
@@ -35,7 +48,7 @@ trait RoleToUserForCompanyBranch
      */
     public function hasUserCompanyBranchRoleByName(string $name, int $companyBranchId): bool
     {
-        return $this->companyBranchRoles($companyBranchId)->contains('name', $name);
+        return $this->getCompanyBranchRoles($companyBranchId)->contains('name', $name);
     }
 
     /**
@@ -50,7 +63,7 @@ trait RoleToUserForCompanyBranch
         ! is_array($roleIds) ? $roleIds = [$roleIds]: '';
         foreach($roleIds as $role => $id)
         {
-            if (is_null($this->companyBranchRoles($companyBranchId)) || ! $this->companyBranchRoles($companyBranchId)->contains('role_id', $id)) {
+            if (is_null($this->getCompanyBranchRoles($companyBranchId)) || ! $this->getCompanyBranchRoles($companyBranchId)->contains('role_id', $id)) {
                 $this->companyBranchRoles($companyBranchId)->attach($roleIds, ['user_id' => $this->id]);
             }
         }
@@ -81,7 +94,7 @@ trait RoleToUserForCompanyBranch
         ! is_array($roleIds) ? $roleIds = [$roleIds]: '';
         foreach($roleIds as $role => $id)
         {
-            if (! $this->companyBranchRoles($companyBranchId)->contains('role_id', $id)) {
+            if (! $this->getCompanyBranchRoles($companyBranchId)->contains('role_id', $id)) {
                 $this->companyBranchRoles($companyBranchId)->detach($roleIds, ['user_id' => $this->id]);
             }
         }
@@ -123,7 +136,7 @@ trait RoleToUserForCompanyBranch
         ! is_array($roleIds) ? $roleIds = [$roleIds]: '';
         foreach($roleIds as $role => $id)
         {
-            if (! $this->companyBranchRoles($companyBranchId)->contains('role_id', $id)) {
+            if (! $this->getCompanyBranchRoles($companyBranchId)->contains('role_id', $id)) {
                 $this->companyBranchRoles($companyBranchId)->sync($roleIds, ['user_id' => $this->id]);
             }
         }

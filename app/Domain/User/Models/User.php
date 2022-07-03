@@ -34,6 +34,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'name',
         'email',
         'password',
+        'current_company_id',
+        'current_company_branch_id'
     ];
 
     /**
@@ -52,6 +54,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array<string, string>
      */
     protected $casts = [
+        'can_be_impersonated' => 'boolean',
         'email_verified_at' => 'datetime',
         'password_changed_at' => 'datetime',
     ];

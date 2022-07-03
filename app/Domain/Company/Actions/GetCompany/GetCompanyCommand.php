@@ -11,9 +11,9 @@ final class GetCompanyCommand
     /**
      * Método construtor da classe
      *
-     * @param readonly int $id
+     * @param readonly null|int $id
      *
      * @return void (implicit)
      */
-    public function __construct(public readonly int $id) {}
+    public function __construct(public readonly null|int $id) {}
 }

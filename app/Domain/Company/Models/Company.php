@@ -30,7 +30,8 @@ class Company extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'name'
+        'name',
+        'owner_user_id'
     ];
 
     /**
@@ -137,7 +138,7 @@ class Company extends Model
     {
         return $this->companyMembersAndOwner()->where('id', $companyMemberId)->firstOrFail();
     }
-	
+
     /**
      * Remove membro da empresa.
      *

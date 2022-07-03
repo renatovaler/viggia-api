@@ -9,6 +9,7 @@ use GuzzleHttp\Exception\RequestException;
 use Illuminate\Database\QueryException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
+
 use Illuminate\Auth\AuthenticationException;
 
 use Illuminate\Http\Exceptions\PostTooLargeException;
@@ -65,85 +66,98 @@ class Handler extends ExceptionHandler
         if ( !config('app.debug') ) {
 			$this->renderable(function (MethodNotAllowedHttpException $e, $request) {
                 return response()->json([
+                    'code' => 405,
                     'type' => 'error',
-                    'message' => __('The specified method for the request is invalid.')
+                    'message' => __('MethodNotAllowedHttpException: The specified method for the request is invalid.')
                 ], 405);
-			});
-			$this->renderable(function (NotFoundHttpException $e, $request) {
-                return response()->json([
-                    'type' => 'error',
-				    'message' => __('The specified URL cannot be found.')
-                ], 404);
 			});
 			$this->renderable(function (AuthenticationException $e, $request) {
                 return response()->json([
+                    'code' => 401,
                     'type' => 'error',
-				    'message' => __('Unauthenticated. Your session or token has been expired. Please login again.')
+				    'message' => __('AuthenticationException: Your session or token has been expired.')
                 ], 401);
 			});
 			$this->renderable(function (AccessDeniedHttpException $e, $request) {
                 return response()->json([
+                    'code' => 401,
                     'type' => 'error',
-				    'message' => __('Unauthorized. This action is unauthorized.')
+				    'message' => __('AccessDeniedHttpException: This action is unauthorized.')
                 ], 401);
 			});
 			$this->renderable(function (TokenMismatchException $e, $request) {
                 return response()->json([
+                    'code' => 419,
                     'type' => 'error',
-				    'message' => __('TokenMismatchException! Your CSRF token has been expired. Request a new token and try again.')
+				    'message' => __('TokenMismatchException: Your CSRF token has been expired. Request a new token and try again.')
                 ], 419);
 			});
 			$this->renderable(function (QueryException $e, $request) {
                 return response()->json([
+                    'code' => 500,
                     'type' => 'error',
-				    'message' => __('Internal server error. There was a problem performing the requested action on the database. Try later.')
+				    'message' => __('QueryException: There was a problem performing the requested action on the database. Try later.')
                 ], 500);
+			});
+			$this->renderable(function (NotFoundHttpException $e, $request) {
+                return response()->json([
+                    'code' => 404,
+                    'type' => 'error',
+				    'message' => __('NotFoundHttpException: The requested information was not found.')
+                ], 404);
 			});
 			$this->renderable(function (ModelNotFoundException $e, $request) {
                 return response()->json([
+                    'code' => 404,
                     'type' => 'error',
-				    'message' => __('The requested information does not exist in our database.')
+				    'message' => __('ModelNotFoundException: The requested information does not exist in our database.')
                 ], 404);
 			});
 			$this->renderable(function (PostTooLargeException $e, $request) {
 				//convertUploadedFileSizeToHumanReadable function is an helper (App\Structure\Support\helpers.php)
                 return response()->json([
+                    'code' => 405,
                     'type' => 'error',
 					__(
-						'Size of attached file should be less :size',
+						'PostTooLargeException: Size of attached file should be less :size',
 						['size' => convertUploadedFileSizeToHumanReadable( ini_get('upload_max_filesize') )]
 					)
                 ], 405);
 			});
 			$this->renderable(function (ThrottleRequestsException $e, $request) {
                 return response()->json([
+                    'code' => 429,
                     'type' => 'error',
-				    'message' => __('Throttle requests exception too many attempts. Wait some minutes and try again.')
+				    'message' => __('ThrottleRequestsException: Throttle requests exception too many attempts. Wait some minutes and try again.')
                 ], 429);
 			});
 			$this->renderable(function (RequestException $e, $request) {
                 return response()->json([
+                    'code' => 500,
                     'type' => 'error',
-				    'message' => __('Internal server error. External API call failed.')
+				    'message' => __('RequestException: Internal server error. External API call failed.')
                 ], 500);
 			});
 			$this->renderable(function (HttpException $e, $request) {
                 return response()->json([
+                    'code' => $e->getCode(),
                     'type' => 'error',
-				    'message' => $e->getMessage(), $e->getCode()
-                ]);
+				    'message' => __('HttpException: Internal server error'),
+                ], $e->getCode());
 			});
 			$this->renderable(function (Error $e, $request) {
                 return response()->json([
+                    'code' => 500,
                     'type' => 'error',
-				    'message' => __('Internal server error.')
+				    'message' => __('GenericError: Internal server error'),
                 ], 500);
 			});
 			$this->renderable(function (Exception $e, $request) {
                 return response()->json([
+                    'code' => $e->getCode(),
                     'type' => 'error',
-				    'message' => $e->getMessage(), $e->getCode()
-                ]);
+				    'message' => __('GenericException: Internal server error'),
+                ], $e->getCode());
 			});
 		}
         $this->reportable(function (Throwable $e) {});
