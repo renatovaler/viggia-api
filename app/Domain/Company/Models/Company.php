@@ -30,8 +30,8 @@ class Company extends Model
      * @var array<int, string>
      */
     protected $fillable = [
+        'user_id',
         'name',
-        'owner_user_id'
     ];
 
     /**
@@ -68,7 +68,7 @@ class Company extends Model
      */
     public function companyOwner(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'owner_user_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     /**

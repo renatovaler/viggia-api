@@ -16,8 +16,8 @@ class UpdateUserPasswordRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        $inputUserId = intval( $this->input('id') );
-        $routeUserId = $this->get('userId');
+        $inputUserId = (int) $this->input('id');
+        $routeUserId = (int) $this->get('userId');
         return $routeUserId === $inputUserId;
     }
 

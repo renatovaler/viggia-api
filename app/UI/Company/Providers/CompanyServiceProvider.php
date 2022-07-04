@@ -5,14 +5,23 @@ namespace App\UI\Company\Providers;
 // Company
 use App\Domain\Company\Actions\GetCompany\GetCompanyCommand;
 use App\Domain\Company\Actions\GetCompany\GetCompanyHandler;
+use App\Domain\Company\Actions\GetCompanyList\GetCompanyListCommand;
+use App\Domain\Company\Actions\GetCompanyList\GetCompanyListHandler;
+use App\Domain\Company\Actions\GetMyselfCompanyList\GetMyselfCompanyListCommand;
+use App\Domain\Company\Actions\GetMyselfCompanyList\GetMyselfCompanyListHandler;
+
+use App\Domain\Company\Actions\SwitchCompany\SwitchCompanyCommand;
+use App\Domain\Company\Actions\SwitchCompany\SwitchCompanyHandler;
+
 use App\Domain\Company\Actions\CreateCompany\CreateCompanyCommand;
 use App\Domain\Company\Actions\CreateCompany\CreateCompanyHandler;
+use App\Domain\Company\Actions\UpdateCompanyInformation\UpdateCompanyInformationCommand;
+use App\Domain\Company\Actions\UpdateCompanyInformation\UpdateCompanyInformationHandler;
+
 use App\Domain\Company\Actions\AddCompanyMember\AddCompanyMemberCommand;
 use App\Domain\Company\Actions\AddCompanyMember\AddCompanyMemberHandler;
 use App\Domain\Company\Actions\RemoveCompanyMember\RemoveCompanyMemberCommand;
 use App\Domain\Company\Actions\RemoveCompanyMember\RemoveCompanyMemberHandler;
-use App\Domain\Company\Actions\UpdateCompanyInformation\UpdateCompanyInformationCommand;
-use App\Domain\Company\Actions\UpdateCompanyInformation\UpdateCompanyInformationHandler;
 
 // Company Branch
 use App\Domain\Company\Actions\GetCompanyBranch\GetCompanyBranchnCommand;
@@ -77,12 +86,15 @@ class CompanyServiceProvider extends ServiceProvider
     {
         Bus::map([
             // Company
+            GetMyselfCompanyListCommand::class => GetMyselfCompanyListHandler::class,
+            GetCompanyListCommand::class => GetCompanyListHandler::class,
             GetCompanyCommand::class => GetCompanyHandler::class,
             CreateCompanyCommand::class => CreateCompanyHandler::class,
             AddCompanyMemberCommand::class => AddCompanyMemberHandler::class,
             RemoveCompanyMemberCommand::class => RemoveCompanyMemberHandler::class,
             UpdateCompanyInformationCommand::class => UpdateCompanyInformationHandler::class,
 
+            SwitchCompanyCommand::class => SwitchCompanyHandler::class,
             // CompanyBranch
             GetCompanyBranchnCommand::class => GetCompanyBranchHandler::class,
             CreateCompanyBranchCommand::class => CreateCompanyBranchHandler::class,

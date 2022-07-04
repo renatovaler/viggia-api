@@ -25,7 +25,7 @@ final class CompanyDto
     {
         return new self(
             $company->id,
-            $company->owner_user_id,
+            $company->user_id,
             $company->name
         );
     }

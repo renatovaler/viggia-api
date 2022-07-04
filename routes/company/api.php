@@ -7,6 +7,9 @@ use App\UI\Company\Http\Controllers\AddCompanyMemberController;
 use App\UI\Company\Http\Controllers\RemoveCompanyMemberController;
 use App\UI\Company\Http\Controllers\UpdateCompanyInformationController;
 use App\UI\Company\Http\Controllers\GetCurrentCompanyInformationController;
+use App\UI\Company\Http\Controllers\GetMyselfCompanyListController;
+
+use App\UI\Company\Http\Controllers\SwitchCompanyController;
 
 use App\UI\Company\Http\Controllers\GetCompanyMemberInformationController;
 use App\UI\Company\Http\Controllers\GetCurrentCompanyMemberListController;
@@ -122,6 +125,16 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 		}); //End "current" company route group
 
     /**
+     * Switch company
+     *
+     * @method  PUT
+     * @route   domain.example/company/switch
+     * @name    company.switch
+     */
+    Route::put('switch', [SwitchCompanyController::class, '__invoke'])
+    ->name('company.switch');
+
+    /**
      * Creates a new company
      *
      * @method  POST
@@ -130,6 +143,16 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
      */
     Route::post('create', [CreateCompanyController::class, '__invoke'])
     ->name('company.create');
+
+    /**
+     * Get list of myself companies
+     *
+     * @method  GET
+     * @route   domain.example/company/myself/list
+     * @name    company.myself.list
+     */
+    Route::get('myself/list', [GetMyselfCompanyListController::class, '__invoke'])
+    ->name('company.myself.list');
 
 
 	}); //End company route group

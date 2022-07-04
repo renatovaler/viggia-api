@@ -23,7 +23,7 @@ final class CreateCompanyHandler
         try {
             DB::beginTransaction();
 				$company = Company::create([
-					'owner_user_id' => $command->ownerUserId,
+					'user_id' => $command->ownerUserId,
 					'name' => $command->name
 				]);
             DB::commit();

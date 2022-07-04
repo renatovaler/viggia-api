@@ -54,7 +54,7 @@ trait CompaniesToUser
      */
     public function switchCompany(Company $company): bool
     {
-        if (! $this->belongsToCompany($company)) {
+        if (! $this->belongsToCompany($company->id, $company->user_id)) {
             return false;
         }
         $this->forceFill([
@@ -81,7 +81,7 @@ trait CompaniesToUser
      */
     public function ownedCompanies(): HasMany
     {
-        return $this->hasMany(Company::class);
+        return $this->hasMany(Company::class, 'user_id', 'id');
     }
 
     /**
@@ -98,13 +98,14 @@ trait CompaniesToUser
     /**
      * Determine if the user belongs to the given company.
      *
-     * @param  mixed  $company
+     * @param  int  $companyId
+     * @param  int  $userId
      * @return bool
      */
-    public function belongsToCompany($company): bool
+    public function belongsToCompany($companyId, $userId): bool
     {
-        return $this->companies->contains(function ($c) use ($company) {
-            return $c->id === $company->id;
-        }) || $this->isOwnerOfCompany($company->owner_user_id);
+        return $this->companies->contains(function ($c) use ($companyId) {
+            return $c->id === $companyId;
+        }) || $this->isOwnerOfCompany($userId);
     }
 }

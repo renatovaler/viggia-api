@@ -4,7 +4,7 @@ namespace App\UI\Company\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateCompanyRequest extends FormRequest
+class SwitchCompanyRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,9 @@ class CreateCompanyRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return auth()->user()->id === (int) $this->input('user_id');
+        $companyId = (int) $this->get('company_id');
+        $userId = auth()->user()->id;
+        return auth()->user()->belongsToCompany($companyId, $userId);
     }
 
     /**
@@ -24,8 +26,7 @@ class CreateCompanyRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user_id' => ['required', 'numeric', 'exists:users,id'],
-            'name' => ['required', 'string', 'max:255']
+            'company_id' => ['required', 'numeric', 'exists:companies,id']
         ];
     }
 
@@ -37,9 +38,8 @@ class CreateCompanyRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'user_id.required' => __('É necessário informar o ID do usuário que será proprietário da empresa.'),
-            'user_id.exists' => __('O usuário informado não existe em nosso banco de dados.'),
-            'name.required' => __('É necessário informar um nome para a empresa.')
+            'company_id.required' => __('É necessário informar o ID da empresa.'),
+            'company_id.exists' => __('A empresa informada não existe em nosso banco de dados.')
         ];
     }
 }
