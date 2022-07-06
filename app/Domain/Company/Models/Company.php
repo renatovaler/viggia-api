@@ -62,6 +62,34 @@ class Company extends Model
     }
 
     /**
+     * Purge all of the company's resources.
+     *
+     * @param  int $companyId
+     * @return void
+     */
+    public function deleteCompany(int $companyId)
+    {
+		$company = $this->where('id', $companyId)->firstOrFail();
+		
+        $company->companyOwner()->where('current_company_id', $companyId)
+                ->update(['current_company_id' => null]);
+
+        $branchs = $company->ownedCompanyBranchs()->all();
+		
+		$branchs->map(function ($branch) {
+			$branch->companyBranchMembers()->detach();
+			$branch->delete();
+		});		
+
+        $company->companyMembersAndOwner()->where('current_company_id', $companyId)
+                ->update(['current_company_id' => null]);
+
+        $this->onlyCompanyMembers()->detach();
+
+        $company->delete();
+    }
+	
+    /**
      * Retorna dados do usuário que é proprietário da empresa
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

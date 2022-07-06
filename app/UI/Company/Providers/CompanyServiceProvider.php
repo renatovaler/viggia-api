@@ -3,6 +3,8 @@
 namespace App\UI\Company\Providers;
 
 // Company
+use App\Domain\Company\Actions\DeleteCompany\DeleteCompanyCommand;
+use App\Domain\Company\Actions\DeleteCompany\DeleteCompanyHandler;
 use App\Domain\Company\Actions\GetCompany\GetCompanyCommand;
 use App\Domain\Company\Actions\GetCompany\GetCompanyHandler;
 use App\Domain\Company\Actions\GetCompanyList\GetCompanyListCommand;
@@ -86,6 +88,7 @@ class CompanyServiceProvider extends ServiceProvider
     {
         Bus::map([
             // Company
+            DeleteCompanyCommand::class => DeleteCompanyHandler::class,
             GetMyselfCompanyListCommand::class => GetMyselfCompanyListHandler::class,
             GetCompanyListCommand::class => GetCompanyListHandler::class,
             GetCompanyCommand::class => GetCompanyHandler::class,

@@ -1,0 +1,119 @@
+|--------------------------------------------------------------------------
+| User
+|--------------------------------------------------------------------------
+
+- Get User - OK
+- Get User List - OK
+
+- Create User - PENDING
+---- Create user - PENDING
+---- Set default system roles - PENDING
+
+- Update User Personal Information - PENDING
+---- Update basic informations (name, email, email_verified_at) - OK
+---- Set default system roles - PENDING
+
+- Update User Password - PENDING/CONFIRM
+- Update User ProfilePhoto - PENDING/CONFIRM
+
+|--------------------------------------------------------------------------
+| Roles
+|--------------------------------------------------------------------------
+
+- Get Role - OK
+- Get Role List - OK
+- Create Role - PENDING
+- Update Role - PENDING
+- Remove Role - PENDING
+
+- Attach Role To User For System - PENDING
+- Dettach Role To User For System - PENDING
+
+- Attach Role To User For Company - PENDING
+- Dettach Role To User For Company - PENDING
+
+- Attach Role To User For Company Branch - PENDING
+- Dettach Role To User For Company Branch - PENDING
+
+|--------------------------------------------------------------------------
+| Company
+|--------------------------------------------------------------------------
+
+--------- Company
+- Create Company - PENDING
+---- Create company - PENDING
+---- Auto switch current to created company - PENDING
+- Get Company - OK
+- Get Company List - PENDING/CONFIRM
+- Get Myself Company List - OK
+- Update Company Information - PENDING/CONFIRM
+- Remove Company - PENDING
+- Switch Company - PENDING/CONFIRM
+
+--------- Company Member
+- Invite Company Member - PENDING
+- Accept invite and add Company Member - PENDING
+- Deny invite - PENDING
+- Add Company Member - PENDING
+- Remove Company Member - PENDING
+- Get Company Member Information - PENDING
+- Get Company Member List - PENDING
+
+--------- Company Branch
+- Create Company Branch - PENDING
+- Update Company Branch Information - PENDING
+- Remove Company Branch - PENDING
+- Get Company Branch - PENDING
+- Get Company Branch List - PENDING
+- Get Myself Company Branch List - PENDING
+
+--------- Company Branch Member
+- Add Company Branch Member - PENDING
+- Remove Company Branch Member - PENDING
+- Get Company Branch Member Information - PENDING
+- Get Company Branch Member List - PENDING
+
+--------- Company Financing Agreement
+- Create Contract - PENDING
+- Update Contract - PENDING
+- Remove Contract - PENDING
+- Get Contract - PENDING
+- Get Contract List - PENDING
+
+|--------------------------------------------------------------------------
+| Subscriptions
+|--------------------------------------------------------------------------
+- Create Subscription Plan - PENDING
+- Update Subscription Plan - PENDING
+- Remove Subscription Plan - PENDING
+- Get Subscription Information - PENDING
+- Get Subscription History - PENDING
+- Subscription Pay - PENDING
+- Get Subscription Payment Information - PENDING
+- Get Subscription Payment History - PENDING
+
+|--------------------------------------------------------------------------
+| License
+|--------------------------------------------------------------------------
+
+- Get License - PENDING
+- Get License List - PENDING
+- Create License - PENDING
+- Update License - PENDING
+- Remove License - PENDING
+- Attach License To User/Company/CompanyBranch - PENDING
+- Dettach License To User/Company/CompanyBranch - PENDING
+- Active License - PENDING
+- Deactive License - PENDING
+
+|--------------------------------------------------------------------------
+| Vehicle Localizations
+|--------------------------------------------------------------------------
+
+- Get Vehicle Localization - TEST PENDING
+- Get Vehicle Localization List - TEST PENDING
+- Create Sighting (LAT, LONG, DATE, HOUR, LICENSE_PLATE) - TEST PENDING
+- Update Sighting (LAT, LONG, DATE, HOUR, LICENSE_PLATE) - TEST PENDING
+- Remove Sighting - PENDING
+
+

@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\User\User\Myself;
+namespace Tests\Feature\User;
 
 use App\Domain\User\Models\User;
 
@@ -27,18 +27,17 @@ class GetUserListTest extends TestCase
         $user->password_changed_at = now();
         $user->save();
 
-        $response = $this->actingAs($user)
-                    ->getJson('/users/list');
-                    $response->assertJsonStructure([
-                        'data' => [
-                            [
-                                'id',
-                                'name',
-                                'email',
-                                'email_verified_at'
-                            ]
-                        ]
-                    ])
-                    ->assertOk();
+        $response = $this->actingAs($user)->getJson('/users/list');
+		$response->assertJsonStructure([
+			'data' => [
+				[
+					'id',
+					'name',
+					'email',
+					'email_verified_at'
+				]
+			]
+		])
+		->assertOk();
     }
 }

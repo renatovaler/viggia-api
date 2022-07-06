@@ -4,6 +4,7 @@ namespace App\UI\Auth\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+//use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 use App\UI\Auth\Http\Requests\LoginRequest;
 use App\Structure\Http\Controllers\Controller;
@@ -22,6 +23,14 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
+		/*
+		return response()->json([
+			'code' => 201,
+			'type' => 'success',
+			'message' => __('Session started successfully.')
+		], 201);
+		*/
+		
         return response()->noContent();
     }
 
@@ -39,6 +48,14 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
+		/*
+		return response()->json([
+			'code' => 200,
+			'type' => 'success',
+			'message' => __('Session ended successfully.')
+		], 200);
+		*/
+		
         return response()->noContent();
     }
 }

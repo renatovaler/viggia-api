@@ -21,7 +21,7 @@ class UpdateUserProfileInformationController extends Controller
     public function __invoke(UpdateUserPersonalInformationRequest $request): JsonResponse
     {
         $userUpdated = dispatch_sync(new UpdateUserPersonalInformationCommand(
-            intval( $request->input('id') ),
+            (int) $request->input('id'),
             $request->input('name'),
             $request->input('email')
         ));

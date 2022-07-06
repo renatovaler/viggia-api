@@ -36,8 +36,11 @@ trait RoleToUserForCompany
      */
     public function getCompanyRoles(null|int $companyId): SupportCollection|EloquentCollection
     {
-        return is_null($companyId) ?
-                collect([]) : $this->companyRoles($companyId)->get();
+		if( is_null($companyId) ) {
+			return collect([]);			
+		}
+        $companyRoles = $this->companyRoles($companyId)->get();
+        return $companyRoles->isEmpty() ? collect([]) : $companyRoles;
     }
 
     /**

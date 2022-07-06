@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\User\User\Myself;
+namespace Tests\Feature\User;
 
 use App\Domain\User\Models\User;
 
@@ -30,12 +30,11 @@ class UpdateMyselfProfileInformationTest extends TestCase
         $user = User::factory()->create();
         $user->password_changed_at = $now;
         $user->save();
-        $response = $this->actingAs($user)
-                    ->putJson('/users/myself/profile', [
-                        'id' => $user->id,
-                        'name' => $this->faker->name(),
-                        'email' => $user->email
-                    ]);
+        $response = $this->actingAs($user)->putJson('/users/myself/profile', [
+			'id' => $user->id,
+			'name' => $this->faker->name(),
+			'email' => $user->email
+		]);
         $response->assertJsonStructure([
             'data' => [
                 'id',

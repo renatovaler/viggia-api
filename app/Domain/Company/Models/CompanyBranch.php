@@ -77,7 +77,7 @@ class CompanyBranch extends Model
     {
         return $this->belongsTo(Company::class, 'owner_company_id');
     }
-
+	
 	/*
     |--------------------------------------------------------------------------
 	| COMPANY BRANCH MEMBER SECTION

@@ -196,6 +196,7 @@ return [
         App\UI\Auth\Providers\AuthServiceProvider::class,
         App\UI\User\Providers\UserServiceProvider::class,
         App\UI\Company\Providers\CompanyServiceProvider::class,
+        App\UI\Vehicle\Providers\VehicleServiceProvider::class,
 
         /*
          * Kernel Service Providers...

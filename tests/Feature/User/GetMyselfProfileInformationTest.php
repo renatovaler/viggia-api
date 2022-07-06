@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\User\User\Myself;
+namespace Tests\Feature\User;
 
 use App\Domain\User\Models\User;
 use Laravel\Sanctum\Sanctum;
@@ -24,8 +24,7 @@ class GetMyselfProfileInformationTest extends TestCase
         $user->password_changed_at = now();
         $user->save();
 
-        $response = $this->actingAs($user)
-        ->getJson('/users/myself/profile');
+        $response = $this->actingAs($user)->getJson('/users/myself/profile');
         $response->assertJsonStructure([
             'data' => [
                 'id',
