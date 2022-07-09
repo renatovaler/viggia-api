@@ -97,9 +97,11 @@ class AdminServiceProvider extends ServiceProvider
     public function map(): void
     {
         Route::middleware(['web'])
+			->prefix('admin')
 			->group(base_path('routes/admin/web.php'));
 
         Route::middleware(['api'])
+			->prefix('admin')
             ->group(base_path('routes/admin/api.php'));
 
         require base_path('routes/admin/channels.php');

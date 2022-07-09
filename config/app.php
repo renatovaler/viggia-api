@@ -193,9 +193,13 @@ return [
          * Application Service Providers...
          */
         App\UI\Admin\Providers\AdminServiceProvider::class,
+		
         App\UI\Auth\Providers\AuthServiceProvider::class,
-        App\UI\User\Providers\UserServiceProvider::class,
+		
+        App\UI\MyselfUser\Providers\MyselfUserServiceProvider::class,
+		
         App\UI\Company\Providers\CompanyServiceProvider::class,
+		
         App\UI\Vehicle\Providers\VehicleServiceProvider::class,
 
         /*

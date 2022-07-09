@@ -3,66 +3,156 @@
 use Illuminate\Support\Facades\Route;
 
 // Users
+use App\UI\Admin\Http\Controllers\User\CreateUserController;
+use App\UI\Admin\Http\Controllers\User\DeleteUserController;
 use App\UI\Admin\Http\Controllers\User\GetUserListController;
 use App\UI\Admin\Http\Controllers\User\GetUserProfileInformationByIdController;
 use App\UI\Admin\Http\Controllers\User\UpdateUserProfileInformationController;
+use App\UI\Admin\Http\Controllers\User\UpdateUserPasswordController;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes - User Domain
-|--------------------------------------------------------------------------
-|
-| As rotas de API do domínio "User" devem ser registradas aqui.
-|
-| Com exceção das rotas relativas ao usuário logado, as demais devem seguir o seguinte padrão:
-|
-|		Verb		|				URI								|	Action	|		Route Name
-|		GET			|	/photos/{photo}/comments					|	index	|	photos.comments.index
-|		GET			|	/photos/{photo}/comments/create				|	create	|	photos.comments.create
-|		POST		|	/photos/{photo}/comments					|	store	|	photos.comments.store
-|		GET			|	/photos/{photo}/comments/{comment}			|	show	|	photos.comments.show
-|		GET			|	/photos/{photo}/comments/{comment}/edit		|	edit	|	photos.comments.edit
-|		PUT/PATCH	|	/photos/{photo}/comments/{comment}			|	update	|	photos.comments.update
-|		DELETE		|	/photos/{photo}/comments/{comment}			|	destroy	|	photos.comments.destroy
-|
-*/
+// Roles
+use App\UI\Admin\Http\Controllers\Role\CreateRoleController;
+use App\UI\Admin\Http\Controllers\Role\DeleteRoleController;
+use App\UI\Admin\Http\Controllers\Role\GetRoleListController;
+use App\UI\Admin\Http\Controllers\Role\GetRoleInformationByIdController;
+use App\UI\Admin\Http\Controllers\Role\UpdateRoleInformationController;
 
-Route::group(['middleware' => ['auth:sanctum']], function () {
 
-	Route::group(['prefix' => 'admin/users'], function () {
 
-        Route::group(['prefix' => 'user'], function () {
 
-            /**
-             * Get another user profile information by user_id
-             *
-             * @method  GET
-             * @route   domain.example/admin/users/user/{userId}/profile
-             * @name    admin.users.user.profile.show
-             */
-            Route::get('{userId}/profile', [GetUserProfileInformationByIdController::class, '__invoke'])
-            ->name('admin.users.user.profile.show');
+Route::group(['middleware' => ['auth:sanctum'], 'prefix' => 'users'], function () {
 
-            /**
-             * Update another user profile information
-             *
-             * @method  PUT
-             * @route   domain.example/admin/users/user/{userId}/profile
-             * @name    admin.users.user.profile.update
-             */
-            Route::put('{userId}/profile', [UpdateUserProfileInformationController::class, '__invoke'])
-            ->name('admin.users.user.profile.update');
-        }); // End prefix "user" (users/user) route group
+	/*
+	|--------------------------------------------------------------------------
+	| Admin - USERS MODULE
+	|--------------------------------------------------------------------------
+	*/
+	Route::group(['prefix' => 'users'], function () {
+		
+		/**
+		 * Create user
+		 *
+		 * @method  POST
+		 * @route   domain.example/admin/users/create
+		 * @name    admin.users.create
+		 */
+		Route::post('/create', [CreateUserController::class, '__invoke'])
+		->name('admin.users.store');
+
+		/**
+		 * Delete user record by id
+		 *
+		 * @method  DELETE
+		 * @route   domain.example/admin/users/{userId}
+		 * @name    admin.users.destroy
+		 */
+		Route::delete('{userId}', [DeleteUserController::class, '__invoke'])
+		->where('userId', '[0-9]+')
+		->name('admin.users.destroy');
+		/**
+		 * Get another user profile information by user_id
+		 *
+		 * @method  GET
+		 * @route   domain.example/admin/users/{userId}/profile
+		 * @name    admin.users.profile.show
+		 */
+		Route::get('{userId}/profile', [GetUserProfileInformationByIdController::class, '__invoke'])
+		->where('userId', '[0-9]+')
+		->name('admin.users.profile.show');
+
+		/**
+		 * Update another user profile information
+		 *
+		 * @method  PUT
+		 * @route   domain.example/admin/users/{userId}/profile
+		 * @name    admin.users.profile.update
+		 */
+		Route::put('{userId}/profile', [UpdateUserProfileInformationController::class, '__invoke'])
+		->where('userId', '[0-9]+')
+		->name('admin.users.profile.update');
+
+		/**
+		 * Update authenticated user password
+		 *
+		 * @method  PUT
+		 * @route   domain.example/admin/users/{userId}/password
+		 * @name    admin.users.password.update
+		 */
+		Route::put('{userId}/password', [UpdateUserPasswordController::class, '__invoke'])
+		->name('admin.users.password.update');
 
 		/**
 		 * Get list of users
 		 *
 		 * @method  GET
-		 * @route   domain.example/admin/users/list
-		 * @name    admin.users.list
+		 * @route   domain.example/admin/users
+		 * @name    admin.users.index
 		 */
-		Route::get('list', [GetUserListController::class, '__invoke'])
-		->name('admin.users.list');
-    }); // End prefix "users" (/users/...) route group
+		Route::get('', [GetUserListController::class, '__invoke'])
+		->name('admin.users.index');
 
+	}); // End prefix "users" (/users/...) route group
+	
+	/*
+	|--------------------------------------------------------------------------
+	| Admin - ROLES MODULE
+	|--------------------------------------------------------------------------
+	*/
+	Route::group(['prefix' => 'roles'], function () {
+		
+		/**
+		 * Create new role
+		 *
+		 * @method  POST
+		 * @route   domain.example/admin/roles/create
+		 * @name    admin.roles.create
+		 */
+		Route::post('/create', [CreateRoleController::class, '__invoke'])
+		->name('admin.roles.store');
+
+		/**
+		 * Delete role record by id
+		 *
+		 * @method  DELETE
+		 * @route   domain.example/admin/roles/{roleId}
+		 * @name    admin.roles.destroy
+		 */
+		Route::delete('{roleId}', [DeleteRoleController::class, '__invoke'])
+		->where('roleId', '[0-9]+')
+		->name('admin.roles.destroy');
+		
+		/**
+		 * Get role information by id
+		 *
+		 * @method  GET
+		 * @route   domain.example/admin/roles/{roleId}
+		 * @name    admin.roles.show
+		 */
+		Route::get('{roleId}', [GetRoleInformationByIdController::class, '__invoke'])
+		->where('roleId', '[0-9]+')
+		->name('admin.roles.show');
+
+		/**
+		 * Update role information
+		 *
+		 * @method  PUT
+		 * @route   domain.example/admin/roles/{roleId}
+		 * @name    admin.roles.update
+		 */
+		Route::put('{roleId}', [UpdateRoleInformationController::class, '__invoke'])
+		->where('roleId', '[0-9]+')
+		->name('admin.roles.update');
+
+		/**
+		 * Get list of roles
+		 *
+		 * @method  GET
+		 * @route   domain.example/admin/roles
+		 * @name    admin.roles.index
+		 */
+		Route::get('', [GetRoleListController::class, '__invoke'])
+		->name('admin.roles.index');
+		
+	}); // End prefix "roles" (/roles/...) route group
+	
 }); // End middleware route group

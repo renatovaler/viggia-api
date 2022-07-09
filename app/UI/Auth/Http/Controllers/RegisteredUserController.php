@@ -2,39 +2,36 @@
 
 namespace App\UI\Auth\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use App\Domain\User\Models\User;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Auth\Events\Registered;
+
 use App\Structure\Http\Controllers\Controller;
-use Illuminate\Validation\Rules\Password as PasswordRules;
+
+use App\UI\Auth\Http\Requests\CreateNewUserRequest;
+use App\Domain\User\Actions\CreateUser\CreateUserCommand;
 
 class RegisteredUserController extends Controller
-{
-    /**
-     * Handle an incoming registration request.
+{    
+
+	/**
+     * Creates a new user
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param App\UI\User\Http\Requests\CreateNewUserRequest $request
+     *
      * @return \Illuminate\Http\Response
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(Request $request): Response
+    public function __invoke(CreateNewUserRequest $request): Response
     {
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'confirmed', PasswordRules::defaults()],
-        ]);
-
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
-
+        $user = dispatch_sync(new CreateUserCommand(
+            $request->name,
+            $request->email,
+			$request->password,
+			now() //passwordChangedAt
+        ));
+		
         event(new Registered($user));
 
         Auth::login($user);

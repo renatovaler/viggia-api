@@ -1,65 +1,144 @@
 |--------------------------------------------------------------------------
-| User
+| UI - Admin
 |--------------------------------------------------------------------------
 
-- Get User - OK
-- Get User List - OK
+================================== MODULE USERS ==================================
 
-- Create User - PENDING
----- Create user - PENDING
----- Set default system roles - PENDING
+- Delete User [Created: OK | Tests: [Created: OK | Tested: PENDING] ]
+- Create User [Created: OK | Tests: [Created: OK | Tested: PENDING] ]
+- Update User Profile Information [Created: OK | Tests: [Created: OK | Tested: PENDING] ]
+- Update User Password [Created: OK | Tests: [Created: OK | Tested: PENDING] ]
+- Get User Profile Information [Created: OK | Tests: [Created: OK | Tested: PENDING] ]
+- Get User List [Created: OK | Tests: [Created: OK | Tested: PENDING] ]
 
-- Update User Personal Information - PENDING
----- Update basic informations (name, email, email_verified_at) - OK
----- Set default system roles - PENDING
+|--------------------------------------------------------------------------
+| UI - MyselfUser
+|--------------------------------------------------------------------------
 
-- Update User Password - PENDING/CONFIRM
-- Update User ProfilePhoto - PENDING/CONFIRM
+- Get Myself User Information
+---- Basic informations [Created: OK | Tests: [Created: OK | Tested: PENDING] ]
+---- System roles [Created: OK | Tests: [Created: OK | Tested: PENDING] ]
+
+- Update Myself User Information [Created: OK | Tests: [Created: OK | Tested: PENDING] ]
+
+- Update Myself User Password [Created: OK | Tests: [Created: OK | Tested: PENDING] ]
+
+- Update Myself User ProfilePhoto [Created: PENDING | Tests: [Created: PENDING | Tested: PENDING] ]
+
+
+|--------------------------------------------------------------------------
+| Vehicle Localizations
+|--------------------------------------------------------------------------
+
+- Delete Vehicle Localization [Created: OK | Tests: [Created: OK | Tested: PENDING] ]
+- Create Vehicle Localization [Created: OK | Tests: [Created: OK | Tested: PENDING] ]
+- Update Vehicle Localization [Created: OK | Tests: [Created: OK | Tested: PENDING] ]
+- Get Vehicle Localization [Created: OK | Tests: [Created: OK | Tested: PENDING] ]
+- Get Vehicle Localization List [Created: OK | Tests: [Created: OK | Tested: PENDING] ]
+
+
+
+
+
+
+
+CONFERIDO ATÉ AQUI
+
+
+
+
+
+
+
+
+
+
 
 |--------------------------------------------------------------------------
 | Roles
 |--------------------------------------------------------------------------
 
-- Get Role - OK
-- Get Role List - OK
-- Create Role - PENDING
-- Update Role - PENDING
-- Remove Role - PENDING
+- Get Role [Created: OK | Tests: [Created: OK | Tested: PENDING] ]
+- Get Role List [Created: OK | Tests: [Created: OK | Tested: PENDING] ]
+- Create Role [Created: OK | Tests: [Created: OK | Tested: PENDING] ]
+- Update Role [Created: OK | Tests: [Created: OK | Tested: PENDING] ]
+- Remove Role [Created: OK | Tests: [Created: OK | Tested: PENDING] ]
 
-- Attach Role To User For System - PENDING
-- Dettach Role To User For System - PENDING
+- Attach Role To User For System [Created: OK | Tests: [Created: OK | Tested: PENDING] ]
+- Dettach Role To User For System [Created: OK | Tests: [Created: OK | Tested: PENDING] ]
 
-- Attach Role To User For Company - PENDING
-- Dettach Role To User For Company - PENDING
+- Attach Role To User For Company [Created: OK | Tests: [Created: OK | Tested: PENDING] ]
+- Dettach Role To User For Company [Created: OK | Tests: [Created: OK | Tested: PENDING] ]
 
-- Attach Role To User For Company Branch - PENDING
-- Dettach Role To User For Company Branch - PENDING
+- Attach Role To User For Company Branch [Created: OK | Tests: [Created: OK | Tested: PENDING] ]
+- Dettach Role To User For Company Branch [Created: OK | Tests: [Created: OK | Tested: PENDING] ]
 
 |--------------------------------------------------------------------------
 | Company
 |--------------------------------------------------------------------------
 
 --------- Company
-- Create Company - PENDING
----- Create company - PENDING
----- Auto switch current to created company - PENDING
-- Get Company - OK
-- Get Company List - PENDING/CONFIRM
-- Get Myself Company List - OK
-- Update Company Information - PENDING/CONFIRM
-- Remove Company - PENDING
-- Switch Company - PENDING/CONFIRM
+
+- Create Company
+---- Create company [Created: PENDING | Tests: [Created: PENDING | Tested: PENDING] ]
+---- Auto switch current to created company [Created: PENDING | Tests: [Created: PENDING | Tested: PENDING] ]
+
+- Get Current Company Information [Created: PENDING | Tests: [Created: PENDING | Tested: PENDING] ]
+- Get Current User Company List [Created: PENDING | Tests: [Created: PENDING | Tested: PENDING] ]
+- Update Current Company Information [Created: PENDING | Tests: [Created: PENDING | Tested: PENDING] ]
+- Delete Current Company [Created: PENDING | Tests: [Created: PENDING | Tested: PENDING] ]
+
+- Get Another Company Information [Created: PENDING | Tests: [Created: PENDING | Tested: PENDING] ]
+- Get Another User Company List [Created: PENDING | Tests: [Created: PENDING | Tested: PENDING] ]
+- Update Another Company Information [Created: PENDING | Tests: [Created: PENDING | Tested: PENDING] ]
+- Delete Another Company [Created: PENDING | Tests: [Created: PENDING | Tested: PENDING] ]
+
+- Switch Company [Created: PENDING | Tests: [Created: PENDING | Tested: PENDING] ]
+
+
+
+
+
+
+
+
+
+
+
+ORGANIZADO ATÉ AQUI
+
+
+
+
+
+
+
+
+
+
+
+
 
 --------- Company Member
-- Invite Company Member - PENDING
-- Accept invite and add Company Member - PENDING
-- Deny invite - PENDING
-- Add Company Member - PENDING
-- Remove Company Member - PENDING
-- Get Company Member Information - PENDING
-- Get Company Member List - PENDING
+
+- Invite Company Member [Created: PENDING | Tests: PENDING]
+- Accept invite and add Company Member [Created: PENDING | Tests: PENDING]
+- Deny invite [Created: PENDING | Tests: PENDING]
+
+- Add Current Company Member [Created: OK | Tests: PENDING]
+- Add Another Company Member [Created: OK | Tests: PENDING]
+
+- Remove Current Company Member [Created: OK | Tests: PENDING]
+- Remove Another Company Member [Created: OK | Tests: PENDING]
+
+- Get Current Company Member Information [Created: OK | Tests: PENDING]
+- Get Another Company Member Information [Created: PENDING | Tests: PENDING]
+
+- Get Current Company Member List [Created: OK | Tests: PENDING]
+- Get Another Company Member List [Created: PENDING | Tests: PENDING]
 
 --------- Company Branch
+
 - Create Company Branch - PENDING
 - Update Company Branch Information - PENDING
 - Remove Company Branch - PENDING
@@ -68,12 +147,14 @@
 - Get Myself Company Branch List - PENDING
 
 --------- Company Branch Member
+
 - Add Company Branch Member - PENDING
 - Remove Company Branch Member - PENDING
 - Get Company Branch Member Information - PENDING
 - Get Company Branch Member List - PENDING
 
 --------- Company Financing Agreement
+
 - Create Contract - PENDING
 - Update Contract - PENDING
 - Remove Contract - PENDING
@@ -105,15 +186,5 @@
 - Dettach License To User/Company/CompanyBranch - PENDING
 - Active License - PENDING
 - Deactive License - PENDING
-
-|--------------------------------------------------------------------------
-| Vehicle Localizations
-|--------------------------------------------------------------------------
-
-- Get Vehicle Localization - TEST PENDING
-- Get Vehicle Localization List - TEST PENDING
-- Create Sighting (LAT, LONG, DATE, HOUR, LICENSE_PLATE) - TEST PENDING
-- Update Sighting (LAT, LONG, DATE, HOUR, LICENSE_PLATE) - TEST PENDING
-- Remove Sighting - PENDING
 
 

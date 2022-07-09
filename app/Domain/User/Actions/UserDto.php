@@ -17,7 +17,8 @@ final class UserDto
      * @param readonly int $id
      * @param readonly string $name
      * @param readonly string $email
-     * @param readonly Carbon|null $emailVerifiedAt
+     * @param readonly null|Carbon $emailVerifiedAt
+     * @param readonly null|Carbon $passwordChangedAt
      * @param readonly SupportCollection|EloquentCollection $systemRoles
      * @param readonly string $profilePhotoPath
      *
@@ -27,7 +28,8 @@ final class UserDto
         public readonly int $id,
         public readonly string $name,
         public readonly string $email,
-        public readonly Carbon|null $emailVerifiedAt,
+        public readonly null|Carbon $emailVerifiedAt,
+        public readonly null|Carbon $passwordChangedAt
         public readonly SupportCollection|EloquentCollection $systemRoles,
         public readonly string $profilePhotoPath,
     ) {}
@@ -40,6 +42,7 @@ final class UserDto
             $user->name,
             $user->email,
             $user->email_verified_at,
+            $user->password_changed_at,
             $user->getSystemRoles(),
             ($user->profile_photo_path
                     ? Storage::url($user->profile_photo_path)

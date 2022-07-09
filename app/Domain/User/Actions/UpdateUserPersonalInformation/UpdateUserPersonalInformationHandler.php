@@ -4,8 +4,6 @@ namespace App\Domain\User\Actions\UpdateUserPersonalInformation;
 
 use Exception;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Database\QueryException;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 use App\Domain\User\Models\User;
 use App\Domain\User\Actions\UserDto;
@@ -32,15 +30,9 @@ final class UpdateUserPersonalInformationHandler
             DB::commit();
 			$user->sendEmailVerificationNotification();
 			return UserDto::fromModel($user);
-		} catch(QueryException $e) {
+		} catch(Exception $e) {
 			DB::rollBack();
-			throw new Exception(__('An internal error occurred while storing information in the database.'), 500);
-        } catch(ModelNotFoundException $e) {
-			DB::rollBack();
-			throw new Exception(__('The informed user does not exist in our database.'), 404);
-        } catch(Exception $e) {
-			DB::rollBack();
-			throw new Exception(__('An unknown internal error has occurred..'), 500);
+			throw new Exception( $e->getMessage(), $e->getCode() );
         }
     }
 }

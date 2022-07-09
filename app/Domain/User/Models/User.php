@@ -156,4 +156,16 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return static::where('email', $email)->firstOrFail();
     }
+
+    /**
+     * Exclui um usuário
+	 * A busca é feita por ID.
+     *
+     * @param  int $id
+     * @return bool
+     */
+    public function deleteUser($id): bool
+    {
+        return $this->findUserByIdOrFail($id)->delete();
+    }
 }

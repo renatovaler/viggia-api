@@ -64,7 +64,7 @@ class VehicleLocalization extends Model
     }
 
     /**
-     * Exclui determinadi avistamento
+     * Exclui um avistamento
 	 * A busca é feita por ID.
      *
      * @param  int $id

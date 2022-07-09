@@ -2,7 +2,7 @@
 
 namespace App\UI\Vehicle\Http\Controllers;
 
-use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Response;
 use App\Structure\Http\Controllers\Controller;
 
 use App\Domain\Vehicle\Actions\DeleteVehicleLocalization\DeleteVehicleLocalizationCommand;
@@ -16,11 +16,9 @@ class DeleteVehicleLocalizationController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function __invoke(int $vehicleId): JsonResponse
+    public function __invoke(int $vehicleId): Response
     {
-        $localization = dispatch_sync(
-			new DeleteVehicleLocalizationCommand($vehicleId)
-		);
+        dispatch_sync( new DeleteVehicleLocalizationCommand($vehicleId) );
         return response()->noContent();
     }
 }

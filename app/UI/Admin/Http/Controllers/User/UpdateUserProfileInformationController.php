@@ -3,18 +3,20 @@
 namespace App\UI\Admin\Http\Controllers\User;
 
 use Illuminate\Http\JsonResponse;
+
 use App\Structure\Http\Controllers\Controller;
 
 use App\UI\Admin\Http\Resources\User\UserResource;
 use App\UI\Admin\Http\Requests\User\UpdateUserPersonalInformationRequest;
+
 use App\Domain\User\Actions\UpdateUserPersonalInformation\UpdateUserPersonalInformationCommand;
 
 class UpdateUserProfileInformationController extends Controller
 {
     /**
-     * Update another user profile information (not myself)
+     * Update another user profile information
      *
-     * @param App\UI\Admin\Http\Requests\UpdateUserPersonalInformationRequest $request
+     * @param App\UI\Admin\Http\Requests\User\UpdateUserPersonalInformationRequest $request
      *
      * @return \Illuminate\Http\JsonResponse
      */

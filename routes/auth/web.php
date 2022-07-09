@@ -10,7 +10,7 @@ use App\UI\Auth\Http\Controllers\EmailVerificationNotificationController;
 
 Route::group(['prefix'=> 'auth'], function () {
 	// route domain.example/auth/register
-	Route::post('/register', [RegisteredUserController::class, 'store'])
+	Route::post('/register', [RegisteredUserController::class, '__invoke'])
 					->middleware('guest')
 					->name('register');
 

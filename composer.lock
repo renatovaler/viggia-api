@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0e04f4158a2add16cc326701baf5c63b",
+    "content-hash": "1abc7822bd9f28e9a62986817bf04f76",
     "packages": [
         {
             "name": "brick/math",
@@ -436,60 +436,6 @@
                 }
             ],
             "time": "2022-06-18T20:57:19+00:00"
-        },
-        {
-            "name": "f9webltd/laravel-api-response-helpers",
-            "version": "1.5.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/f9webltd/laravel-api-response-helpers.git",
-                "reference": "4efcbab7ed9519a1d81c95f4d778b53158c92021"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/f9webltd/laravel-api-response-helpers/zipball/4efcbab7ed9519a1d81c95f4d778b53158c92021",
-                "reference": "4efcbab7ed9519a1d81c95f4d778b53158c92021",
-                "shasum": ""
-            },
-            "require": {
-                "ext-json": "*",
-                "illuminate/support": "^6.0|^7.0|^8.0|^9.0",
-                "php": "^7.4 | ^8.0"
-            },
-            "require-dev": {
-                "orchestra/testbench": "^4.0|^5.0|^6.0|^7.0",
-                "phpunit/phpunit": "^9.0|^9.5"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "F9Web\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Rob Allport",
-                    "email": "rob@f9web.co.uk",
-                    "homepage": "https://www.f9web.co.uk",
-                    "role": "Developer"
-                }
-            ],
-            "description": "A super simple package allowing for consistent API responses throughout your Laravel application ",
-            "homepage": "https://github.com/f9webltd/laravel-api-response-helpers",
-            "keywords": [
-                "laravel",
-                "laravel api response",
-                "laravel api response helpers"
-            ],
-            "support": {
-                "issues": "https://github.com/f9webltd/laravel-api-response-helpers/issues",
-                "source": "https://github.com/f9webltd/laravel-api-response-helpers/tree/1.5.1"
-            },
-            "time": "2022-02-15T14:34:03+00:00"
         },
         {
             "name": "fruitcake/php-cors",
@@ -2498,16 +2444,16 @@
         },
         {
             "name": "psy/psysh",
-            "version": "v0.11.5",
+            "version": "v0.11.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bobthecow/psysh.git",
-                "reference": "c23686f9c48ca202710dbb967df8385a952a2daf"
+                "reference": "77fc7270031fbc28f9a7bea31385da5c4855cb7a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/c23686f9c48ca202710dbb967df8385a952a2daf",
-                "reference": "c23686f9c48ca202710dbb967df8385a952a2daf",
+                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/77fc7270031fbc28f9a7bea31385da5c4855cb7a",
+                "reference": "77fc7270031fbc28f9a7bea31385da5c4855cb7a",
                 "shasum": ""
             },
             "require": {
@@ -2568,9 +2514,9 @@
             ],
             "support": {
                 "issues": "https://github.com/bobthecow/psysh/issues",
-                "source": "https://github.com/bobthecow/psysh/tree/v0.11.5"
+                "source": "https://github.com/bobthecow/psysh/tree/v0.11.7"
             },
-            "time": "2022-05-27T18:03:49+00:00"
+            "time": "2022-07-07T13:49:11+00:00"
         },
         {
             "name": "ralouphie/getallheaders",

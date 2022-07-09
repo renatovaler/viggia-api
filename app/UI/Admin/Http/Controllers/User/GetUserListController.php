@@ -3,7 +3,9 @@
 namespace App\UI\Admin\Http\Controllers\User;
 
 use App\Structure\Http\Controllers\Controller;
+
 use App\UI\Admin\Http\Resources\User\UserCollection;
+
 use App\Domain\User\Actions\GetUserList\GetUserListCommand;
 
 class GetUserListController extends Controller
@@ -16,6 +18,6 @@ class GetUserListController extends Controller
     public function __invoke(): UserCollection
     {
         $users = dispatch_sync( new GetUserListCommand() );
-        return (new UserCollection($users));
+        return ( new UserCollection($users) );
     }
 }
