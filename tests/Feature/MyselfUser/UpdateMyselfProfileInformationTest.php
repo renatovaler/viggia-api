@@ -34,12 +34,11 @@ class UpdateMyselfProfileInformationTest extends TestCase
 		// Verifica se está correta a estrutura do JSON de resposta
         $response->assertJsonStructure([
 			'data' => [
-				[
-					'id',
-					'name',
-					'email',
-					'email_verified_at'
-				]
+                'id',
+                'name',
+                'email',
+                'email_verified_at',
+                'system_roles'
 			]
 		]);
 		// Verifica se o código de resposta HTTP está correto (200)

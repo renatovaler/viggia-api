@@ -45,8 +45,9 @@ class UpdateMyselfPasswordTest extends TestCase
 		// Monta o array com os dados de atualização
 		$data = [
 			'id' => $user->id,
+            'current_password' => 'password',
 			'password' => 'password',
-			'password_confirm' => 'password'
+			'password_confirmation' => 'password'
 		];
 
 		// Verifica se a requisição deve ser com usuário logado ou não

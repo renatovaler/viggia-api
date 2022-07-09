@@ -2,10 +2,9 @@
 
 namespace App\UI\MyselfUser\Http\Controllers;
 
-use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Response;
 use App\Structure\Http\Controllers\Controller;
 
-use App\UI\MyselfUser\Http\Resources\MyselfUserResource;
 use App\UI\MyselfUser\Http\Requests\UpdateMyselfPasswordRequest;
 
 use App\Domain\User\Actions\UpdateUserPassword\UpdateUserPasswordCommand;
@@ -17,14 +16,14 @@ class UpdateMyselfPasswordController extends Controller
      *
      * @param App\UI\MyselfUser\Http\Requests\UpdateMyselfPasswordRequest $request
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Illuminate\Http\Response
      */
-    public function __invoke(UpdateMyselfPasswordRequest $request): JsonResponse
+    public function __invoke(UpdateMyselfPasswordRequest $request): Response
     {
-        $userUpdated = dispatch_sync(new UpdateUserPasswordCommand(
+        dispatch_sync(new UpdateUserPasswordCommand(
             auth()->user()->id,
             $request->input('password')
         ));
-        return ( new MyselfUserResource($userUpdated) )->response($request);
+        return response()->noContent();
     }
 }
