@@ -3,6 +3,7 @@
 namespace Tests\Feature\MyselfUser;
 
 use Tests\TestCase;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class UpdateMyselfPasswordTest extends TestCase
@@ -15,7 +16,7 @@ class UpdateMyselfPasswordTest extends TestCase
 		$response = $this->putUpdateUserPassword( self::NOT_AUTHENTICATED );
 
 		// Verifica se o usuário está logado
-		$this->assertAuthenticated();
+		$this->assertGuest();
 
 		// Verifica se a resposta foi do tipo "não autorizado" (401)
         $response->assertUnauthorized();
@@ -52,6 +53,9 @@ class UpdateMyselfPasswordTest extends TestCase
 
 		// Verifica se a requisição deve ser com usuário logado ou não
 		if(true === $authenticated) {
+
+            // Faz login
+            Auth::loginUsingId($user->id);
 
 			// Retorna a resposta da requisição feita COM usuário logado
 			return $this->actingAs($user)->putJson('/myself/password', $data);

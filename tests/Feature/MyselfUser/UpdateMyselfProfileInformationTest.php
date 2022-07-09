@@ -3,6 +3,7 @@
 namespace Tests\Feature\MyselfUser;
 
 use Tests\TestCase;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -17,7 +18,7 @@ class UpdateMyselfProfileInformationTest extends TestCase
 		$response = $this->putUpdateUser( self::NOT_AUTHENTICATED );
 
 		// Verifica se o usuário está logado
-		$this->assertAuthenticated();
+		$this->assertGuest();
 
 		// Verifica se a resposta foi do tipo "não autorizado" (401)
         $response->assertUnauthorized();
@@ -64,6 +65,9 @@ class UpdateMyselfProfileInformationTest extends TestCase
 
 		// Verifica se a requisição deve ser com usuário logado ou não
 		if(true === $authenticated) {
+
+            // Faz login
+            Auth::loginUsingId($user->id);
 
 			// Retorna a resposta da requisição feita com usuário logado
 			return $this->actingAs($user)->putJson('/myself/profile', $data);

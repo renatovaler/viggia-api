@@ -2,10 +2,9 @@
 
 namespace Tests\Feature\MyselfUser;
 
-use Laravel\Sanctum\Sanctum;
-use App\Domain\User\Models\User;
 
 use Tests\TestCase;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class GetMyselfProfileInformationTest extends TestCase
@@ -30,6 +29,9 @@ class GetMyselfProfileInformationTest extends TestCase
     {
         // Cria um usuário comum (não admin)
         $loggedUser = $this->createCommonUser();
+
+        // Faz login
+        Auth::loginUsingId($loggedUser->id);
 
 		// Faz a requisição para obter os dados dos registros informando um usuário logado
         $response = $this->actingAs($loggedUser)->getJson('/myself/profile');
