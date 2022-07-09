@@ -7,6 +7,7 @@ use App\UI\Vehicle\Http\Resources\VehicleLocalizationResource;
 use App\UI\Vehicle\Http\Requests\CreateVehicleLocalizationRequest;
 use App\Domain\Vehicle\Actions\CreateVehicleLocalization\CreateVehicleLocalizationCommand;
 
+use Illuminate\Support\Carbon;
 use Illuminate\Http\JsonResponse;
 
 class CreateVehicleLocalizationController extends Controller
@@ -23,7 +24,7 @@ class CreateVehicleLocalizationController extends Controller
         $licensePlate = $request->input('license_plate');
         $localizationLatitude = $request->input('localization_latitude');
         $localizationLongitude = $request->input('localization_longitude');
-        $localizedAt = $request->input('localized_at');
+        $localizedAt = Carbon::createFromFormat('Y-m-d H:i:s', $request->input('localized_at') );
 		
         $localization = dispatch_sync( 
 			new CreateVehicleLocalizationCommand(
