@@ -18,10 +18,10 @@ class CreateVehicleLocalizationTest extends TestCase
     {
 		// Faz a requisição para criar o registro sem usuário logado
 		$response = $this->postCreateVehicleLocalization(false);
-		
+
 		// Verifica se o usuário não está logado
-        $response->assertGuest();
-		
+        $this->assertGuest();
+
 		// Verifica se a resposta foi do tipo "não autorizado" (401)
 		$response->assertUnauthorized();
     }
@@ -30,10 +30,10 @@ class CreateVehicleLocalizationTest extends TestCase
     {
 		// Faz a requisição para criar o registro com usuário comum
 		$response = $this->postCreateVehicleLocalization(true);
-        
+
 		// Verifica se o usuário está logado
-		$response->assertAuthenticated();
-		
+		$this->assertAuthenticated();
+
 		// Verifica se a resposta foi do tipo "não autorizado" (401)
         $response->assertUnauthorized();
     }
@@ -42,10 +42,10 @@ class CreateVehicleLocalizationTest extends TestCase
     {
 		// Faz a requisição para criar o registro com usuário admin/super_admin
 		$response = $this->postCreateVehicleLocalization(true, true);
-        
+
 		// Verifica se o usuário está logado
-		$response->assertAuthenticated();
-		
+		$this->assertAuthenticated();
+
 		// Verifica se está correta a estrutura do JSON de resposta
         $response->assertJsonStructure([
 			'data' => [
@@ -61,7 +61,7 @@ class CreateVehicleLocalizationTest extends TestCase
 		// Verifica se o código de resposta HTTP está correto (200)
 		$response->assertOk();
     }
-	
+
 	/*
 	* Create Vehicle Localization for tests
 	* @return result of post http request
@@ -69,20 +69,20 @@ class CreateVehicleLocalizationTest extends TestCase
 	public function postCreateVehicleLocalization(bool $authenticated = false, bool $commonUser = true)
 	{
 		$localizationPoints = $this->getLocalizationPoints();
-		
+
 		$data = [
             'license_plate' => Str::random(7),
 			'localization_latitude' => $localizationPoints[0],
 			'localization_longitude' => $localizationPoints[1],
-			'localized_at' => now(),
+			'localized_at' => now()->toDateTimeString(),
 		];
-		
+
 		if(true === $authenticated) {
 			$user = (true === $commonUser ? $this->createCommonUser() : $this->createAdminUser());
 			$data['user_id'] = $user->id;
 			return $this->actingAs($user)->post('/vehicle/localizations', $data);
 		}
-		
-		return $this->post('/vehicle/localizations', $data);		
+
+		return $this->post('/vehicle/localizations', $data);
 	}
 }

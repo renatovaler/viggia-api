@@ -18,7 +18,7 @@ class GetUserListTest extends TestCase
         $response = $this->getJson('/admin/users');
 		
 		// Verifica se o usuário não está logado
-        $response->assertGuest();
+        $this->assertGuest();
 		
 		// Verifica se a resposta foi do tipo "não autorizado" (401)
 		$response->assertUnauthorized();
@@ -36,7 +36,7 @@ class GetUserListTest extends TestCase
         $response = $this->actingAs($user)->getJson('/admin/users');
         
 		// Verifica se o usuário está logado
-		$response->assertAuthenticated();
+		$this->assertAuthenticated();
 		
 		// Verifica se está correta a estrutura do JSON de resposta
         $response->assertJsonStructure([
@@ -65,7 +65,7 @@ class GetUserListTest extends TestCase
         $response = $this->actingAs($user)->getJson('/admin/users');
         
 		// Verifica se o usuário está logado
-		$response->assertAuthenticated();
+		$this->assertAuthenticated();
 		
 		// Verifica se está correta a estrutura do JSON de resposta
         $response->assertJsonStructure([

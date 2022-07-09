@@ -15,10 +15,10 @@ class CreateUserTest extends TestCase
     {
 		// Faz a requisição para criar o registro sem usuário logado
 		$response = $this->postCreateUser( self::NOT_AUTHENTICATED );
-		
+
 		// Verifica se o usuário não está logado
-        $response->assertGuest();
-		
+        $this->assertGuest();
+
 		// Verifica se a resposta foi do tipo "não autorizado" (401)
 		$response->assertUnauthorized();
     }
@@ -27,10 +27,10 @@ class CreateUserTest extends TestCase
     {
 		// Faz a requisição para criar o registro com usuário comum
 		$response = $this->postCreateUser( self::AUTHENTICATED, self::COMMON_USER );
-        
+
 		// Verifica se o usuário está logado
-		$response->assertAuthenticated();
-		
+		$this->assertAuthenticated();
+
 		// Verifica se a resposta foi do tipo "não autorizado" (401)
         $response->assertUnauthorized();
     }
@@ -39,10 +39,10 @@ class CreateUserTest extends TestCase
     {
 		// Faz a requisição para criar o registro com usuário admin/super_admin
 		$response = $this->postCreateUser( self::AUTHENTICATED, self::ADMIN_USER );
-        
+
 		// Verifica se o usuário está logado
-		$response->assertAuthenticated();
-		
+		$this->assertAuthenticated();
+
 		// Verifica se está correta a estrutura do JSON de resposta
         $response->assertJsonStructure([
             'data' => [
@@ -55,7 +55,7 @@ class CreateUserTest extends TestCase
 		// Verifica se o código de resposta HTTP está correto (200)
 		$response->assertOk();
     }
-	
+
 	/*
 	* Create user for tests
 	* @return result of post http request
@@ -68,12 +68,12 @@ class CreateUserTest extends TestCase
             'password' => 'password',
             'password_confirmation' => 'password'
 		];
-		
+
 		if(true === $authenticated) {
 			$user = (true === $commonUser ? $this->createCommonUser() : $this->createAdminUser());
 			return $this->actingAs($user)->post('/admin/users/create', $data);
 		}
-		
-		return $this->post('/admin/users/create', $data);		
+
+		return $this->post('/admin/users/create', $data);
 	}
 }

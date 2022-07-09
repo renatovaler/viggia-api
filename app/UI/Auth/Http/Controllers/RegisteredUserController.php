@@ -8,22 +8,22 @@ use Illuminate\Auth\Events\Registered;
 
 use App\Structure\Http\Controllers\Controller;
 
-use App\UI\Auth\Http\Requests\CreateNewUserRequest;
+use App\UI\Auth\Http\Requests\RegisterUserRequest;
 use App\Domain\User\Actions\CreateUser\CreateUserCommand;
 
 class RegisteredUserController extends Controller
-{    
+{
 
 	/**
      * Creates a new user
      *
-     * @param App\UI\User\Http\Requests\CreateNewUserRequest $request
+     * @param App\UI\User\Http\Requests\RegisterUserRequest $request
      *
      * @return \Illuminate\Http\Response
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function __invoke(CreateNewUserRequest $request): Response
+    public function __invoke(RegisterUserRequest $request): Response
     {
         $user = dispatch_sync(new CreateUserCommand(
             $request->name,
@@ -31,10 +31,10 @@ class RegisteredUserController extends Controller
 			$request->password,
 			now() //passwordChangedAt
         ));
-		
+
         event(new Registered($user));
 
-        Auth::login($user);
+        Auth::loginUsingId($user->id);
 
         return response()->noContent();
     }

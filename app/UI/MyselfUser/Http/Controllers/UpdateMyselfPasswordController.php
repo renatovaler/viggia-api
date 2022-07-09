@@ -5,7 +5,7 @@ namespace App\UI\MyselfUser\Http\Controllers;
 use Illuminate\Http\JsonResponse;
 use App\Structure\Http\Controllers\Controller;
 
-use App\UI\MyselfUser\Http\Resources\UserResource;
+use App\UI\MyselfUser\Http\Resources\MyselfUserResource;
 use App\UI\MyselfUser\Http\Requests\UpdateMyselfPasswordRequest;
 
 use App\Domain\User\Actions\UpdateUserPassword\UpdateUserPasswordCommand;
@@ -25,6 +25,6 @@ class UpdateMyselfPasswordController extends Controller
             auth()->user()->id,
             $request->input('password')
         ));
-        return ( new UserResource($userUpdated) )->response($request);
+        return ( new MyselfUserResource($userUpdated) )->response($request);
     }
 }

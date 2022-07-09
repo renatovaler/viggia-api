@@ -74,7 +74,13 @@ trait RoleToUserForSystem
     public function addRoleToUserByName(string $name = null): bool
     {
         $role = Role::where('name', $name)->first();
-        return $role->count() > 0 ? $this->addRoleToUser($role->id) : false;
+        return (
+            is_null($role) ? false :
+            (
+                $role->count() > 0 ?
+                $this->addRoleToUser($role->id) : false
+            )
+        );
     }
 
     /**
@@ -103,7 +109,13 @@ trait RoleToUserForSystem
     public function removeRoleToUserByName(string $name): bool
     {
         $role = Role::where('name', $name)->first();
-        return $role->count() > 0 ? $this->removeRoleToUser($role->id) : false;
+        return (
+            is_null($role) ? false :
+            (
+                $role->count() > 0 ?
+                $this->removeRoleToUser($role->id) : false
+            )
+        );
     }
 
     /**

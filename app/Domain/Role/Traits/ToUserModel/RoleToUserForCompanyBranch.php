@@ -79,7 +79,13 @@ trait RoleToUserForCompanyBranch
     public function addRoleToCompanyBranchMemberByName(string $name, int $companyBranchId): bool
     {
         $role = Role::where('name', $name)->first();
-        return $role->count() > 0 ? $this->addRoleToCompanyBranchMember($role->id, $companyBranchId) : false;
+        return (
+            is_null($role) ? false :
+            (
+                $role->count() > 0 ?
+                $this->addRoleToCompanyBranchMember($role->id, $companyBranchId) : false
+            )
+        );
     }
 
     /**
@@ -110,7 +116,13 @@ trait RoleToUserForCompanyBranch
     public function removeRoleToCompanyBranchMemberByName(string $name, int $companyBranchId): bool
     {
         $role = Role::where('name', $name)->first();
-        return $role->count() > 0 ? $this->removeRoleToCompanyBranchMember($role->id, $companyBranchId) : false;
+        return (
+            is_null($role) ? false :
+            (
+                $role->count() > 0 ?
+                $this->removeRoleToCompanyBranchMember($role->id, $companyBranchId) : false
+            )
+        );
     }
 
     /**

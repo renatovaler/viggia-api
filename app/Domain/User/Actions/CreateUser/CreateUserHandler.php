@@ -32,7 +32,7 @@ final class CreateUserHandler
 				// Attach default system role
 				$user->addRoleToUserByName('common_user');
 				$user->save();
-            DB::commit();				
+            DB::commit();
 			return UserDto::fromModel($user);
 		} catch(Exception $e) {
 			DB::rollBack();

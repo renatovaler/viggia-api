@@ -37,7 +37,7 @@ trait RoleToUserForCompany
     public function getCompanyRoles(null|int $companyId): SupportCollection|EloquentCollection
     {
 		if( is_null($companyId) ) {
-			return collect([]);			
+			return collect([]);
 		}
         $companyRoles = $this->companyRoles($companyId)->get();
         return $companyRoles->isEmpty() ? collect([]) : $companyRoles;
@@ -83,7 +83,13 @@ trait RoleToUserForCompany
     public function addRoleToCompanyMemberByName(string $name, int $companyId): bool
     {
         $role = Role::where('name', $name)->first();
-        return $role->count() > 0 ? $this->addRoleToCompanyMember($role->id, $companyId) : false;
+        return (
+            is_null($role) ? false :
+            (
+                $role->count() > 0 ?
+                $this->addRoleToCompanyMember($role->id, $companyId) : false
+            )
+        );
     }
 
     /**
@@ -114,7 +120,13 @@ trait RoleToUserForCompany
     public function removeRoleToCompanyMemberByName(string $name, int $companyId): bool
     {
         $role = Role::where('name', $name)->first();
-        return $role->count() > 0 ? $this->removeRoleToCompanyMember($role->id, $companyId) : false;
+        return (
+            is_null($role) ? false :
+            (
+                $role->count() > 0 ?
+                $this->removeRoleToCompanyMember($role->id, $companyId) : false
+            )
+        );
     }
 
     /**

@@ -19,7 +19,7 @@ class MyselfUserResource extends JsonResource
 			'name' => $this->name,
 			'email' => $this->email,
 			'email_verified_at' => $this->emailVerifiedAt,
-			'system_roles' => $this->getSystemRoles()
+			'system_roles' => $this->systemRoles
 		];
     }
 }

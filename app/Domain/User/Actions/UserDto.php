@@ -29,7 +29,7 @@ final class UserDto
         public readonly string $name,
         public readonly string $email,
         public readonly null|Carbon $emailVerifiedAt,
-        public readonly null|Carbon $passwordChangedAt
+        public readonly null|Carbon $passwordChangedAt,
         public readonly SupportCollection|EloquentCollection $systemRoles,
         public readonly string $profilePhotoPath,
     ) {}

@@ -3,6 +3,7 @@
 namespace Tests\Feature\Vehicle;
 
 use Tests\TestCase;
+use Illuminate\Support\Str;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class UpdateVehicleLocalizationTest extends TestCase
@@ -13,10 +14,10 @@ class UpdateVehicleLocalizationTest extends TestCase
     {
 		// Faz a requisição para atualizar o registro sem informar usuário logado
 		$response = $this->putUpdateVehicleLocalization( self::NOT_AUTHENTICATED );
-        
+
 		// Verifica se o usuário está logado
-		$response->assertAuthenticated();
-		
+		$this->assertAuthenticated();
+
 		// Verifica se a resposta foi do tipo "não autorizado" (401)
         $response->assertUnauthorized();
     }
@@ -25,10 +26,10 @@ class UpdateVehicleLocalizationTest extends TestCase
     {
 		// Faz a requisição para atualizar o registro com usuário comum
 		$response = $this->putUpdateVehicleLocalization( self::AUTHENTICATED, self::COMMON_USER );
-        
+
 		// Verifica se o usuário está logado
-		$response->assertAuthenticated();
-		
+		$this->assertAuthenticated();
+
 		// Verifica se a resposta foi do tipo "não autorizado" (401)
         $response->assertUnauthorized();
     }
@@ -37,26 +38,24 @@ class UpdateVehicleLocalizationTest extends TestCase
     {
 		// Faz a requisição para atualizar o registro com usuário comum
 		$response = $this->putUpdateVehicleLocalization( self::AUTHENTICATED, self::ADMIN_USER );
-        
+
 		// Verifica se o usuário está logado
-		$response->assertAuthenticated();
-		
+		$this->assertAuthenticated();
+
 		// Verifica se está correta a estrutura do JSON de resposta
         $response->assertJsonStructure([
 			'data' => [
-				[
-					'id',
-					'license_plate',
-					'localization_latitude',
-					'localization_longitude',
-					'localized_at'
-				]
+                'id',
+                'license_plate',
+                'localization_latitude',
+                'localization_longitude',
+                'localized_at'
 			]
 		]);
 		// Verifica se o código de resposta HTTP está correto (200)
 		$response->assertOk();
     }
-	
+
 	/*
 	* Create Vehicle Localization for tests
 	* @return result of post http request
@@ -65,22 +64,22 @@ class UpdateVehicleLocalizationTest extends TestCase
 	{
         // Cria um ponto de localização na DB
 		$localization = $this->createVehicleLocalization();
-		
+
 		// Pega os pontos de GPS
 		$localizationPoints = $this->getLocalizationPoints();
-		
+
 		// Monta o array com os dados de atualização
 		$data = [
             'id' => $localization->id,
             'license_plate' => Str::random(7),
-			'localization_latitude' => $latlong[0],
-			'localization_longitude' => $latlong[1],
-			'localized_at' => now()
+			'localization_latitude' => $localizationPoints[0],
+			'localization_longitude' => $localizationPoints[1],
+			'localized_at' => now()->toDateTimeString()
 		];
-		
+
 		// Verifica se a requisição deve ser com usuário logado ou não
 		if(true === $authenticated) {
-			
+
 			// Verifica se o usuário deve ser comum ou admin/super admin
 			$user = (true === $commonUser ? $this->createCommonUser() : $this->createAdminUser());
 			// Especifica o ID do usuário responsável pela requisição

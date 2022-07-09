@@ -25,13 +25,14 @@ class UpdateMyselfPersonalInformationRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'id' => ['required', 'exists:users,id'],
             'name' => ['required', 'string', 'max:255'],
             'email' => [
                 'required',
                 'string',
                 'email',
                 'max:255',
-                Rule::unique('users')->ignore($this->id)
+                Rule::unique('users')->ignore($this->input('id'))
             ]
         ];
     }
@@ -44,6 +45,8 @@ class UpdateMyselfPersonalInformationRequest extends FormRequest
     public function messages(): array
     {
         return [
+            'id.required' => __('É necessário informar o ID do usuário.'),
+            'id.exists' => __('O usuário informado não existe em nosso banco de dados.'),
             'name.required' => __('É necessário informar um nome para o usuário.'),
             'email.required' => __('É necessário informar um e-mail para o usuário.'),
             'email.email' => __('É necessário informar um e-mail válido para o usuário.'),

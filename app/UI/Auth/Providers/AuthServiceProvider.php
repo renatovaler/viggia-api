@@ -2,6 +2,10 @@
 
 namespace App\UI\Auth\Providers;
 
+use App\Domain\User\Actions\CreateUser\CreateUserCommand;
+use App\Domain\User\Actions\CreateUser\CreateUserHandler;
+
+use Illuminate\Support\Facades\Bus;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
@@ -25,6 +29,21 @@ class AuthServiceProvider extends ServiceProvider
     {
         // map routes
         $this->map();
+
+        // commands and handlers
+        $this->registerCommandsAndHandlers();
+    }
+
+    /**
+     * Mapeia os comandos e handlers respectivos
+     *
+     * @return void
+     */
+    public function registerCommandsAndHandlers(): void
+    {
+        Bus::map([
+            CreateUserCommand::class => CreateUserHandler::class
+        ]);
     }
 
     /**

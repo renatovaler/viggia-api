@@ -21,7 +21,7 @@ class GetVehicleLocalizationListTest extends TestCase
         $response = $this->getJson('/vehicle/localizations');
 		
 		// Verifica se o usuário não está logado
-        $response->assertGuest();
+        $this->assertGuest();
 		
 		// Verifica se a resposta foi do tipo "não autorizado" (401)
 		$response->assertUnauthorized();
@@ -39,7 +39,7 @@ class GetVehicleLocalizationListTest extends TestCase
         $response = $this->actingAs($user)->getJson('/vehicle/localizations');
         
 		// Verifica se o usuário está logado
-		$response->assertAuthenticated();
+		$this->assertAuthenticated();
 		
 		// Verifica se está correta a estrutura do JSON de resposta
         $response->assertJsonStructure([
@@ -69,7 +69,7 @@ class GetVehicleLocalizationListTest extends TestCase
         $response = $this->actingAs($user)->getJson('/vehicle/localizations');
         
 		// Verifica se o usuário está logado
-		$response->assertAuthenticated();
+		$this->assertAuthenticated();
 		
 		// Verifica se está correta a estrutura do JSON de resposta
         $response->assertJsonStructure([

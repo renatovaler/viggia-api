@@ -2,7 +2,7 @@
 
 namespace App\UI\MyselfUser\Http\Controllers;
 
-use App\UI\MyselfUser\Http\Resources\UserResource;
+use App\UI\MyselfUser\Http\Resources\MyselfUserResource;
 
 use App\Structure\Http\Controllers\Controller;
 
@@ -11,11 +11,11 @@ class GetMyselfProfileInformationController extends Controller
     /**
      * Get authenticated user profile information (myself information)
      *
-     * @return \App\UI\MyselfUser\Http\Resources\UserResource
+     * @return \App\UI\MyselfUser\Http\Resources\MyselfUserResource
      */
-    public function __invoke(): UserResource
+    public function __invoke(): MyselfUserResource
     {
         $user = auth()->user();
-        return ( new UserResource($user) );
+        return ( new MyselfUserResource($user) );
     }
 }
