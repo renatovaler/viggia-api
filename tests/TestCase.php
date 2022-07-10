@@ -43,6 +43,16 @@ abstract class TestCase extends BaseTestCase
         [-20.801228977710903, -51.67107857452488],
     ];
 
+    protected function setUp(): void
+    {
+       parent::setUp();
+       // set your headers here
+       $this->withHeaders([
+            'Accept' => 'application/json',
+            'Content-Type' => 'application/json',
+       ]);
+
+    }
 	/*
 	* Create common user for test
 	*

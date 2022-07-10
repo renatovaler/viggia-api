@@ -21,6 +21,7 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \App\Structure\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
+        \App\Structure\Http\Middleware\OnlyAcceptJsonMiddleware::class,
 		\App\Structure\Http\Middleware\FirstLogin::class,
     ];
 

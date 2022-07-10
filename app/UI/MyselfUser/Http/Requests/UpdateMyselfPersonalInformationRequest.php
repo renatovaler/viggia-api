@@ -14,7 +14,7 @@ class UpdateMyselfPersonalInformationRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return auth()->user()->id === (int) $this->input('id');
     }
 
     /**

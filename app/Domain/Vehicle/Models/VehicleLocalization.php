@@ -21,7 +21,7 @@ class VehicleLocalization extends Model
      * @var string
      */
     protected $table = 'vehicle_localizations';
-	
+
     /**
      * The attributes that are mass assignable.
      *
@@ -31,6 +31,7 @@ class VehicleLocalization extends Model
         'license_plate',
         'localization_latitude',
         'localization_longitude',
+        'localized_at'
     ];
 
     /**

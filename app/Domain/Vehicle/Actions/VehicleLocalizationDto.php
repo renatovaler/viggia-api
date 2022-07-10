@@ -2,7 +2,6 @@
 
 namespace App\Domain\Vehicle\Actions;
 
-use Illuminate\Support\Carbon;
 use App\Domain\Vehicle\Models\VehicleLocalization;
 
 final class VehicleLocalizationDto
@@ -14,7 +13,7 @@ final class VehicleLocalizationDto
      * @param readonly string $licensePlate
      * @param readonly float $localizationLatitude
      * @param readonly float $localizationLongitude
-     * @param readonly Carbon $localizedAt
+     * @param readonly string $localizedAt
      *
      * @return void (implicit)
      */
@@ -23,17 +22,17 @@ final class VehicleLocalizationDto
         public readonly string $licensePlate,
         public readonly float $localizationLatitude,
         public readonly float $localizationLongitude,
-        public readonly Carbon $localizedAt
+        public readonly string $localizedAt
     ) {}
 
     public static function fromModel(VehicleLocalization $localization): self
     {
         return new self(
             $localization->id,
-            $localization->licensePlate,
-            $localization->localizationLatitude,
-            $localization->localizationLongitude,
-            $localization->localizedAt
+            $localization->license_plate,
+            $localization->localization_latitude,
+            $localization->localization_longitude,
+            ($localization->localized_at)->format('Y-m-d H:i:s')
         );
     }
 }

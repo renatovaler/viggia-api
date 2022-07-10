@@ -24,16 +24,17 @@ class CreateVehicleLocalizationController extends Controller
         $licensePlate = $request->input('license_plate');
         $localizationLatitude = $request->input('localization_latitude');
         $localizationLongitude = $request->input('localization_longitude');
-        $localizedAt = Carbon::createFromFormat('Y-m-d H:i:s', $request->input('localized_at') );
-		
-        $localization = dispatch_sync( 
+        $localizedAt = $request->input('localized_at');
+
+        $localization = dispatch_sync(
 			new CreateVehicleLocalizationCommand(
 				$licensePlate,
 				$localizationLatitude,
 				$localizationLongitude,
 				$localizedAt
-			) 
+			)
 		);
+
         return (new VehicleLocalizationResource($localization))->response($request);
     }
 }

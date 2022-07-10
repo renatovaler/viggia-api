@@ -25,6 +25,8 @@ use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 use Throwable;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
+use App\Structure\Exceptions\OnlyAcceptJsonException;
+
 class Handler extends ExceptionHandler
 {
     /**
@@ -71,6 +73,14 @@ class Handler extends ExceptionHandler
                     'message' => __('MethodNotAllowedHttpException: The specified method for the request is invalid.')
                 ], 405);
 			});
+			$this->renderable(function (OnlyAcceptJsonException $e, $request) {
+                return response()->json([
+                    'code' => 406,
+                    'type' => 'error',
+                    'message' => __('Unauthorized! Only JSON requests are allowed.')
+                ], 406);
+			});
+
 			$this->renderable(function (AuthenticationException $e, $request) {
                 return response()->json([
                     'code' => 401,

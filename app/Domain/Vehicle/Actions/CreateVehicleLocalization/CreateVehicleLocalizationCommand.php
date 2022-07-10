@@ -2,7 +2,6 @@
 
 namespace App\Domain\Vehicle\Actions\CreateVehicleLocalization;
 
-use Illuminate\Support\Carbon;
 use Illuminate\Foundation\Bus\Dispatchable;
 
 final class CreateVehicleLocalizationCommand
@@ -15,7 +14,7 @@ final class CreateVehicleLocalizationCommand
      * @param readonly string $licensePlate
      * @param readonly float $localizationLatitude
      * @param readonly float $localizationLongitude
-     * @param readonly Carbon $localizedAt
+     * @param readonly string $localizedAt
      *
      * @return void (implicit)
      */
@@ -23,6 +22,6 @@ final class CreateVehicleLocalizationCommand
         public readonly string $licensePlate,
         public readonly float $localizationLatitude,
         public readonly float $localizationLongitude,
-        public readonly Carbon $localizedAt
+        public readonly string $localizedAt
 	) {}
 }
