@@ -4,6 +4,8 @@ namespace App\Structure\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Route;
 use App\Structure\Exceptions\OnlyAcceptJsonException;
 
 class OnlyAcceptJsonMiddleware
@@ -18,9 +20,8 @@ class OnlyAcceptJsonMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        // Verify if request is JSON
-        if (! $request->expectsJson()) {
-			throw new OnlyAcceptJsonException();
+        if (! $request->is('auth/*') && ! $request->expectsJson()) {
+            throw new OnlyAcceptJsonException();
         }
         return $next($request);
     }

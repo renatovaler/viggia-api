@@ -23,14 +23,6 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-		/*
-		return response()->json([
-			'code' => 201,
-			'type' => 'success',
-			'message' => __('Session started successfully.')
-		], 201);
-		*/
-		
         return response()->noContent();
     }
 
@@ -48,14 +40,6 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
-		/*
-		return response()->json([
-			'code' => 200,
-			'type' => 'success',
-			'message' => __('Session ended successfully.')
-		], 200);
-		*/
-		
         return response()->noContent();
     }
 }

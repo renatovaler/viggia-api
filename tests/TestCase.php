@@ -47,12 +47,9 @@ abstract class TestCase extends BaseTestCase
     {
        parent::setUp();
        // set your headers here
-       $this->withHeaders([
-            'Accept' => 'application/json',
-            'Content-Type' => 'application/json',
-       ]);
-
+       $this->withHeaders(['Accept' => 'application/json']);
     }
+
 	/*
 	* Create common user for test
 	*
