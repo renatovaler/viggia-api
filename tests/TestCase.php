@@ -11,6 +11,8 @@ abstract class TestCase extends BaseTestCase
 {
     use CreatesApplication;
 
+	const VALID_PARAM = true;
+	const INVALID_PARAM = false;
 	const NOT_AUTHENTICATED = false;
 	const AUTHENTICATED = true;
 	const COMMON_USER = true;

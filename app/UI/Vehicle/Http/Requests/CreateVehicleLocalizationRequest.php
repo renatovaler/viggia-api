@@ -24,11 +24,40 @@ class CreateVehicleLocalizationRequest extends FormRequest
     */
     protected function prepareForValidation()
     {
+        // remove non-alphanumeric characters
+        $licensePlate = (
+            !is_null( $this->input('license_plate') ) ?
+            preg_replace( '/[^a-z0-9 ]/i', '', $this->input('license_plate') ) :
+            null
+        );
+
+        // convert value to float
+        $localizationLatitude = (
+            !is_null( $this->input('localization_latitude') ) ?
+            floatval ( $this->input('localization_latitude') ) :
+            null
+        );
+
+        // convert value to float
+        $localizationLongitude = (
+            !is_null( $this->input('localization_longitude') ) ?
+            floatval ( $this->input('localization_longitude') ) :
+            null
+        );
+
+        // convert value to Y-m-d H:i:s date format
+        $localizatedAt = (
+            !is_null( $this->input('localized_at') ) ?
+            Carbon::parse( $this->input('localized_at') )->format('Y-m-d H:i:s') :
+            null
+        );
+
+        // Merge request params
         $this->merge([
-            'license_plate' => preg_replace( '/[^a-z0-9 ]/i', '', $this->input('license_plate') ), // remove non-alphanumeric characters
-            'localization_latitude' => floatval ($this->input('localization_latitude')), // convert value to float
-            'localization_longitude' => floatval ($this->input('localization_longitude')), // convert value to float
-            'localized_at' => Carbon::parse( $this->input('localized_at') )->format('Y-m-d H:i:s') // convert value to Y-m-d H:i:s date format
+            'license_plate' => $licensePlate,
+            'localization_latitude' => $localizationLatitude,
+            'localization_longitude' => $localizationLongitude,
+            'localized_at' => $localizatedAt
         ]);
     }
 
