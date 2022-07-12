@@ -15,7 +15,10 @@ return new class extends Migration
     {
         Schema::create('company_branchs', function (Blueprint $table) {
             $table->id();
-            $table->integer('owner_company_id')->unsigned();
+            $table->foreignId('owner_company_id')
+                ->references('id')
+                ->on('companies')
+                ->unsigned();
             $table->string('name');
             $table->timestamps();
         });

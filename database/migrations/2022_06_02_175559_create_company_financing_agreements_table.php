@@ -15,7 +15,10 @@ return new class extends Migration
     {
         Schema::create('company_financing_agreements', function (Blueprint $table) {
             $table->id();
-            $table->integer('owner_company_id')->unsigned();
+            $table->foreignId('owner_company_id')
+                ->references('id')
+                ->on('companies')
+                ->unsigned();
             $table->string('license_plate');
             $table->boolean('is_active')->default(1); // true
             $table->boolean('is_wanted')->default(0); //false

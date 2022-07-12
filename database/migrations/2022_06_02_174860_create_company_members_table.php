@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('company_members', function (Blueprint $table) {
             $table->id();
-			$table->integer('user_id')->unsigned();
-            $table->integer('company_id')->unsigned();
+			$table->foreignId('user_id')->unsigned();
+            $table->foreignId('company_id')->unsigned();
             $table->unique(['user_id', 'company_id']);
             $table->timestamps();
         });

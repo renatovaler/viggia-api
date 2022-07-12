@@ -19,7 +19,7 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => [env('FRONTEND_URL', 'http://api.soft')],
+    'allowed_origins' => [ env('FRONTEND_URL', 'http://test.dev.willerson.com.br')],
 
     'allowed_origins_patterns' => [],
 
