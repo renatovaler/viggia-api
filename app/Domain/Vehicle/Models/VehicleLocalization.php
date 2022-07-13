@@ -12,8 +12,7 @@ use Database\Factories\Vehicle\VehicleLocalizationFactory;
 
 class VehicleLocalization extends Model
 {
-    use SoftDeletes;
-	use HasFactory;
+	use HasFactory, SoftDeletes;
 
     /**
      * The table associated with the model.
@@ -41,6 +40,7 @@ class VehicleLocalization extends Model
      */
     protected $casts = [
         'localized_at' => 'datetime',
+        'deleted_at' => 'datetime',
     ];
 
     /**
@@ -71,8 +71,8 @@ class VehicleLocalization extends Model
      * @param  int $id
      * @return bool
      */
-    public function removeVehicleLocalization($id): bool
+    public static function removeVehicleLocalization($id): bool
     {
-        return $this->findVehicleLocalizationByIdOrFail($id)->delete();
+        return static::findVehicleLocalizationByIdOrFail($id)->delete();
     }
 }

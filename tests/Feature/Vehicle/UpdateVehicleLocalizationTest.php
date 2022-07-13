@@ -4,6 +4,7 @@ namespace Tests\Feature\Vehicle;
 
 use Tests\TestCase;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class UpdateVehicleLocalizationTest extends TestCase
@@ -16,19 +17,7 @@ class UpdateVehicleLocalizationTest extends TestCase
 		$response = $this->putUpdateVehicleLocalization( self::NOT_AUTHENTICATED );
 
 		// Verifica se o usuário está logado
-		$this->assertAuthenticated();
-
-		// Verifica se a resposta foi do tipo "não autorizado" (401)
-        $response->assertUnauthorized();
-    }
-
-    public function test_update_vehicle_localization_information_with_common_user()
-    {
-		// Faz a requisição para atualizar o registro com usuário comum
-		$response = $this->putUpdateVehicleLocalization( self::AUTHENTICATED, self::COMMON_USER );
-
-		// Verifica se o usuário está logado
-		$this->assertAuthenticated();
+		$this->assertGuest();
 
 		// Verifica se a resposta foi do tipo "não autorizado" (401)
         $response->assertUnauthorized();
@@ -52,6 +41,7 @@ class UpdateVehicleLocalizationTest extends TestCase
                 'localized_at'
 			]
 		]);
+
 		// Verifica se o código de resposta HTTP está correto (200)
 		$response->assertOk();
     }
@@ -82,6 +72,10 @@ class UpdateVehicleLocalizationTest extends TestCase
 
 			// Verifica se o usuário deve ser comum ou admin/super admin
 			$user = (true === $commonUser ? $this->createCommonUser() : $this->createAdminUser());
+
+			// Faz login
+			Auth::loginUsingId($user->id);
+
 			// Especifica o ID do usuário responsável pela requisição
 			$data['user_id'] = $user->id;
 			// Retorna a resposta da requisição feita com usuário logado

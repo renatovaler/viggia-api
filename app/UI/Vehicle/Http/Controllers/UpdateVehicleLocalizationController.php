@@ -25,9 +25,9 @@ class UpdateVehicleLocalizationController extends Controller
         $localization = dispatch_sync(new UpdateVehicleLocalizationCommand(
             (int) $request->input('id'),
             $request->input('license_plate'),
-            $request->input('localization_latitude'),
-            $request->input('localization_longitude'),
-            Carbon::createFromFormat('d/m/Y H:i:s', $request->input('localized_at'))
+            floatval( $request->input('localization_latitude') ),
+            floatval( $request->input('localization_longitude') ),
+            Carbon::parse( $request->input('localized_at') )
         ));
         return ( new VehicleLocalizationResource($localization) )->response($request);
     }

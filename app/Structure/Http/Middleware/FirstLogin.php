@@ -4,6 +4,7 @@ namespace App\Structure\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -18,7 +19,10 @@ class FirstLogin
      */
     public function handle(Request $request, Closure $next, ...$guards)
     {
-        if(Route::currentRouteName() != 'users.myself.password.update' && Route::currentRouteName() != 'logout' && Route::currentRouteName() != 'login') {
+        if( 
+            ! $request->is('auth/*') && 
+            Route::currentRouteName() != 'users.myself.password.update'
+        ) {
             $guards = empty($guards) ? [null] : $guards;
             foreach ($guards as $guard) {
                 if (Auth::guard($guard)->check()) {

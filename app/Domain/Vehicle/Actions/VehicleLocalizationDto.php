@@ -30,8 +30,8 @@ final class VehicleLocalizationDto
         return new self(
             $localization->id,
             $localization->license_plate,
-            $localization->localization_latitude,
-            $localization->localization_longitude,
+            floatval($localization->localization_latitude),
+            floatval($localization->localization_longitude),
             ($localization->localized_at)->format('Y-m-d H:i:s')
         );
     }

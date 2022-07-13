@@ -20,6 +20,7 @@ return new class extends Migration
 			$table->decimal('localization_longitude', 11, 7)->nullable();
             $table->timestamp('localized_at');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

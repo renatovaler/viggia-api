@@ -77,11 +77,13 @@ class User extends Authenticatable implements MustVerifyEmail
      *
      * @return void
      */
+    /*
     public function sendEmailVerificationNotification(): void
     {
 		// Configurar serviço de envio de e-mail antes de ativar isso aqui
-        //$this->notify(new QueuedVerifyEmail);
+        $this->notify(new QueuedVerifyEmail);
     }
+    */
 
     /**
      * Overrideen sendPasswordResetNotification implementation
@@ -89,11 +91,13 @@ class User extends Authenticatable implements MustVerifyEmail
      *
      * @return void
      */
+    /*
     public function sendPasswordResetNotification($token): void
     {
 		// Configurar serviço de envio de e-mail antes de ativar isso aqui
-        //$this->notify(new QueuedResetPassword($token));
+        $this->notify(new QueuedResetPassword($token));
     }
+    */
 
     /**
      * Define custom factory to the model

@@ -20,7 +20,7 @@ final class DeleteVehicleLocalizationHandler
     {
         try {
             DB::beginTransaction();
-				VehicleLocalization::removeVehicleLocalization($command->id);
+                VehicleLocalization::removeVehicleLocalization($command->id);
             DB::commit();
 		} catch(Exception $e) {
 			DB::rollBack();

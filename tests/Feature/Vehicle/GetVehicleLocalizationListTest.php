@@ -6,6 +6,7 @@ use App\Domain\User\Models\User;
 use App\Domain\Vehicle\Models\VehicleLocalization;
 
 use Tests\TestCase;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class GetVehicleLocalizationListTest extends TestCase
@@ -31,6 +32,9 @@ class GetVehicleLocalizationListTest extends TestCase
     {
         // Cria um usuário comum (não admin)
         $user = $this->createCommonUser();
+
+		// Faz login
+		Auth::loginUsingId($user->id);
 		
         // Cria os pontos de localização
 		$this->createVehicleLocalizations(15);
@@ -57,10 +61,13 @@ class GetVehicleLocalizationListTest extends TestCase
 		$response->assertOk();
     }
 
-    public function test_get_vehicle_localization_list_with_admin_user()
+    public function _test_get_vehicle_localization_list_with_admin_user()
     {
         // Cria um usuário admin e super_admin
         $user = $this->createAdminUser();
+
+		// Faz login
+		Auth::loginUsingId($user->id);
 		
         // Cria os pontos de localização
 		$this->createVehicleLocalizations(15);
