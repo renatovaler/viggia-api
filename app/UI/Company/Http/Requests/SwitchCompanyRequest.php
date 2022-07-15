@@ -2,6 +2,7 @@
 
 namespace App\UI\Company\Http\Requests;
 
+use App\Domain\Company\Models\Company;
 use Illuminate\Foundation\Http\FormRequest;
 
 class SwitchCompanyRequest extends FormRequest
@@ -13,9 +14,9 @@ class SwitchCompanyRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        $companyId = (int) $this->get('company_id');
+        $company = Company::where('id', (int) $this->input('company_id') )->firstOrFail();
         $userId = auth()->user()->id;
-        return auth()->user()->belongsToCompany($companyId, $userId);
+        return auth()->user()->belongsToCompany($company, $userId);
     }
 
     /**

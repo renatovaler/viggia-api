@@ -7,7 +7,8 @@ use App\Domain\Company\Models\CompanyMember;
 use App\Domain\Company\Models\CompanyBranch;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Collection as SupportCollection;
+use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Database\Eloquent\Relations\{BelongsToMany, BelongsTo, HasMany};
 
 use Database\Factories\Company\CompanyFactory;
@@ -67,7 +68,7 @@ class Company extends Model
      * @param  int $companyId
      * @return void
      */
-    public function deleteCompany(int $companyId)
+    public function deleteCompany(int $companyId): void
     {
 		$company = $this->where('id', $companyId)->firstOrFail();
 		
@@ -103,11 +104,22 @@ class Company extends Model
      * Retorna todos os usuários que são membros da empresa, INCLUSIVE o proprietário
      * Não inclui dados de membros das filiais, apenas da empresa matriz.
      *
-     * @return \Illuminate\Database\Eloquent\Collection
+     * @return \Illuminate\Database\Eloquent\Collection as EloquentCollection
      */
-    public function companyMembersAndOwner(): Collection
+    public function companyMembersAndOwner(): EloquentCollection
     {
         return $this->onlyCompanyMembers->merge([$this->companyOwner]);
+    }
+
+    /**
+     * Get all user system roles
+     *
+     * @return SupportCollection|EloquentCollection
+     */
+    public function getCompanyMembersAndOwner(): SupportCollection|EloquentCollection
+    {
+        $companyMembersAndOwner = $this->companyMembersAndOwner();
+        return $companyMembersAndOwner->isEmpty() ? collect([]) : $companyMembersAndOwner;
     }
 
     /**
@@ -160,9 +172,9 @@ class Company extends Model
 	 * A busca é feita por ID do usuário.
      *
      * @param  int $companyMemberId
-     * @return \Illuminate\Database\Eloquent\Collection
+     * @return \Illuminate\Database\Eloquent\Collection as EloquentCollection
      */
-    public function companyMemberById($companyMemberId): Collection
+    public function companyMemberById($companyMemberId): EloquentCollection
     {
         return $this->companyMembersAndOwner()->where('id', $companyMemberId)->firstOrFail();
     }

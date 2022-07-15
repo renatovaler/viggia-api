@@ -22,7 +22,9 @@ class CreateCompanyController extends Controller
     {
         $userId = (int) $request->input('user_id');
         $name = $request->input('name');
+        
         $company = dispatch_sync( new CreateCompanyCommand($userId, $name) );
+
         return (new CompanyResource($company))->response($request);
     }
 }

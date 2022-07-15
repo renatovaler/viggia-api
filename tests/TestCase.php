@@ -3,13 +3,17 @@
 namespace Tests;
 
 use App\Domain\User\Models\User;
+use App\Domain\Company\Models\Company;
 use App\Domain\Vehicle\Models\VehicleLocalization;
 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
+use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 
 abstract class TestCase extends BaseTestCase
 {
-    use CreatesApplication;
+    use CreatesApplication, WithFaker;
 
 	const VALID_PARAM = true;
 	const INVALID_PARAM = false;
@@ -120,5 +124,31 @@ abstract class TestCase extends BaseTestCase
 	public function getLocalizationPoints(): array
 	{
 		return $this->localizationPoints[array_rand($this->localizationPoints, 1)];
+	}
+
+	/*
+	* Create single company for test
+	*
+	* @param int $ownerId
+	* @return \App\Domain\Company\Models\Company
+	*/
+	public function createCompany(int $ownerId): Company
+	{
+        $company = Company::create([
+            'user_id' => $ownerId,
+            'name' => $this->faker->company
+		]);
+        return $company;
+	}
+
+	/*
+	* Create companies for test
+	*
+	* @param int $amount
+	* @return void
+	*/
+	public function createCompanies(int $amount = 15): void
+	{
+        Company::factory()->count($amount)->create();
 	}
 }

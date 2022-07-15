@@ -5,10 +5,11 @@ namespace App\Domain\Company\Traits\ToUserModel;
 use App\Domain\Company\Models\Company;
 use App\Domain\Company\Models\CompanyMember;
 
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Support\Collection as SupportCollection;
+use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 
 trait CompaniesToUser
 {
@@ -20,6 +21,17 @@ trait CompaniesToUser
     public function companies(): BelongsToMany
     {
         return $this->belongsToMany(Company::class, CompanyMember::class, 'user_id', 'company_id');
+    }
+
+    /**
+     * Get all user system roles
+     *
+     * @return SupportCollection|EloquentCollection
+     */
+    public function getCompanies(): SupportCollection|EloquentCollection
+    {
+        $companies = $this->companies();
+        return $companies->isEmpty() ? collect([]) : $companies;
     }
 
     /**
@@ -54,7 +66,7 @@ trait CompaniesToUser
      */
     public function switchCompany(Company $company): bool
     {
-        if (! $this->belongsToCompany($company->id, $company->user_id)) {
+        if (! $this->belongsToCompany($company, $this->id)) {
             return false;
         }
         $this->forceFill([
@@ -67,11 +79,22 @@ trait CompaniesToUser
     /**
      * Get all of the companies the user owns or belongs to.
      *
-     * @return \Illuminate\Database\Eloquent\Collection
+     * @return \Illuminate\Database\Eloquent\Collection as EloquentCollection
      */
-    public function allCompanies(): Collection
+    public function allCompanies(): EloquentCollection
     {
         return $this->ownedCompanies->merge($this->companies)->sortBy('name');
+    }
+
+    /**
+     * Get all user system roles
+     *
+     * @return SupportCollection|EloquentCollection
+     */
+    public function getAllCompanies(): SupportCollection|EloquentCollection
+    {
+        $companies = $this->allCompanies();
+        return $companies->isEmpty() ? collect([]) : $companies;
     }
 
     /**
@@ -98,14 +121,14 @@ trait CompaniesToUser
     /**
      * Determine if the user belongs to the given company.
      *
-     * @param  int  $companyId
+     * @param  App\Domain\Company\Models\Company  $company
      * @param  int  $userId
      * @return bool
      */
-    public function belongsToCompany($companyId, $userId): bool
+    public function belongsToCompany(Company $company, int $userId): bool
     {
-        return $this->companies->contains(function ($c) use ($companyId) {
-            return $c->id === $companyId;
-        }) || $this->isOwnerOfCompany($userId);
+        return $this->getAllCompanies()->contains(function ($c) use ($company) {
+            return $c->id === $company->id;
+        }) || $this->isOwnerOfCompany($company->user_id);
     }
 }

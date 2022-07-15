@@ -16,7 +16,7 @@ class CompanyResource extends JsonResource
     {
         return [
 			'id' => $this->id,
-			'owner_user_id' => $this->ownerUserId,
+			'user_id' => $this->userId,
 			'name' => $this->name
         ];
     }
