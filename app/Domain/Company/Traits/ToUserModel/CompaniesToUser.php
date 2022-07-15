@@ -48,13 +48,10 @@ trait CompaniesToUser
     /**
      * Has-one relation with the current selected company model.
      *
-     * @return bool|\Illuminate\Database\Eloquent\Relations\HasOne
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function currentCompany(): bool|HasOne
+    public function currentCompany(): HasOne
     {
-        if (is_null($this->current_company_id) && $this->id) {
-            return false; // or exception?
-        }
         return $this->hasOne(Company::class,  'id', 'current_company_id');
     }
 
@@ -69,10 +66,13 @@ trait CompaniesToUser
         if (! $this->belongsToCompany($company, $this->id)) {
             return false;
         }
+
         $this->forceFill([
             'current_company_id' => $company->id,
         ])->save();
+
         $this->setRelation('currentCompany', $company);
+
         return true;
     }
 

@@ -13,7 +13,12 @@ class UpdateCompanyInformationRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return ( auth()->user()->id == auth()->user()->currentCompany->owner_user_id );
+        $currentCompany = auth()->user()->currentCompany;
+        return ( 
+            is_null($currentCompany) ? 
+            false : 
+            auth()->user()->id == $currentCompany->user_id
+        );
     }
 
     /**

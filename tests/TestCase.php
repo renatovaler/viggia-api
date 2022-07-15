@@ -17,10 +17,15 @@ abstract class TestCase extends BaseTestCase
 
 	const VALID_PARAM = true;
 	const INVALID_PARAM = false;
+	
 	const NOT_AUTHENTICATED = false;
 	const AUTHENTICATED = true;
+	
 	const COMMON_USER = true;
 	const ADMIN_USER = false;
+	
+	const COMPANY_MEMBER = true;
+	const NOT_COMPANY_MEMBER = false;
 
 	/*
 	* Latitude and longitude points
@@ -66,6 +71,7 @@ abstract class TestCase extends BaseTestCase
         $user = User::factory()->create();
         $user->password_changed_at = now();
         $user->save();
+		
         return $user;
 	}
 
