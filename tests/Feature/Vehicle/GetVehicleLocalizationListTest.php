@@ -90,6 +90,10 @@ class GetVehicleLocalizationListTest extends TestCase
 				]
 			]
 		]);
+
+		// Verifica se a quantidade de itens no JSON de resposta é zero
+		$response->assertJsonCount(15, 'data');
+
 		// Verifica se o código de resposta HTTP está correto (200)
 		$response->assertOk();
     }

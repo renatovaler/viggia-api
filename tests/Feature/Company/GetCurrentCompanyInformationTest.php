@@ -54,8 +54,8 @@ class GetCurrentCompanyInformationTest extends TestCase
 		// Requisita informações da company
         $response = $this->actingAs(Auth::user())->getJson('companies/current-company/profile');
 
-		// Verifica se a resposta foi do tipo "NotFound" (404)
-		$response->assertNotFound();
+		// Verifica se a resposta foi do tipo "proibido" (403)
+        $response->assertForbidden();
 	}
 
 	/*

@@ -58,8 +58,8 @@ class CompanyServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        'App\Domain\Company\Models\Company' => 'App\Domain\Company\Policies\CompanyPolicy',
-        'App\Domain\Company\Models\CompanyBranch' => 'App\Domain\Company\Policies\CompanyBranchPolicy',
+        'App\Domain\Company\Models\Company' => 'App\UI\Company\Policies\CompanyPolicy',
+        //'App\Domain\Company\Models\CompanyBranch' => 'App\UI\Compan\Policies\CompanyBranchPolicy',
     ];
 
     /**
