@@ -150,11 +150,17 @@ abstract class TestCase extends BaseTestCase
 	/*
 	* Create companies for test
 	*
+	* @param int $ownerId
 	* @param int $amount
 	* @return void
 	*/
-	public function createCompanies(int $amount = 15): void
+	public function createCompanies(int $ownerId, int $amount = 15): void
 	{
-        Company::factory()->count($amount)->create();
+		for ($i = 1; $i <= $amount; $i++) {
+			$company = Company::create([
+				'user_id' => $ownerId,
+				'name' => $this->faker->company
+			]);
+		}
 	}
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Vehicle;
+namespace Tests\Feature\Company;
 
 use Tests\TestCase;
 use Illuminate\Support\Facades\Auth;
@@ -49,7 +49,7 @@ class SwitchCompanyTest extends TestCase
 		]);
 
 		// Faz a requisição para obter os dados do registro sem informar usuário logado
-        $response = $this->putJson('/companies/switch', ['company_id' => $company->id]);
+        $response = $this->actingAs(Auth::user())->putJson('/companies/switch', ['company_id' => $company->id]);
 
 		// Verifica se o usuário não está logado
         $this->assertAuthenticated();

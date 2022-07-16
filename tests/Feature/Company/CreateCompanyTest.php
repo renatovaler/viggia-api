@@ -83,7 +83,7 @@ class CreateCompanyTest extends TestCase
 
 			$data['user_id'] = $user->id;
 
-			return $this->actingAs($user)->post('/companies/create', $data);
+			return $this->actingAs(Auth::user())->post('/companies/create', $data);
 		}
 
 		return $this->post('/companies/create', $data);

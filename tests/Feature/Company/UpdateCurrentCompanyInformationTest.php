@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Vehicle;
+namespace Tests\Feature\Company;
 
 use App\Domain\User\Models\User;
 use App\Domain\Company\Models\Company;
@@ -155,7 +155,7 @@ class UpdateCurrentCompanyInformationTest extends TestCase
 		* Membro da empresa: SIM
 		* Parametros de update válidos: SIM
 		*/
-		$response = $this->actingAs(auth()->user())->putJson('/companies/current-company/profile', $data);
+		$response = $this->actingAs(Auth::user())->putJson('/companies/current-company/profile', $data);
 
 		// Verifica se o usuário não está logado
         $this->assertAuthenticated();
