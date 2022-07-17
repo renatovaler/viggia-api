@@ -61,7 +61,7 @@ class Company extends Model
     {
         return CompanyFactory::new();
     }
-
+ 
     /**
      * Purge all of the company's resources.
      *
@@ -75,24 +75,24 @@ class Company extends Model
         $company->companyOwner()->where('current_company_id', $companyId)
                 ->update(['current_company_id' => null]);
 
+        $members = $company->onlyCompanyMembers->where('current_company_id', $companyId);
+    
+        $members->map(function ($member) {
+            $member->update(['current_company_id' => null]);
+        });
+
+        $company->onlyCompanyMembers()->detach();
+
         $branchs = $company->ownedCompanyBranchs;
 
         $branchs->map(function ($branch) {
             $branchMembers = $branch->companyBranchMembers;
             $branchMembers->map(function ($branchMember) {
                 $branchMember->update(['current_company_id' => null]);
-                $branchMember->detach();
             });
+            $branch->companyBranchMembers()->detach();
             $branch->delete();
         });
-
-        $members = $company->companyMembersAndOwner()->where('current_company_id', $companyId);
-    
-        $members->map(function ($member) {
-            $member->update(['current_company_id' => null]);
-        });
-        
-        $this->onlyCompanyMembers()->detach();
 
         $company->delete();
     }

@@ -77,6 +77,29 @@ class CompanyBranch extends Model
     {
         return $this->belongsTo(Company::class, 'company_id');
     }
+
+    /**
+     * Purge all of the company's resources.
+     *
+     * @param  int $companyId
+     * @return void
+     */
+    public function deleteCompanyBranch(int $companyBranchId): void
+    {
+		$companyBranch = $this->where('id', $companyBranchId)->firstOrFail();
+		
+        $companyBranch->companyOwnerOfThisBranch()->companyOwner()->where('current_company_id', $companyId)
+                ->update(['current_company_id' => null]);
+
+        $branchMembers = $this->companyBranchMembers;
+
+        $branchMembers->map(function ($branchMember) {
+            $branchMember->update(['current_company_id' => null]);
+            $branchMember->detach();
+        });
+
+        $companyBranch->delete();
+    }
 	
 	/*
     |--------------------------------------------------------------------------
