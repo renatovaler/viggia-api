@@ -2,9 +2,10 @@
 
 namespace App\UI\Company\Http\Controllers;
 
-use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Response;
 use App\Structure\Http\Controllers\Controller;
 
+use App\Domain\Company\Models\Company;
 use App\Domain\Company\Actions\DeleteCompany\DeleteCompanyCommand;
 
 class DeleteCompanyController extends Controller
@@ -14,15 +15,18 @@ class DeleteCompanyController extends Controller
      *
      * @param  int $companyId
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Illuminate\Http\Response
      */
-    public function __invoke(int $companyId): JsonResponse
+    public function __invoke(int $companyId): Response
     {
-		// Falta fazer validação/autorização
+        $company = Company::where('id', $companyId )->first();
+
+        $this->authorize('delete', $company);
 		
-        $companyId = dispatch_sync(
+        dispatch_sync(
 			new DeleteCompanyCommand($companyId)
 		);
+        
         return response()->noContent();
     }
 }

@@ -41,6 +41,9 @@ use Illuminate\Support\Facades\Bus;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
+use App\Domain\Company\Models\Company;
+use App\UI\Company\Policies\CompanyPolicy;
+
 class CompanyServiceProvider extends ServiceProvider
 {
     /**
@@ -58,8 +61,7 @@ class CompanyServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        'App\Domain\Company\Models\Company' => 'App\UI\Company\Policies\CompanyPolicy',
-        //'App\Domain\Company\Models\CompanyBranch' => 'App\UI\Compan\Policies\CompanyBranchPolicy',
+        Company::class => CompanyPolicy::class,
     ];
 
     /**

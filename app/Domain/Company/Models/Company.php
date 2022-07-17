@@ -75,16 +75,23 @@ class Company extends Model
         $company->companyOwner()->where('current_company_id', $companyId)
                 ->update(['current_company_id' => null]);
 
-        $branchs = $company->ownedCompanyBranchs()->all();
-		
-		$branchs->map(function ($branch) {
-			$branch->companyBranchMembers()->detach();
-			$branch->delete();
-		});		
+        $branchs = $company->ownedCompanyBranchs;
 
-        $company->companyMembersAndOwner()->where('current_company_id', $companyId)
-                ->update(['current_company_id' => null]);
+        $branchs->map(function ($branch) {
+            $branchMembers = $branch->companyBranchMembers;
+            $branchMembers->map(function ($branchMember) {
+                $branchMember->update(['current_company_id' => null]);
+                $branchMember->detach();
+            });
+            $branch->delete();
+        });
 
+        $members = $company->companyMembersAndOwner()->where('current_company_id', $companyId);
+    
+        $members->map(function ($member) {
+            $member->update(['current_company_id' => null]);
+        });
+        
         $this->onlyCompanyMembers()->detach();
 
         $company->delete();
@@ -154,6 +161,17 @@ class Company extends Model
     public function hasOwnerOrCompanyMember(int $userId): bool
     {
         return $this->companyMembersAndOwner()->contains('id', $userId);
+    }
+
+    /**
+     * Determina se o usuário é proprietário da empresa. Busca por ID do usuário.
+     *
+     * @param  int $userId
+     * @return bool
+     */
+    public function hasCompanyOwner(int $userId): bool
+    {
+        return $this->companyOwner()->where('id', $userId)->exists();
     }
 
     /**

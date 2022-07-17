@@ -39,7 +39,7 @@ class UpdateCurrentCompanyInformationTest extends TestCase
 	/*
 	* Teste de atualização dos dados da empresa "atual" com usuário logado, mas que não é membro da empresa
 	*/
-    public function _test_update_current_company_information_with_authenticated_user_but_not_member_of_company()
+    public function test_update_current_company_information_with_authenticated_user_but_not_member_of_company()
     {
 		// Cria um usuário logado
 		$loggedUser = $this->createAdminUser();

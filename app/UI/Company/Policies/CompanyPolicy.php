@@ -18,7 +18,7 @@ class CompanyPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return true;
     }
 
     /**
@@ -41,7 +41,7 @@ class CompanyPolicy
      */
     public function create(User $user)
     {
-        //
+        return true;
     }
 
     /**
@@ -53,7 +53,19 @@ class CompanyPolicy
      */
     public function update(User $user, Company $company)
     {
-        //
+        return $company->hasCompanyOwner($user->id);
+    }
+
+    /**
+     * Determine whether the user can switch company.
+     *
+     * @param  \App\Domain\User\Models\User  $user
+     * @param  \App\Domain\Company\Models\Company  $company
+     * @return \Illuminate\Auth\Access\Response|bool
+     */
+    public function switchCompany(User $user, Company $company)
+    {
+        return $company->hasOwnerOrCompanyMember($user->id);
     }
 
     /**
@@ -65,7 +77,7 @@ class CompanyPolicy
      */
     public function delete(User $user, Company $company)
     {
-        //
+        return $company->hasCompanyOwner($user->id);
     }
 
     /**

@@ -3,7 +3,10 @@
 namespace App\UI\Company\Http\Controllers;
 
 use App\UI\Company\Http\Resources\CompanyCollection;
+
 use App\Structure\Http\Controllers\Controller;
+
+use App\Domain\Company\Models\Company;
 use App\Domain\Company\Actions\GetCurrentUserCompanyList\GetCurrentUserCompanyListCommand;
 
 class GetCurrentUserCompanyListController extends Controller
@@ -15,6 +18,8 @@ class GetCurrentUserCompanyListController extends Controller
      */
     public function __invoke(): CompanyCollection
     {
+        $this->authorize('viewAny', Company::class);
+
         $companies = dispatch_sync(
             new GetCurrentUserCompanyListCommand()
         );

@@ -30,7 +30,7 @@ class CompanyFinancingAgreement extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'owner_company_id',
+        'company_id',
 		'license_plate',
 		'is_active',
 		'is_wanted'
@@ -70,6 +70,6 @@ class CompanyFinancingAgreement extends Model
      */
     public function companyOwnerOfThisContract(): BelongsTo
     {
-        return $this->belongsTo(Company::class, 'owner_company_id');
+        return $this->belongsTo(Company::class, 'company_id');
     }
 }

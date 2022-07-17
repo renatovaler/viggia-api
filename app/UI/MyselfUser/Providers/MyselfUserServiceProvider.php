@@ -43,9 +43,7 @@ class MyselfUserServiceProvider extends ServiceProvider
      *
      * @var array
      */
-    protected $policies = [
-        //'App\Domain\User\Models\User' => 'App\Domain\User\Policies\UserPolicy',
-    ];
+    protected $policies = [];
 
     /**
      * Inicia os serviços

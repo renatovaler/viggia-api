@@ -11,18 +11,6 @@ class CreateCompanyTest extends TestCase
 {
     use RefreshDatabase, WithFaker;
 
-    public function test_create_company_with_not_authenticated_user()
-    {
-		// Faz a requisição para criar o registro sem usuário logado
-		$response = $this->postCreateCompany( self::NOT_AUTHENTICATED );
-
-		// Verifica se o usuário não está logado
-        $this->assertGuest();
-
-		// Verifica se a resposta foi do tipo "não autorizado" (401)
-		$response->assertUnauthorized();
-    }
-
     public function test_create_company_with_authorized_user()
     {
 		// Faz a requisição para criar o registro com usuário admin/super_admin
@@ -39,6 +27,7 @@ class CreateCompanyTest extends TestCase
                 'name'
 			]
 		]);
+
 		// Verifica se o código de resposta HTTP está correto (200)
 		$response->assertOk();
     }
@@ -58,6 +47,18 @@ class CreateCompanyTest extends TestCase
 		]);
 		// Verifica se o código de resposta HTTP está correto (422)
 		$response->assertUnprocessable();
+    }
+
+    public function test_create_company_with_not_authenticated_user()
+    {
+		// Faz a requisição para criar o registro sem usuário logado
+		$response = $this->postCreateCompany( self::NOT_AUTHENTICATED );
+
+		// Verifica se o usuário não está logado
+        $this->assertGuest();
+
+		// Verifica se a resposta foi do tipo "não autorizado" (401)
+		$response->assertUnauthorized();
     }
 
 	/*
@@ -83,9 +84,9 @@ class CreateCompanyTest extends TestCase
 
 			$data['user_id'] = $user->id;
 
-			return $this->actingAs(Auth::user())->post('/companies/create', $data);
+			return $this->actingAs(Auth::user())->postJson('/companies/create', $data);
 		}
 
-		return $this->post('/companies/create', $data);
+		return $this->postJson('/companies/create', $data);
 	}
 }

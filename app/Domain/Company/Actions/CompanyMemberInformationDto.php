@@ -30,8 +30,8 @@ final class CompanyMemberInformationDto
         return new self(
             $companyMember->id,
 			$companyMember->user_id,
-            $companyMember->owner_user_id,
-            $companyMember->user_id === $companyMember->company->owner_user_id,
+            $companyMember->company_id,
+            $companyMember->user_id === $companyMember->company->user_id,
 			//$companyMember->roles
         );
     }

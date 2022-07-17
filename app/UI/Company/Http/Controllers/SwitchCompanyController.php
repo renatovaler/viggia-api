@@ -6,6 +6,8 @@ use Illuminate\Http\JsonResponse;
 use App\Structure\Http\Controllers\Controller;
 use App\UI\Company\Http\Resources\CompanyResource;
 use App\UI\Company\Http\Requests\SwitchCompanyRequest;
+
+use App\Domain\Company\Models\Company;
 use App\Domain\Company\Actions\SwitchCompany\SwitchCompanyCommand;
 
 class SwitchCompanyController extends Controller
@@ -19,6 +21,10 @@ class SwitchCompanyController extends Controller
      */
     public function __invoke(SwitchCompanyRequest $request): JsonResponse
     {
+        $company = Company::where('id', (int) $request->input('company_id') )->first();
+        
+        $this->authorize('switchCompany', $company);
+
         $companyUpdated = dispatch_sync(new SwitchCompanyCommand(
             (int) $request->input('company_id')
         ));

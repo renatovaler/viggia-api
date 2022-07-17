@@ -19,6 +19,8 @@ class UpdateCompanyInformationController extends Controller
      */
     public function __invoke(UpdateCompanyInformationRequest $request): JsonResponse
     {
+        $this->authorize('update', auth()->user()->currentCompany);
+
         $companyUpdated = dispatch_sync(new UpdateCompanyInformationCommand(
             $request->input('company_id'),
             $request->input('name')

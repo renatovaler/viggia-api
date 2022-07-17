@@ -13,7 +13,8 @@ class CreateCompanyRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return auth()->user()->id === (int) $this->input('user_id');
+        return true;
+        //return auth()->user()->id === (int) $this->input('user_id');
     }
 
     /**

@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('company_financing_agreements', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('owner_company_id')
+            $table->foreignId('company_id')
                 ->references('id')
                 ->on('companies')
                 ->unsigned();

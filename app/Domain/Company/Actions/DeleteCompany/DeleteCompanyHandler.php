@@ -20,11 +20,11 @@ final class DeleteCompanyHandler
     {
         try {
             DB::beginTransaction();
-				Company::deleteCompany($command->id);
+				(new Company())->deleteCompany($command->id);
             DB::commit();
 		} catch(Exception $e) {
 			DB::rollBack();
-			throw new Exception( $e->getMessage(), $e->getCode() );
+			throw new Exception( $e->getMessage(), (int) $e->getCode() );
         }
     }
 }

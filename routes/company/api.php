@@ -16,9 +16,6 @@ use App\UI\Company\Http\Controllers\Member\RemoveCompanyMemberController;
 use App\UI\Company\Http\Controllers\Member\GetCompanyMemberInformationController;
 use App\UI\Company\Http\Controllers\Member\GetCurrentCompanyMemberListController;
 
-
-
-
 /*
 |--------------------------------------------------------------------------
 | API Routes - Company Domain
@@ -133,6 +130,16 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 		 */
 		Route::post('create', [CreateCompanyController::class, '__invoke'])
 		->name('companies.create');
+
+		/**
+		 * Delete company by id
+		 *
+		 * @method  DELETE
+		 * @route   domain.example/companies/{companyId}
+		 * @name    companies.destroy
+		 */
+		Route::delete('{companyId}', [DeleteCompanyController::class, '__invoke'])
+		->name('companies.destroy');
 
 		/**
 		 * Get company list of current user

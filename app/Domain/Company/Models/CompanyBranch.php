@@ -30,7 +30,7 @@ class CompanyBranch extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'owner_company_id',
+        'company_id',
 		'name'
     ];
 
@@ -75,7 +75,7 @@ class CompanyBranch extends Model
      */
     public function companyOwnerOfThisBranch(): BelongsTo
     {
-        return $this->belongsTo(Company::class, 'owner_company_id');
+        return $this->belongsTo(Company::class, 'company_id');
     }
 	
 	/*

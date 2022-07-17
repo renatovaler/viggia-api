@@ -33,9 +33,7 @@ class VehicleServiceProvider extends ServiceProvider
      *
      * @var array
      */
-    protected $policies = [
-        //'App\Domain\Vehicle\Models\VehicleLocalization' => 'App\Domain\Vehicle\Policies\VehicleLocalizationPolicy',
-    ];
+    protected $policies = [];
 
     /**
      * Inicia os serviços

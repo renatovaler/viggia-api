@@ -5,6 +5,8 @@ namespace App\UI\Company\Http\Controllers;
 use App\Structure\Http\Controllers\Controller;
 use App\UI\Company\Http\Resources\CompanyResource;
 use App\UI\Company\Http\Requests\CreateCompanyRequest;
+
+use App\Domain\Company\Models\Company;
 use App\Domain\Company\Actions\CreateCompany\CreateCompanyCommand;
 
 use Illuminate\Http\JsonResponse;
@@ -17,9 +19,13 @@ class CreateCompanyController extends Controller
      * @param App\UI\Company\Http\Requests\CreateCompanyRequest $request
      *
      * @return \Illuminate\Http\JsonResponse
+    *
+    * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function __invoke(CreateCompanyRequest $request): JsonResponse
     {
+        $this->authorize('create', Company::class);
+
         $userId = (int) $request->input('user_id');
         $name = $request->input('name');
         

@@ -17,7 +17,7 @@ final class CompanyBranchDto
      */
     public function __construct(
         public readonly int $id,
-        public readonly int $ownerCompanyId,
+        public readonly int $companyId,
         public readonly string $name
     ) {}
 
@@ -25,7 +25,7 @@ final class CompanyBranchDto
     {
         return new self(
             $companyBranch->id,
-            $companyBranch->owner_company_id,
+            $companyBranch->company_id,
             $companyBranch->name
         );
     }
