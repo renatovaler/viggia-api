@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace App\Domain\Company\Actions\AddCompanyMember;
+namespace App\Domain\Company\Actions\InviteCompanyMemberCommand;
 
 use Illuminate\Foundation\Bus\Dispatchable;
 
-final class AddCompanyMemberCommand
+final class InviteCompanyMemberCommand
 {
     use Dispatchable;
 
@@ -12,12 +12,14 @@ final class AddCompanyMemberCommand
      * Método construtor da classe
      *
      * @param readonly int $companyId
-     * @param readonly int $userId
+     * @param readonly string $email
+     * @param readonly array $roles
      *
      * @return void (implicit)
      */
     public function __construct(
       public readonly int $companyId,
-      public readonly int $userId
+      public readonly string $email,
+      public readonly array $roles
 	  ) {}
 }

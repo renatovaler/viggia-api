@@ -2,15 +2,15 @@
 
 namespace App\Domain\Company\Models;
 
-use App\Domain\User\Models\User;
+use App\Domain\Company\Models\Company;
 
-use Database\Factories\Company\CompanyMemberFactory;
+use Database\Factories\Company\CompanyInvitationFactory;
 
-use Illuminate\Database\Eloquent\Relations\Pivot;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class CompanyMember extends Pivot
+class CompanyInvitation extends Model
 {
     use HasFactory;
 
@@ -19,7 +19,7 @@ class CompanyMember extends Pivot
      *
      * @var string
      */
-    protected $table = 'company_members';
+    protected $table = 'company_invitations';
 
     /**
      * Indicates if the IDs are auto-incrementing.
@@ -29,15 +29,32 @@ class CompanyMember extends Pivot
     public $incrementing = true;
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'email',
+        'roles',
+    ];
+
+    /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var array<int, string>
+     */
+    protected $hidden = [];
+
+    /**
      * Define custom factory to the model
      *
-     * @return \Database\Factories\Company\CompanyMemberFactory
+     * @return void
      */
-    protected static function newFactory(): CompanyMemberFactory
+    protected static function newFactory()
     {
-        return CompanyMemberFactory::new();
+        return CompanyInvitationFactory::new();
     }
-	
+
 	/**
      * Get the company of this member
      *
