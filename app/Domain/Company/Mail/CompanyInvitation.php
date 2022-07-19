@@ -42,7 +42,7 @@ class CompanyInvitation extends Mailable
             'emails.company.company-invitation',
             [
                 'acceptUrl' => URL::signedRoute(
-                    'company-invitations.accept', ['invitation' => $this->invitation]
+                    'companies.company-invitations.accept', ['invitation' => $this->invitation]
                 )
             ]
         )->subject(__('Company Invitation'));

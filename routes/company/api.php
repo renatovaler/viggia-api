@@ -16,6 +16,9 @@ use App\UI\Company\Http\Controllers\Member\RemoveCompanyMemberController;
 use App\UI\Company\Http\Controllers\Member\GetCompanyMemberInformationController;
 use App\UI\Company\Http\Controllers\Member\GetCurrentCompanyMemberListController;
 
+// Invite company member
+use App\UI\Company\Http\Controllers\Member\CompanyInvitationController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes - Company Domain
@@ -36,7 +39,7 @@ use App\UI\Company\Http\Controllers\Member\GetCurrentCompanyMemberListController
 |
 */
 
-Route::group(['middleware' => ['auth:sanctum']], function () {
+Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
 
 	// Company group
 	Route::group(['prefix' => 'companies'], function () {
@@ -111,6 +114,12 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
 		}); //End "current" company route group
 
+		Route::get('/company-invitations/{invitation}', [CompanyInvitationController::class, 'accept'])
+		->middleware(['signed'])
+		->name('companies.company-invitations.accept');
+
+		Route::delete('/company-invitations/{invitation}', [CompanyInvitationController::class, 'destroy'])
+		->name('companies.company-invitations.destroy');
 		/**
 		 * Switch company
 		 *

@@ -5,6 +5,7 @@ namespace App\Domain\Company\Models;
 use App\Domain\User\Models\User;
 use App\Domain\Company\Models\CompanyMember;
 use App\Domain\Company\Models\CompanyBranch;
+use App\Domain\Company\Models\CompanyInvitation;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection as SupportCollection;
@@ -213,6 +214,16 @@ class Company extends Model
         $this->onlyCompanyMembers()->detach($user);
     }
 
+    /**
+     * Get all of the pending user invitations for the company.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function companyInvitations()
+    {
+        return $this->hasMany(CompanyInvitation::class);
+    }
+    
 	/*
     |--------------------------------------------------------------------------
 	| COMPANY BRANCH SECTION

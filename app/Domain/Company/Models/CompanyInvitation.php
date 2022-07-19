@@ -34,6 +34,7 @@ class CompanyInvitation extends Model
      * @var array
      */
     protected $fillable = [
+        'company_id',
         'email',
         'roles',
     ];

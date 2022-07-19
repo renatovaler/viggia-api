@@ -6,7 +6,6 @@ use Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 
-use App\Domain\Role\Models\Role;
 use App\Domain\Company\Mail\CompanyInvitation;
 use App\Domain\Company\Models\CompanyInvitation as CompanyInvitationModel;
 use App\Domain\Company\Actions\InviteCompanyMember\InviteCompanyMemberCommand;
@@ -25,7 +24,7 @@ final class InviteCompanyMemberHandler
             DB::beginTransaction();
 
                 // Cria o convite
-                $invitation = CompanyInvitation::create([
+                $invitation = CompanyInvitationModel::create([
                     'company_id' => $command->companyId,
                     'email' => $command->email,
                     'roles' => $command->roles,
