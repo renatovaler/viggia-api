@@ -3,19 +3,19 @@
 use Illuminate\Support\Facades\Route;
 
 // Users
-use App\UI\Admin\Http\Controllers\User\CreateUserController;
-use App\UI\Admin\Http\Controllers\User\DeleteUserController;
-use App\UI\Admin\Http\Controllers\User\GetUserListController;
-use App\UI\Admin\Http\Controllers\User\GetUserProfileInformationByIdController;
-use App\UI\Admin\Http\Controllers\User\UpdateUserProfileInformationController;
-use App\UI\Admin\Http\Controllers\User\UpdateUserPasswordController;
+use App\Admin\Http\Controllers\User\CreateUserController;
+use App\Admin\Http\Controllers\User\DeleteUserController;
+use App\Admin\Http\Controllers\User\GetUserListController;
+use App\Admin\Http\Controllers\User\GetUserProfileInformationByIdController;
+use App\Admin\Http\Controllers\User\UpdateUserProfileInformationController;
+use App\Admin\Http\Controllers\User\UpdateUserPasswordController;
 
 // Roles
-use App\UI\Admin\Http\Controllers\Role\CreateRoleController;
-use App\UI\Admin\Http\Controllers\Role\DeleteRoleController;
-use App\UI\Admin\Http\Controllers\Role\GetRoleListController;
-use App\UI\Admin\Http\Controllers\Role\GetRoleInformationByIdController;
-use App\UI\Admin\Http\Controllers\Role\UpdateRoleInformationController;
+use App\Admin\Http\Controllers\Role\CreateRoleController;
+use App\Admin\Http\Controllers\Role\DeleteRoleController;
+use App\Admin\Http\Controllers\Role\GetRoleListController;
+use App\Admin\Http\Controllers\Role\GetRoleInformationByIdController;
+use App\Admin\Http\Controllers\Role\UpdateRoleInformationController;
 
 
 

@@ -1,12 +1,12 @@
 <?php
 
-namespace Tests\Feature\Company\CompanyMember;
+namespace Tests\Company\CompanyMember;
 
-use App\Domain\User\Models\User;
-use App\Domain\Company\Models\Company;
+use App\User\Models\User;
+use App\Company\Models\Company;
 
-use App\Domain\Company\Mail\CompanyInvitation as CompanyInvitationInvite;
-use App\Domain\Company\Models\CompanyInvitation as CompanyInvitationModel;
+use App\Company\Mail\CompanyInvitation as CompanyInvitationInvite;
+use App\Company\Models\CompanyInvitation as CompanyInvitationModel;
 
 use Tests\TestCase;
 use Illuminate\Support\Facades\Mail;

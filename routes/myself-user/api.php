@@ -3,9 +3,9 @@
 use Illuminate\Support\Facades\Route;
 
 // Myself
-use App\UI\MyselfUser\Http\Controllers\UpdateMyselfPasswordController;
-use App\UI\MyselfUser\Http\Controllers\GetMyselfProfileInformationController;
-use App\UI\MyselfUser\Http\Controllers\UpdateMyselfProfileInformationController;
+use App\MyselfUser\Http\Controllers\UpdateMyselfPasswordController;
+use App\MyselfUser\Http\Controllers\GetMyselfProfileInformationController;
+use App\MyselfUser\Http\Controllers\UpdateMyselfProfileInformationController;
 
 Route::group(['middleware' => ['auth:sanctum'], 'prefix' => 'myself'], function () {
 

@@ -192,15 +192,15 @@ return [
         /*
          * Application Service Providers...
          */
-        App\UI\Admin\Providers\AdminServiceProvider::class,
+        App\Admin\Providers\AdminServiceProvider::class,
 		
-        App\UI\Auth\Providers\AuthServiceProvider::class,
+        App\Auth\Providers\AuthServiceProvider::class,
 		
-        App\UI\MyselfUser\Providers\MyselfUserServiceProvider::class,
+        App\MyselfUser\Providers\MyselfUserServiceProvider::class,
 		
-        App\UI\Company\Providers\CompanyServiceProvider::class,
+        App\Company\Providers\CompanyServiceProvider::class,
 		
-        App\UI\Vehicle\Providers\VehicleServiceProvider::class,
+        App\Vehicle\Providers\VehicleServiceProvider::class,
 
         /*
          * Kernel Service Providers...

@@ -1,12 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\UI\Auth\Http\Controllers\NewPasswordController;
-use App\UI\Auth\Http\Controllers\VerifyEmailController;
-use App\UI\Auth\Http\Controllers\RegisteredUserController;
-use App\UI\Auth\Http\Controllers\PasswordResetLinkController;
-use App\UI\Auth\Http\Controllers\AuthenticatedSessionController;
-use App\UI\Auth\Http\Controllers\EmailVerificationNotificationController;
+use App\Auth\Http\Controllers\NewPasswordController;
+use App\Auth\Http\Controllers\VerifyEmailController;
+use App\Auth\Http\Controllers\RegisteredUserController;
+use App\Auth\Http\Controllers\PasswordResetLinkController;
+use App\Auth\Http\Controllers\AuthenticatedSessionController;
+use App\Auth\Http\Controllers\EmailVerificationNotificationController;
 
 Route::group(['prefix'=> 'auth'], function () {
 	// route domain.example/auth/register

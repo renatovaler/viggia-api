@@ -3,11 +3,11 @@
 namespace Database\Factories\Vehicle;
 
 use Illuminate\Support\Str;
-use App\Domain\Vehicle\Models\VehicleLocalization;
+use App\Vehicle\Models\VehicleLocalization;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Domain\Vehicle\Models\VehicleLocalization>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Vehicle\Models\VehicleLocalization>
  */
 class VehicleLocalizationFactory extends Factory
 {

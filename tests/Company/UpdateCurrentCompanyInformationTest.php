@@ -1,9 +1,9 @@
 <?php
 
-namespace Tests\Feature\Company;
+namespace Tests\Company;
 
-use App\Domain\User\Models\User;
-use App\Domain\Company\Models\Company;
+use App\User\Models\User;
+use App\Company\Models\Company;
 
 use Tests\TestCase;
 use Illuminate\Support\Str;

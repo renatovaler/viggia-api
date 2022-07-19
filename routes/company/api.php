@@ -3,21 +3,21 @@
 use Illuminate\Support\Facades\Route;
 
 // Company
-use App\UI\Company\Http\Controllers\CreateCompanyController;
-use App\UI\Company\Http\Controllers\UpdateCompanyInformationController;
-use App\UI\Company\Http\Controllers\DeleteCompanyController;
-use App\UI\Company\Http\Controllers\GetCurrentCompanyInformationController;
-use App\UI\Company\Http\Controllers\GetCurrentUserCompanyListController;
-use App\UI\Company\Http\Controllers\SwitchCompanyController;
+use App\Company\Http\Controllers\CreateCompanyController;
+use App\Company\Http\Controllers\UpdateCompanyInformationController;
+use App\Company\Http\Controllers\DeleteCompanyController;
+use App\Company\Http\Controllers\GetCurrentCompanyInformationController;
+use App\Company\Http\Controllers\GetCurrentUserCompanyListController;
+use App\Company\Http\Controllers\SwitchCompanyController;
 
 // Company Member
-use App\UI\Company\Http\Controllers\Member\AddCompanyMemberController;
-use App\UI\Company\Http\Controllers\Member\RemoveCompanyMemberController;
-use App\UI\Company\Http\Controllers\Member\GetCompanyMemberInformationController;
-use App\UI\Company\Http\Controllers\Member\GetCurrentCompanyMemberListController;
+use App\Company\Http\Controllers\Member\AddCompanyMemberController;
+use App\Company\Http\Controllers\Member\RemoveCompanyMemberController;
+use App\Company\Http\Controllers\Member\GetCompanyMemberInformationController;
+use App\Company\Http\Controllers\Member\GetCurrentCompanyMemberListController;
 
 // Invite company member
-use App\UI\Company\Http\Controllers\Member\CompanyInvitationController;
+use App\Company\Http\Controllers\Member\CompanyInvitationController;
 
 /*
 |--------------------------------------------------------------------------

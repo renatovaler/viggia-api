@@ -3,11 +3,11 @@
 use Illuminate\Support\Facades\Route;
 
 // Vehicle Localization
-use App\UI\Vehicle\Http\Controllers\CreateVehicleLocalizationController;
-use App\UI\Vehicle\Http\Controllers\GetVehicleLocalizationByIdController;
-use App\UI\Vehicle\Http\Controllers\GetVehicleLocalizationListController;
-use App\UI\Vehicle\Http\Controllers\UpdateVehicleLocalizationController;
-use App\UI\Vehicle\Http\Controllers\DeleteVehicleLocalizationController;
+use App\Vehicle\Http\Controllers\CreateVehicleLocalizationController;
+use App\Vehicle\Http\Controllers\GetVehicleLocalizationByIdController;
+use App\Vehicle\Http\Controllers\GetVehicleLocalizationListController;
+use App\Vehicle\Http\Controllers\UpdateVehicleLocalizationController;
+use App\Vehicle\Http\Controllers\DeleteVehicleLocalizationController;
 
 /*
 |--------------------------------------------------------------------------

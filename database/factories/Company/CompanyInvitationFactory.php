@@ -2,7 +2,7 @@
 
 namespace Database\Factories\Company;
 
-use App\Domain\Company\Models\CompanyInvitation;
+use App\Company\Models\CompanyInvitation;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 

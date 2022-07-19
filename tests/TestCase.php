@@ -2,9 +2,9 @@
 
 namespace Tests;
 
-use App\Domain\User\Models\User;
-use App\Domain\Company\Models\Company;
-use App\Domain\Vehicle\Models\VehicleLocalization;
+use App\User\Models\User;
+use App\Company\Models\Company;
+use App\Vehicle\Models\VehicleLocalization;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -64,7 +64,7 @@ abstract class TestCase extends BaseTestCase
 	/*
 	* Create common user for test
 	*
-	* @return \App\Domain\User\Models\User
+	* @return \App\User\Models\User
 	*/
 	public function createCommonUser(): User
 	{
@@ -78,7 +78,7 @@ abstract class TestCase extends BaseTestCase
 	/*
 	* Create admin and super_admin user for test
 	*
-	* @return \App\Domain\User\Models\User
+	* @return \App\User\Models\User
 	*/
 	public function createAdminUser(): User
 	{
@@ -104,7 +104,7 @@ abstract class TestCase extends BaseTestCase
 	/*
 	* Create single vehicle localization for test
 	*
-	* @return \App\Domain\Vehicle\Models\VehicleLocalization
+	* @return \App\Vehicle\Models\VehicleLocalization
 	*/
 	public function createVehicleLocalization(): VehicleLocalization
 	{
@@ -136,7 +136,7 @@ abstract class TestCase extends BaseTestCase
 	* Create single company for test
 	*
 	* @param int $ownerId
-	* @return \App\Domain\Company\Models\Company
+	* @return \App\Company\Models\Company
 	*/
 	public function createCompany(int $ownerId): Company
 	{

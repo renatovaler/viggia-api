@@ -1,9 +1,9 @@
 <?php
 
-namespace Tests\Feature\Vehicle;
+namespace Tests\Vehicle;
 
-use App\Domain\User\Models\User;
-use App\Domain\Vehicle\Models\VehicleLocalization;
+use App\User\Models\User;
+use App\Vehicle\Models\VehicleLocalization;
 
 use Tests\TestCase;
 use Illuminate\Support\Facades\Auth;

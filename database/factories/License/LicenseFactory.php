@@ -2,13 +2,13 @@
 
 namespace Database\Factories\License;
 
-use App\Domain\User\Models\User;
-use App\Domain\Company\Models\Company;
-use App\Domain\License\Models\License;
+use App\User\Models\User;
+use App\Company\Models\Company;
+use App\License\Models\License;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Domain\License\Models\License>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\License\Models\License>
  */
 class LicenseFactory extends Factory
 {

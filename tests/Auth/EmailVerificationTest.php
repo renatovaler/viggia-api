@@ -1,8 +1,8 @@
 <?php
 
-namespace Tests\Feature\Auth;
+namespace Tests\Auth;
 
-use App\Domain\User\Models\User;
+use App\User\Models\User;
 use App\Structure\Providers\RouteServiceProvider;
 
 use Illuminate\Auth\Events\Verified;

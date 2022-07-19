@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\MyselfUser;
+namespace Tests\MyselfUser;
 
 use Tests\TestCase;
 use Illuminate\Support\Facades\Auth;

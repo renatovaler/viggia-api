@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Vehicle;
+namespace Tests\Vehicle;
 
 use Tests\TestCase;
 use Illuminate\Support\Facades\Auth;
