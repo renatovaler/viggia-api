@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace App\MyselfUser\Http\Controllers;
+namespace App\User\Http\Controllers;
 
 use Illuminate\Http\Response;
 use App\Structure\Http\Controllers\Controller;
 
-use App\MyselfUser\Http\Requests\UpdateMyselfPasswordRequest;
+use App\User\Http\Requests\UpdateMyselfPasswordRequest;
 
 use App\User\Actions\UpdateUserPassword\UpdateUserPassword;
 
@@ -14,7 +14,7 @@ class UpdateMyselfPasswordController extends Controller
     /**
      * Update authenticated user password (myself password)
      *
-     * @param App\MyselfUser\Http\Requests\UpdateMyselfPasswordRequest $request
+     * @param App\User\Http\Requests\UpdateMyselfPasswordRequest $request
      *
      * @return \Illuminate\Http\Response
      */

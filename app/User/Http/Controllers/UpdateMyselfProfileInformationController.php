@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace App\MyselfUser\Http\Controllers;
+namespace App\User\Http\Controllers;
 
 use Illuminate\Http\JsonResponse;
 use App\Structure\Http\Controllers\Controller;
 
-use App\MyselfUser\Http\Resources\MyselfUserResource;
-use App\MyselfUser\Http\Requests\UpdateMyselfPersonalInformationRequest;
+use App\User\Http\Resources\UserResource;
+use App\User\Http\Requests\UpdateMyselfPersonalInformationRequest;
 
 use App\User\Actions\UpdateUserPersonalInformation\UpdateUserPersonalInformation;
 
@@ -15,7 +15,7 @@ class UpdateMyselfProfileInformationController extends Controller
     /**
      * Update authenticated user profile information (myself information)
      *
-     * @param App\MyselfUser\Http\Requests\UpdateMyselfPersonalInformationRequest $request
+     * @param App\User\Http\Requests\UpdateMyselfPersonalInformationRequest $request
      *
      * @return \Illuminate\Http\JsonResponse
      */
@@ -26,6 +26,6 @@ class UpdateMyselfProfileInformationController extends Controller
             $request->input('name'),
             $request->input('email')
         ));
-        return ( new MyselfUserResource($userUpdated) )->response($request);
+        return ( new UserResource($userUpdated) )->response($request);
     }
 }

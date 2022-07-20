@@ -196,7 +196,7 @@ return [
 		
         App\Auth\Providers\AuthServiceProvider::class,
 		
-        App\MyselfUser\Providers\MyselfUserServiceProvider::class,
+        App\User\Providers\UserServiceProvider::class,
 		
         App\Company\Providers\CompanyServiceProvider::class,
 		

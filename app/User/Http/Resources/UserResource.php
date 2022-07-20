@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace App\MyselfUser\Http\Resources;
+namespace App\User\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class MyselfUserResource extends JsonResource
+class UserResource extends JsonResource
 {
     /**
      * Transform the resource into an array.

@@ -1,12 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace App\MyselfUser\Providers;
+namespace App\User\Providers;
 
 use App\User\Actions\GetUser\GetUser;
 use App\User\Actions\GetUser\GetUserHandler;
-
-use App\User\Actions\GetUser\GetUserByEmail\GetUserByEmail;
-use App\User\Actions\GetUser\GetUserByEmail\GetUserByEmailHandler;
 
 use App\User\Actions\UpdateUserPassword\UpdateUserPassword;
 use App\User\Actions\UpdateUserPassword\UpdateUserPasswordHandler;
@@ -27,7 +24,7 @@ use Illuminate\Support\Facades\Bus;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
-class MyselfUserServiceProvider extends ServiceProvider
+class UserServiceProvider extends ServiceProvider
 {
     /**
      * The path to the "home" route for your application.
@@ -74,7 +71,6 @@ class MyselfUserServiceProvider extends ServiceProvider
     {
         Bus::map([
             GetUser::class => GetUserHandler::class,
-            GetUserByEmail::class => GetUserByEmailHandler::class,
             UpdateUserPassword::class => UpdateUserPasswordHandler::class,
             UpdateUserPersonalInformation::class => UpdateUserPersonalInformationHandler::class,
             UpdateUserProfilePhoto::class => UpdateUserProfilePhotoHandler::class,
@@ -111,13 +107,17 @@ class MyselfUserServiceProvider extends ServiceProvider
      */
     public function map(): void
     {
+        /*
+        *   Myself routes
+        *   São rotas do "usuário logado"
+        */
         Route::middleware(['web'])
-			->group(base_path('routes/myself-user/web.php'));
+			->group(base_path('routes/myself/web.php'));
 
         Route::middleware(['api'])
-            ->group(base_path('routes/myself-user/api.php'));
+            ->group(base_path('routes/myself/api.php'));
 
-        require base_path('routes/myself-user/channels.php');
-        require base_path('routes/myself-user/console.php');
+        require base_path('routes/myself/channels.php');
+        require base_path('routes/myself/console.php');
     }
 }

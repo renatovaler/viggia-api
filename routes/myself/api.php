@@ -3,18 +3,18 @@
 use Illuminate\Support\Facades\Route;
 
 // Myself
-use App\MyselfUser\Http\Controllers\UpdateMyselfPasswordController;
-use App\MyselfUser\Http\Controllers\GetMyselfProfileInformationController;
-use App\MyselfUser\Http\Controllers\UpdateMyselfProfileInformationController;
+use App\User\Http\Controllers\UpdateMyselfPasswordController;
+use App\User\Http\Controllers\GetMyselfProfileInformationController;
+use App\User\Http\Controllers\UpdateMyselfProfileInformationController;
 
 Route::group(['middleware' => ['auth:sanctum'], 'prefix' => 'myself'], function () {
-
+	
 	/**
 	 * Get authenticated user profile information
 	 *
 	 * @method  GET
-	 * @route   domain.example/myself/profile
-	 * @name    users.myself.profile.show
+	 * @route   domain.example/users/myself/profile
+	 * @name    myself.profile.show
 	 */
 	Route::get('profile', [GetMyselfProfileInformationController::class, '__invoke'])
 	->name('myself.profile.show');
@@ -24,7 +24,7 @@ Route::group(['middleware' => ['auth:sanctum'], 'prefix' => 'myself'], function 
 	 *
 	 * @method  PUT
 	 * @route   domain.example/myself/profile
-	 * @name    users.myself.profile.update
+	 * @name    myself.profile.update
 	 */
 	Route::put('profile', [UpdateMyselfProfileInformationController::class, '__invoke'])
 	->name('myself.profile.update');
@@ -39,4 +39,4 @@ Route::group(['middleware' => ['auth:sanctum'], 'prefix' => 'myself'], function 
 	Route::put('password', [UpdateMyselfPasswordController::class, '__invoke'])
 	->name('myself.password.update');
 
-}); // End middleware and prefix myself route group
+}); // End middleware route group
