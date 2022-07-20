@@ -4,7 +4,7 @@ namespace App\License\Actions\UpdateLicense;
 
 use Illuminate\Foundation\Bus\Dispatchable;
 
-final class UpdateLicenseCommand
+final class UpdateLicense
 {
     use Dispatchable;
 

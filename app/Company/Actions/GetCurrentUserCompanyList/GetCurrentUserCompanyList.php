@@ -4,7 +4,7 @@ namespace App\Company\Actions\GetCurrentUserCompanyList;
 
 use Illuminate\Foundation\Bus\Dispatchable;
 
-final class GetCurrentUserCompanyListCommand
+final class GetCurrentUserCompanyList
 {
     use Dispatchable;
 

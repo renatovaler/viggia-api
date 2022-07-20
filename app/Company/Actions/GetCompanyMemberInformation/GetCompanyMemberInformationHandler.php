@@ -8,17 +8,17 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 use App\Company\Models\Company;
 use App\Company\Actions\CompanyMemberInformationDto;
-use App\Company\Actions\GetCompanyMemberInformation\GetCompanyMemberInformationCommand;
+use App\Company\Actions\GetCompanyMemberInformation\GetCompanyMemberInformation;
 
 final class GetCompanyMemberInformationHandler
 {
     /**
      * Executa a ação
      *
-     * @param \App\Company\Actions\GetCompanyMemberInformation\GetCompanyMemberInformationCommand $command
+     * @param \App\Company\Actions\GetCompanyMemberInformation\GetCompanyMemberInformation $command
      * @return \App\Company\Actions\CompanyMemberInformationDto
      */
-    public function handle(GetCompanyMemberInformationCommand $command): CompanyMemberInformationDto
+    public function handle(GetCompanyMemberInformation $command): CompanyMemberInformationDto
     {
         try {
             $company = Company::where('id', $command->companyId)->firstOrFail();

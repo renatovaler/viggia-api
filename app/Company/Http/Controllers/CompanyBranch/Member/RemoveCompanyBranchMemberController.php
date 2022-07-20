@@ -8,7 +8,7 @@ use App\Structure\Http\Controllers\Controller;
 
 use App\Company\Http\Requests\RemoveCompanyBranchMemberRequest;
 
-use App\Company\Actions\RemoveCompanyBranchMember\RemoveCompanyBranchMemberCommand;
+use App\Company\Actions\RemoveCompanyBranchMember\RemoveCompanyBranchMember;
 
 class RemoveCompanyBranchMemberController extends Controller
 {
@@ -22,7 +22,7 @@ class RemoveCompanyBranchMemberController extends Controller
     public function __invoke(RemoveCompanyBranchMemberRequest $request): JsonResponse
     {
         dispatch_sync(
-            new RemoveCompanyBranchMemberRequestCommand(
+            new RemoveCompanyBranchMemberRequest(
 				$request->input('company_branch_id'),
 				$request->input('user_id'),
 			)

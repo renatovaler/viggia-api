@@ -5,7 +5,7 @@ namespace App\Company\Http\Controllers\Member;
 use Illuminate\Http\JsonResponse;
 use App\Structure\Http\Controllers\Controller;
 use App\Company\Http\Requests\AddCompanyMemberRequest;
-use App\Company\Actions\AddCompanyMember\AddCompanyMemberCommand;
+use App\Company\Actions\AddCompanyMember\AddCompanyMember;
 
 class AddCompanyMemberController extends Controller
 {
@@ -19,7 +19,7 @@ class AddCompanyMemberController extends Controller
     public function __invoke(AddCompanyMemberRequest $request): JsonResponse
     {
         dispatch_sync(
-            new AddCompanyMemberCommand(
+            new AddCompanyMember(
 				$request->input('company_id'),
 				$request->input('user_id'),
 			)

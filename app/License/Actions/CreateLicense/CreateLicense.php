@@ -4,7 +4,7 @@ namespace App\License\Actions\CreateLicense;
 
 use Illuminate\Foundation\Bus\Dispatchable;
 
-final class CreateLicenseCommand
+final class CreateLicense
 {
     use Dispatchable;
 

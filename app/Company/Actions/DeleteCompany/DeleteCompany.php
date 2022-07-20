@@ -4,7 +4,7 @@ namespace App\Company\Actions\DeleteCompany;
 
 use Illuminate\Foundation\Bus\Dispatchable;
 
-final class DeleteCompanyCommand
+final class DeleteCompany
 {
     use Dispatchable;
 

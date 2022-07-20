@@ -1,23 +1,23 @@
 <?php declare(strict_types=1);
 
-namespace App\Company\Actions\UpdateCompanyInformation;
+namespace App\Role\Actions\CreateRole;
 
 use Illuminate\Foundation\Bus\Dispatchable;
 
-final class UpdateCompanyInformationCommand
+final class CreateRole
 {
     use Dispatchable;
 
     /**
      * Método construtor da classe
      *
-     * @param readonly int $id
      * @param readonly string $name
+     * @param readonly string $description
      *
      * @return void (implicit)
      */
     public function __construct(
-        public readonly int $id,
-        public readonly string $name
-    ) {}
+		public readonly string $name,
+		public readonly string $description,
+	) {}
 }

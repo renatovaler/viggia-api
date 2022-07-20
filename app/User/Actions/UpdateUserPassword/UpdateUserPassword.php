@@ -4,7 +4,7 @@ namespace App\User\Actions\UpdateUserPassword;
 
 use Illuminate\Foundation\Bus\Dispatchable;
 
-final class UpdateUserPasswordCommand
+final class UpdateUserPassword
 {
     use Dispatchable;
 

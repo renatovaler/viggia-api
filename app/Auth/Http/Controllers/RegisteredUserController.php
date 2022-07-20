@@ -9,7 +9,7 @@ use Illuminate\Auth\Events\Registered;
 use App\Structure\Http\Controllers\Controller;
 
 use App\Auth\Http\Requests\RegisterUserRequest;
-use App\User\Actions\CreateUser\CreateUserCommand;
+use App\User\Actions\CreateUser\CreateUser;
 
 class RegisteredUserController extends Controller
 {
@@ -25,7 +25,7 @@ class RegisteredUserController extends Controller
      */
     public function __invoke(RegisterUserRequest $request): Response
     {
-        $user = dispatch_sync(new CreateUserCommand(
+        $user = dispatch_sync(new CreateUser(
             $request->name,
             $request->email,
 			$request->password,

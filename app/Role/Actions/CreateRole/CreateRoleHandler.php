@@ -9,17 +9,17 @@ use Illuminate\Database\QueryException;
 
 use App\Role\Models\Role;
 use App\Role\Actions\RoleDto;
-use App\Role\Actions\CreateRole\CreateRoleCommand;
+use App\Role\Actions\CreateRole\CreateRole;
 
 final class CreateRoleHandler
 {
     /**
      * Executa a ação
      *
-     * @param \App\Role\Actions\CreateRole\CreateRoleCommand $command
+     * @param \App\Role\Actions\CreateRole\CreateRole $command
      * @return RoleDto
      */
-    public function handle(CreateRoleCommand $command): RoleDto
+    public function handle(CreateRole $command): RoleDto
     {
         try {
             DB::beginTransaction();

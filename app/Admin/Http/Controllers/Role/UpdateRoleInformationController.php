@@ -9,7 +9,7 @@ use App\Structure\Http\Controllers\Controller;
 use App\Admin\Http\Resources\Role\RoleResource;
 use App\Admin\Http\Requests\Role\UpdateRoleRequest;
 
-use App\Role\Actions\UpdateRole\UpdateRoleCommand;
+use App\Role\Actions\UpdateRole\UpdateRole;
 
 class UpdateRoleInformationController extends Controller
 {
@@ -22,7 +22,7 @@ class UpdateRoleInformationController extends Controller
      */
     public function __invoke(UpdateRoleRequest $request): JsonResponse
     {
-        $roleUpdated = dispatch_sync(new UpdateRoleCommand(
+        $roleUpdated = dispatch_sync(new UpdateRole(
             (int) $request->id,
             $request->name,
             $request->description

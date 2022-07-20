@@ -6,7 +6,7 @@ use Illuminate\Http\JsonResponse;
 use App\Structure\Http\Controllers\Controller;
 use App\Company\Http\Resources\CompanyResource;
 use App\Company\Http\Requests\UpdateCompanyInformationRequest;
-use App\Company\Actions\UpdateCompanyInformation\UpdateCompanyInformationCommand;
+use App\Company\Actions\UpdateCompanyInformation\UpdateCompanyInformation;
 
 class UpdateCompanyInformationController extends Controller
 {
@@ -21,7 +21,7 @@ class UpdateCompanyInformationController extends Controller
     {
         $this->authorize('update', auth()->user()->currentCompany);
 
-        $companyUpdated = dispatch_sync(new UpdateCompanyInformationCommand(
+        $companyUpdated = dispatch_sync(new UpdateCompanyInformation(
             $request->input('company_id'),
             $request->input('name')
         ));

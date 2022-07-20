@@ -4,7 +4,7 @@ namespace App\Vehicle\Http\Controllers;
 
 use App\Structure\Http\Controllers\Controller;
 use App\Vehicle\Http\Resources\VehicleLocalizationCollection;
-use App\Vehicle\Actions\GetVehicleLocalizationList\GetVehicleLocalizationListCommand;
+use App\Vehicle\Actions\GetVehicleLocalizationList\GetVehicleLocalizationList;
 
 class GetVehicleLocalizationListController extends Controller
 {
@@ -15,7 +15,7 @@ class GetVehicleLocalizationListController extends Controller
      */
     public function __invoke(): VehicleLocalizationCollection
     {
-        $localizations = dispatch_sync( new GetVehicleLocalizationListCommand() );
+        $localizations = dispatch_sync( new GetVehicleLocalizationList() );
         return (new VehicleLocalizationCollection($localizations));
     }
 }

@@ -8,17 +8,17 @@ use Illuminate\Support\Facades\DB;
 
 use App\License\Models\License;
 use App\License\Actions\LicenseInformationDto;
-use App\License\Actions\UpdateLicense\UpdateLicenseCommand;
+use App\License\Actions\UpdateLicense\UpdateLicense;
 
 final class UpdateLicenseHandler
 {
     /**
      * Executa a ação
      *
-     * @param \App\License\Actions\UpdateLicense\UpdateLicenseCommand $command
+     * @param \App\License\Actions\UpdateLicense\UpdateLicense $command
      * @return \App\License\Actions\LicenseInformationDto
      */
-    public function handle(UpdateLicenseCommand $command): LicenseInformationDto
+    public function handle(UpdateLicense $command): LicenseInformationDto
     {
         try {
             DB::beginTransaction();

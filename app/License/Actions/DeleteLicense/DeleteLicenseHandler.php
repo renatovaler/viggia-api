@@ -7,17 +7,17 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Database\QueryException;
 
 use App\License\Models\License;
-use App\License\Actions\DeleteLicense\DeleteLicenseCommand;
+use App\License\Actions\DeleteLicense\DeleteLicense;
 
 final class DeleteLicenseHandler
 {
     /**
      * Executa a ação
      *
-     * @param \App\License\Actions\DeleteLicense\DeleteLicenseCommand $command
+     * @param \App\License\Actions\DeleteLicense\DeleteLicense $command
      * @return void
      */
-    public function handle(DeleteLicenseCommand $command): void
+    public function handle(DeleteLicense $command): void
     {
         try {
             DB::beginTransaction();

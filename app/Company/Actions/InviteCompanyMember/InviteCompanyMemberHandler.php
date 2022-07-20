@@ -8,17 +8,17 @@ use Illuminate\Support\Facades\Mail;
 
 use App\Company\Mail\CompanyInvitation;
 use App\Company\Models\CompanyInvitation as CompanyInvitationModel;
-use App\Company\Actions\InviteCompanyMember\InviteCompanyMemberCommand;
+use App\Company\Actions\InviteCompanyMember\InviteCompanyMember;
 
 final class InviteCompanyMemberHandler
 {
     /**
      * Executa a ação
      *
-     * @param \App\Company\Actions\InviteCompanyMember\InviteCompanyMemberCommand $command
+     * @param \App\Company\Actions\InviteCompanyMember\InviteCompanyMember $command
      * @return void
      */
-    public function handle(InviteCompanyMemberCommand $command): void
+    public function handle(InviteCompanyMember $command): void
     {
         try {
             DB::beginTransaction();

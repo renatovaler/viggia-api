@@ -8,17 +8,17 @@ use Illuminate\Support\Facades\DB;
 
 use App\Role\Models\Role;
 use App\Role\Actions\RoleInformationDto;
-use App\Role\Actions\UpdateRole\UpdateRoleCommand;
+use App\Role\Actions\UpdateRole\UpdateRole;
 
 final class UpdateRoleHandler
 {
     /**
      * Executa a ação
      *
-     * @param \App\Role\Actions\UpdateRole\UpdateRoleCommand $command
+     * @param \App\Role\Actions\UpdateRole\UpdateRole $command
      * @return \App\Role\Actions\RoleInformationDto
      */
-    public function handle(UpdateRoleCommand $command): RoleInformationDto
+    public function handle(UpdateRole $command): RoleInformationDto
     {
         try {
             DB::beginTransaction();

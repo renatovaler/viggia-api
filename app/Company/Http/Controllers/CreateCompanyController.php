@@ -7,7 +7,7 @@ use App\Company\Http\Resources\CompanyResource;
 use App\Company\Http\Requests\CreateCompanyRequest;
 
 use App\Company\Models\Company;
-use App\Company\Actions\CreateCompany\CreateCompanyCommand;
+use App\Company\Actions\CreateCompany\CreateCompany;
 
 use Illuminate\Http\JsonResponse;
 
@@ -29,7 +29,7 @@ class CreateCompanyController extends Controller
         $userId = (int) $request->input('user_id');
         $name = $request->input('name');
         
-        $company = dispatch_sync( new CreateCompanyCommand($userId, $name) );
+        $company = dispatch_sync( new CreateCompany($userId, $name) );
 
         return (new CompanyResource($company))->response($request);
     }

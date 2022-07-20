@@ -10,17 +10,17 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 use App\User\Models\User;
 use App\User\Actions\UserDto;
-use App\User\Actions\UpdateUserPassword\UpdateUserPasswordCommand;
+use App\User\Actions\UpdateUserPassword\UpdateUserPassword;
 
 final class UpdateUserPasswordHandler
 {
     /**
      * Executa a ação
      *
-     * @param \App\User\Actions\UpdateUserPassword\UpdateUserPasswordCommand $command
+     * @param \App\User\Actions\UpdateUserPassword\UpdateUserPassword $command
      * @return \App\User\Actions\UserDto
      */
-    public function handle(UpdateUserPasswordCommand $command): UserDto
+    public function handle(UpdateUserPassword $command): UserDto
     {
         try {
             DB::beginTransaction();

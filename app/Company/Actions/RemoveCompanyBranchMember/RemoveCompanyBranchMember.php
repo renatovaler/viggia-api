@@ -4,7 +4,7 @@ namespace App\Company\Actions\RemoveCompanyBranchMember;
 
 use Illuminate\Foundation\Bus\Dispatchable;
 
-final class RemoveCompanyBranchMemberCommand
+final class RemoveCompanyBranchMember
 {
     use Dispatchable;
 

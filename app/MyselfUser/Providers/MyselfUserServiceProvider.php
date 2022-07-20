@@ -2,22 +2,22 @@
 
 namespace App\MyselfUser\Providers;
 
-use App\User\Actions\GetUser\GetUserCommand;
+use App\User\Actions\GetUser\GetUser;
 use App\User\Actions\GetUser\GetUserHandler;
 
-use App\User\Actions\GetUser\GetUserByEmail\GetUserByEmailCommand;
+use App\User\Actions\GetUser\GetUserByEmail\GetUserByEmail;
 use App\User\Actions\GetUser\GetUserByEmail\GetUserByEmailHandler;
 
-use App\User\Actions\UpdateUserPassword\UpdateUserPasswordCommand;
+use App\User\Actions\UpdateUserPassword\UpdateUserPassword;
 use App\User\Actions\UpdateUserPassword\UpdateUserPasswordHandler;
 
-use App\User\Actions\UpdateUserProfilePhoto\UpdateUserProfilePhotoCommand;
+use App\User\Actions\UpdateUserProfilePhoto\UpdateUserProfilePhoto;
 use App\User\Actions\UpdateUserProfilePhoto\UpdateUserProfilePhotoHandler;
 
-use App\User\Actions\DeleteUserProfilePhoto\DeleteUserProfilePhotoCommand;
+use App\User\Actions\DeleteUserProfilePhoto\DeleteUserProfilePhoto;
 use App\User\Actions\DeleteUserProfilePhoto\DeleteUserProfilePhotoHandler;
 
-use App\User\Actions\UpdateUserPersonalInformation\UpdateUserPersonalInformationCommand;
+use App\User\Actions\UpdateUserPersonalInformation\UpdateUserPersonalInformation;
 use App\User\Actions\UpdateUserPersonalInformation\UpdateUserPersonalInformationHandler;
 
 //use Illuminate\Support\Facades\Event;
@@ -59,7 +59,7 @@ class MyselfUserServiceProvider extends ServiceProvider
         $this->map();
 
         // commands and handlers
-        $this->registerCommandsAndHandlers();
+        $this->registersAndHandlers();
 
         // events
         $this->registerEventsAndHandlers();
@@ -70,15 +70,15 @@ class MyselfUserServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function registerCommandsAndHandlers(): void
+    public function registersAndHandlers(): void
     {
         Bus::map([
-            GetUserCommand::class => GetUserHandler::class,
-            GetUserByEmailCommand::class => GetUserByEmailHandler::class,
-            UpdateUserPasswordCommand::class => UpdateUserPasswordHandler::class,
-            UpdateUserPersonalInformationCommand::class => UpdateUserPersonalInformationHandler::class,
-            UpdateUserProfilePhotoCommand::class => UpdateUserProfilePhotoHandler::class,
-            DeleteUserProfilePhotoCommand::class => DeleteUserProfilePhotoHandler::class
+            GetUser::class => GetUserHandler::class,
+            GetUserByEmail::class => GetUserByEmailHandler::class,
+            UpdateUserPassword::class => UpdateUserPasswordHandler::class,
+            UpdateUserPersonalInformation::class => UpdateUserPersonalInformationHandler::class,
+            UpdateUserProfilePhoto::class => UpdateUserProfilePhotoHandler::class,
+            DeleteUserProfilePhoto::class => DeleteUserProfilePhotoHandler::class
         ]);
     }
 

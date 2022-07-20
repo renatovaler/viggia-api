@@ -2,7 +2,7 @@
 
 namespace App\Auth\Providers;
 
-use App\User\Actions\CreateUser\CreateUserCommand;
+use App\User\Actions\CreateUser\CreateUser;
 use App\User\Actions\CreateUser\CreateUserHandler;
 
 use Illuminate\Support\Facades\Bus;
@@ -31,7 +31,7 @@ class AuthServiceProvider extends ServiceProvider
         $this->map();
 
         // commands and handlers
-        $this->registerCommandsAndHandlers();
+        $this->registersAndHandlers();
     }
 
     /**
@@ -39,10 +39,10 @@ class AuthServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function registerCommandsAndHandlers(): void
+    public function registersAndHandlers(): void
     {
         Bus::map([
-            CreateUserCommand::class => CreateUserHandler::class
+            CreateUser::class => CreateUserHandler::class
         ]);
     }
 

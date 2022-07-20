@@ -4,7 +4,7 @@ namespace App\License\Actions\DeleteLicense;
 
 use Illuminate\Foundation\Bus\Dispatchable;
 
-final class DeleteLicenseCommand
+final class DeleteLicense
 {
     use Dispatchable;
 

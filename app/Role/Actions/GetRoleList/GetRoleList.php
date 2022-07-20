@@ -4,7 +4,7 @@ namespace App\Role\Actions\GetRoleList;
 
 use Illuminate\Foundation\Bus\Dispatchable;
 
-final class GetRoleListCommand
+final class GetRoleList
 {
     use Dispatchable;
 

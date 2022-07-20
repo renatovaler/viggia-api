@@ -8,17 +8,17 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 use App\Role\Models\Role;
 use App\Role\Actions\RoleInformationDto;
-use App\Role\Actions\GetRoleInformation\GetRoleInformationCommand;
+use App\Role\Actions\GetRoleInformation\GetRoleInformation;
 
 final class GetRoleInformationHandler
 {
     /**
      * Executa a ação
      *
-     * @param \App\Role\Actions\GetRoleInformation\GetRoleInformationCommand $command
+     * @param \App\Role\Actions\GetRoleInformation\GetRoleInformation $command
      * @return \App\Role\Actions\RoleInformationDto
      */
-    public function handle(GetRoleInformationCommand $command): RoleInformationDto
+    public function handle(GetRoleInformation $command): RoleInformationDto
     {
         try {
             $role = Role::where('id', $command->roleId)->firstOrFail();

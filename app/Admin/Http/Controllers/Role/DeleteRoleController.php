@@ -5,7 +5,7 @@ namespace App\Admin\Http\Controllers\Role;
 use Illuminate\Http\Response;
 use App\Structure\Http\Controllers\Controller;
 
-use App\Admin\Actions\DeleteRole\DeleteRoleCommand;
+use App\Admin\Actions\DeleteRole\DeleteRole;
 
 class DeleteRoleController extends Controller
 {
@@ -18,7 +18,7 @@ class DeleteRoleController extends Controller
      */
     public function __invoke(int $roleId): Response
     {
-        dispatch_sync( new DeleteRoleCommand($roleId) );
+        dispatch_sync( new DeleteRole($roleId) );
         return response()->noContent();
     }
 }

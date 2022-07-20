@@ -4,7 +4,7 @@ namespace App\Company\Http\Controllers\Member;
 
 use App\Structure\Http\Controllers\Controller;
 use App\Company\Http\Resources\CompanyMemberCollection;
-use App\Company\Actions\GetCompanyMemberList\GetCompanyMemberListCommand;
+use App\Company\Actions\GetCompanyMemberList\GetCompanyMemberList;
 
 class GetCurrentCompanyMemberListController extends Controller
 {
@@ -16,7 +16,7 @@ class GetCurrentCompanyMemberListController extends Controller
     public function __invoke(): CompanyResource
     {
         $companyMembers = dispatch_sync(
-            new GetCompanyMemberListCommand( auth()->user()->current_company_id )
+            new GetCompanyMemberList( auth()->user()->current_company_id )
         );
         return (new CompanyMemberCollection($companyMembers));
     }

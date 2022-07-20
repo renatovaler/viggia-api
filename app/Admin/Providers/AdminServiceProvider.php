@@ -2,11 +2,11 @@
 
 namespace App\Admin\Providers;
 
-use App\User\Actions\GetUserList\GetUserListCommand;
+use App\User\Actions\GetUserList\GetUserList;
 use App\User\Actions\GetUserList\GetUserListHandler;
-use App\User\Actions\GetUser\GetUserCommand;
+use App\User\Actions\GetUser\GetUser;
 use App\User\Actions\GetUser\GetUserHandler;
-use App\User\Actions\UpdateUserPersonalInformation\UpdateUserPersonalInformationCommand;
+use App\User\Actions\UpdateUserPersonalInformation\UpdateUserPersonalInformation;
 use App\User\Actions\UpdateUserPersonalInformation\UpdateUserPersonalInformationHandler;
 
 use Illuminate\Support\Facades\Bus;
@@ -47,7 +47,7 @@ class AdminServiceProvider extends ServiceProvider
         $this->map();
 
         // commands and handlers
-        $this->registerCommandsAndHandlers();
+        $this->registersAndHandlers();
 
         // events
         $this->registerEventsAndHandlers();
@@ -58,12 +58,12 @@ class AdminServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function registerCommandsAndHandlers(): void
+    public function registersAndHandlers(): void
     {
         Bus::map([
-            GetUserListCommand::class => GetUserListHandler::class,
-            GetUserCommand::class => GetUserHandler::class,
-            UpdateUserPersonalInformationCommand::class => UpdateUserPersonalInformationHandler::class,
+            GetUserList::class => GetUserListHandler::class,
+            GetUser::class => GetUserHandler::class,
+            UpdateUserPersonalInformation::class => UpdateUserPersonalInformationHandler::class,
         ]);
     }
 

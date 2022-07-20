@@ -7,17 +7,17 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Database\QueryException;
 
 use App\Role\Models\Role;
-use App\Role\Actions\DeleteRole\DeleteRoleCommand;
+use App\Role\Actions\DeleteRole\DeleteRole;
 
 final class DeleteRoleHandler
 {
     /**
      * Executa a ação
      *
-     * @param \App\Role\Actions\DeleteRole\DeleteRoleCommand $command
+     * @param \App\Role\Actions\DeleteRole\DeleteRole $command
      * @return void
      */
-    public function handle(DeleteRoleCommand $command): void
+    public function handle(DeleteRole $command): void
     {
         try {
             DB::beginTransaction();

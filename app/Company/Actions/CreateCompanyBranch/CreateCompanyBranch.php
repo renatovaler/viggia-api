@@ -4,7 +4,7 @@ namespace App\Company\Actions\CreateCompanyBranch;
 
 use Illuminate\Foundation\Bus\Dispatchable;
 
-final class CreateCompanyBranchCommand
+final class CreateCompanyBranch
 {
     use Dispatchable;
 

@@ -4,7 +4,7 @@ namespace App\License\Actions\GetLicenseInformation;
 
 use Illuminate\Foundation\Bus\Dispatchable;
 
-final class GetLicenseInformationCommand
+final class GetLicenseInformation
 {
     use Dispatchable;
 

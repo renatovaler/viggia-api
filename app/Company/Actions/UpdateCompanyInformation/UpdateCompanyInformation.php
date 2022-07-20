@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace App\Company\Actions\UpdateCompanyBranchInformation;
+namespace App\Company\Actions\UpdateCompanyInformation;
 
 use Illuminate\Foundation\Bus\Dispatchable;
 
-final class UpdateCompanyBranchInformationCommand
+final class UpdateCompanyInformation
 {
     use Dispatchable;
 

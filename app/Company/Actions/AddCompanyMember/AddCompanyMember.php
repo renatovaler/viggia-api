@@ -4,7 +4,7 @@ namespace App\Company\Actions\AddCompanyMember;
 
 use Illuminate\Foundation\Bus\Dispatchable;
 
-final class AddCompanyMemberCommand
+final class AddCompanyMember
 {
     use Dispatchable;
 

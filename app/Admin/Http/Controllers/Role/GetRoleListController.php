@@ -6,7 +6,7 @@ use App\Structure\Http\Controllers\Controller;
 
 use App\Admin\Http\Resources\Role\RoleCollection;
 
-use App\Role\Actions\GetRoleList\GetRoleListCommand;
+use App\Role\Actions\GetRoleList\GetRoleList;
 
 class GetRoleListController extends Controller
 {
@@ -17,7 +17,7 @@ class GetRoleListController extends Controller
      */
     public function __invoke(): RoleCollection
     {
-        $roles = dispatch_sync( new GetRoleListCommand() );
+        $roles = dispatch_sync( new GetRoleList() );
         return ( new RoleCollection($roles) );
     }
 }

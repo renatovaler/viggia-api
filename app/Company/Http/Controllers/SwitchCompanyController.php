@@ -8,7 +8,7 @@ use App\Company\Http\Resources\CompanyResource;
 use App\Company\Http\Requests\SwitchCompanyRequest;
 
 use App\Company\Models\Company;
-use App\Company\Actions\SwitchCompany\SwitchCompanyCommand;
+use App\Company\Actions\SwitchCompany\SwitchCompany;
 
 class SwitchCompanyController extends Controller
 {
@@ -25,7 +25,7 @@ class SwitchCompanyController extends Controller
         
         $this->authorize('switchCompany', $company);
 
-        $companyUpdated = dispatch_sync(new SwitchCompanyCommand(
+        $companyUpdated = dispatch_sync(new SwitchCompany(
             (int) $request->input('company_id')
         ));
         return (new CompanyResource($companyUpdated))->response($request);

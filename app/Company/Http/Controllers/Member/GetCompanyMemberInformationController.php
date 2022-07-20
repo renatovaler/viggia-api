@@ -4,7 +4,7 @@ namespace App\Company\Http\Controllers\Member;
 
 use App\Structure\Http\Controllers\Controller;
 use App\Company\Http\Resources\CompanyMemberResource;
-use App\Company\Actions\GetCompanyMemberInformation\GetCompanyMemberInformationCommand;
+use App\Company\Actions\GetCompanyMemberInformation\GetCompanyMemberInformation;
 
 class GetCompanyMemberInformationController extends Controller
 {
@@ -18,7 +18,7 @@ class GetCompanyMemberInformationController extends Controller
     public function __invoke(int $companyMemberId): CompanyMemberResource
     {
         $companyMember = dispatch_sync(
-            new GetCompanyMemberInformationCommand($companyMemberId)
+            new GetCompanyMemberInformation($companyMemberId)
         );
         return (new CompanyMemberResource($companyMember));
     }

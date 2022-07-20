@@ -7,7 +7,7 @@ use App\Structure\Http\Controllers\Controller;
 use App\Company\Http\Resources\CompanyBranchResource;
 use App\Company\Http\Requests\CreateCompanyBranchRequest;
 
-use App\Company\Actions\CreateCompanyBranch\CreateCompanyBranchCommand;
+use App\Company\Actions\CreateCompanyBranch\CreateCompanyBranch;
 
 class CreateCompanyBranchController extends Controller
 {
@@ -20,7 +20,7 @@ class CreateCompanyBranchController extends Controller
      */
     public function __invoke(CreateCompanyBranchRequest $request): JsonResponse
     {
-        $companyBranch = dispatch_sync(new CreateCompanyBranchCommand(
+        $companyBranch = dispatch_sync(new CreateCompanyBranch(
             $request->input('company_id'),
             $request->input('name')
         ));

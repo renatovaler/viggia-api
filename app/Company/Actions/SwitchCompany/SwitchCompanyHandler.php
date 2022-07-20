@@ -10,17 +10,17 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\User\Models\User;
 use App\Company\Models\Company;
 use App\Company\Actions\CompanyDto;
-use App\Company\Actions\SwitchCompany\SwitchCompanyCommand;
+use App\Company\Actions\SwitchCompany\SwitchCompany;
 
 final class SwitchCompanyHandler
 {
     /**
      * Executa a ação
      *
-     * @param \App\Company\Actions\SwitchCompany\SwitchCompanyCommand $command
+     * @param \App\Company\Actions\SwitchCompany\SwitchCompany $command
      * @return \App\Company\Actions\CompanyDto
      */
-    public function handle(SwitchCompanyCommand $command): CompanyDto
+    public function handle(SwitchCompany $command): CompanyDto
     {
         try {
             DB::beginTransaction();

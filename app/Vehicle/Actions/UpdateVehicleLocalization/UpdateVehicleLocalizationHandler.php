@@ -7,17 +7,17 @@ use Illuminate\Support\Facades\DB;
 
 use App\Vehicle\Models\VehicleLocalization;
 use App\Vehicle\Actions\VehicleLocalizationDto;
-use App\Vehicle\Actions\UpdateVehicleLocalization\UpdateVehicleLocalizationCommand;
+use App\Vehicle\Actions\UpdateVehicleLocalization\UpdateVehicleLocalization;
 
 final class UpdateVehicleLocalizationHandler
 {
     /**
      * Executa a ação
      *
-     * @param \App\Vehicle\Actions\UpdateVehicleLocalization\UpdateVehicleLocalizationCommand $command
+     * @param \App\Vehicle\Actions\UpdateVehicleLocalization\UpdateVehicleLocalization $command
      * @return \App\Vehicle\Actions\VehicleLocalizationDto
      */
-    public function handle(UpdateVehicleLocalizationCommand $command): VehicleLocalizationDto
+    public function handle(UpdateVehicleLocalization $command): VehicleLocalizationDto
     {
         try {
             DB::beginTransaction();

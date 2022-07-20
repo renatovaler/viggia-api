@@ -4,7 +4,7 @@ namespace App\Company\Actions\GetCompanyMemberList;
 
 use Illuminate\Foundation\Bus\Dispatchable;
 
-final class GetCompanyMemberListCommand
+final class GetCompanyMemberList
 {
     use Dispatchable;
 

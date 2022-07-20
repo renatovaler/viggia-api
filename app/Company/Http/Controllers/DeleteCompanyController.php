@@ -6,7 +6,7 @@ use Illuminate\Http\Response;
 use App\Structure\Http\Controllers\Controller;
 
 use App\Company\Models\Company;
-use App\Company\Actions\DeleteCompany\DeleteCompanyCommand;
+use App\Company\Actions\DeleteCompany\DeleteCompany;
 
 class DeleteCompanyController extends Controller
 {
@@ -24,7 +24,7 @@ class DeleteCompanyController extends Controller
         $this->authorize('delete', $company);
 		
         dispatch_sync(
-			new DeleteCompanyCommand($companyId)
+			new DeleteCompany($companyId)
 		);
         
         return response()->noContent();

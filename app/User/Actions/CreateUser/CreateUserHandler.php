@@ -8,17 +8,17 @@ use Illuminate\Support\Facades\Hash;
 
 use App\User\Models\User;
 use App\User\Actions\UserDto;
-use App\User\Actions\CreateUser\CreateUserCommand;
+use App\User\Actions\CreateUser\CreateUser;
 
 final class CreateUserHandler
 {
     /**
      * Executa a ação
      *
-     * @param \App\User\Actions\CreateUser\CreateUserCommand $command
+     * @param \App\User\Actions\CreateUser\CreateUser $command
      * @return \App\User\Actions\UserDto
      */
-    public function handle(CreateUserCommand $command): UserDto
+    public function handle(CreateUser $command): UserDto
     {
         try {
             DB::beginTransaction();

@@ -5,7 +5,7 @@ namespace App\Vehicle\Http\Controllers;
 use App\Structure\Http\Controllers\Controller;
 use App\Vehicle\Http\Resources\VehicleLocalizationResource;
 use App\Vehicle\Http\Requests\CreateVehicleLocalizationRequest;
-use App\Vehicle\Actions\CreateVehicleLocalization\CreateVehicleLocalizationCommand;
+use App\Vehicle\Actions\CreateVehicleLocalization\CreateVehicleLocalization;
 
 use Illuminate\Support\Carbon;
 use Illuminate\Http\JsonResponse;
@@ -27,7 +27,7 @@ class CreateVehicleLocalizationController extends Controller
         $localizedAt = $request->input('localized_at');
 
         $localization = dispatch_sync(
-			new CreateVehicleLocalizationCommand(
+			new CreateVehicleLocalization(
 				$licensePlate,
 				$localizationLatitude,
 				$localizationLongitude,

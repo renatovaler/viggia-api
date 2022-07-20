@@ -9,17 +9,17 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 use App\User\Models\User;
 use App\User\Actions\UserDto;
-use App\User\Actions\UpdateUserProfilePhoto\UpdateUserProfilePhotoCommand;
+use App\User\Actions\UpdateUserProfilePhoto\UpdateUserProfilePhoto;
 
 final class UpdateUserProfilePhotoHandler
 {
     /**
      * Executa a ação
      *
-     * @param \App\User\Actions\UpdateUserProfilePhoto\UpdateUserProfilePhotoCommand $command
+     * @param \App\User\Actions\UpdateUserProfilePhoto\UpdateUserProfilePhoto $command
      * @return \App\User\Actions\UserDto
      */
-    public function handle(UpdateUserProfilePhotoCommand $command): UserDto
+    public function handle(UpdateUserProfilePhoto $command): UserDto
     {
         try {
 			$user = User::findUserByIdOrFail($command->id);

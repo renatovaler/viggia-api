@@ -6,7 +6,7 @@ use App\Structure\Http\Controllers\Controller;
 
 use App\Admin\Http\Resources\Role\RoleResource;
 
-use App\Role\Actions\GetRoleInformation\GetRoleInformationCommand;
+use App\Role\Actions\GetRoleInformation\GetRoleInformation;
 
 class GetRoleInformationByIdController extends Controller
 {
@@ -19,7 +19,7 @@ class GetRoleInformationByIdController extends Controller
      */
     public function __invoke(int $roleId): RoleResource
     {
-        $role = dispatch_sync( new GetRoleInformationCommand($roleId) );
+        $role = dispatch_sync( new GetRoleInformation($roleId) );
         return ( new RoleResource($role) );
     }
 }

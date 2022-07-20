@@ -5,7 +5,7 @@ namespace App\Vehicle\Actions\UpdateVehicleLocalization;
 use Illuminate\Support\Carbon;
 use Illuminate\Foundation\Bus\Dispatchable;
 
-final class UpdateVehicleLocalizationCommand
+final class UpdateVehicleLocalization
 {
     use Dispatchable;
 

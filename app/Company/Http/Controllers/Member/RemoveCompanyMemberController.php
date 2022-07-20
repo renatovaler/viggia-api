@@ -5,7 +5,7 @@ namespace App\Company\Http\Controllers\Member;
 use Illuminate\Http\JsonResponse;
 use App\Structure\Http\Controllers\Controller;
 use App\Company\Http\Requests\RemoveCompanyMemberRequest;
-use App\Company\Actions\RemoveCompanyMember\RemoveCompanyMemberCommand;
+use App\Company\Actions\RemoveCompanyMember\RemoveCompanyMember;
 
 class RemoveCompanyMemberController extends Controller
 {
@@ -19,7 +19,7 @@ class RemoveCompanyMemberController extends Controller
     public function __invoke(RemoveCompanyMemberRequest $request): JsonResponse
     {
         dispatch_sync(
-            new RemoveCompanyMemberCommand(
+            new RemoveCompanyMember(
 				$request->input('company_id'),
 				$request->input('user_id'),
 			)

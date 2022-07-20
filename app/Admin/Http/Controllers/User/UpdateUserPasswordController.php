@@ -8,7 +8,7 @@ use App\Structure\Http\Controllers\Controller;
 
 use App\Admin\Http\Requests\User\UpdateUserPasswordRequest;
 
-use App\User\Actions\UpdateUserPassword\UpdateUserPasswordCommand;
+use App\User\Actions\UpdateUserPassword\UpdateUserPassword;
 
 class UpdateUserPasswordController extends Controller
 {
@@ -21,7 +21,7 @@ class UpdateUserPasswordController extends Controller
      */
     public function __invoke(UpdateUserPasswordRequest $request): Response
     {
-        $userUpdated = dispatch_sync(new UpdateUserPasswordCommand(
+        $userUpdated = dispatch_sync(new UpdateUserPassword(
             (int) $request->input('id'),
             $request->input('password')
         ));

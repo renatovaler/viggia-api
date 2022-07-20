@@ -8,7 +8,7 @@ use App\Structure\Http\Controllers\Controller;
 use App\MyselfUser\Http\Resources\MyselfUserResource;
 use App\MyselfUser\Http\Requests\UpdateMyselfPersonalInformationRequest;
 
-use App\User\Actions\UpdateUserPersonalInformation\UpdateUserPersonalInformationCommand;
+use App\User\Actions\UpdateUserPersonalInformation\UpdateUserPersonalInformation;
 
 class UpdateMyselfProfileInformationController extends Controller
 {
@@ -21,7 +21,7 @@ class UpdateMyselfProfileInformationController extends Controller
      */
     public function __invoke(UpdateMyselfPersonalInformationRequest $request): JsonResponse
     {
-        $userUpdated = dispatch_sync(new UpdateUserPersonalInformationCommand(
+        $userUpdated = dispatch_sync(new UpdateUserPersonalInformation(
             auth()->user()->id,
             $request->input('name'),
             $request->input('email')

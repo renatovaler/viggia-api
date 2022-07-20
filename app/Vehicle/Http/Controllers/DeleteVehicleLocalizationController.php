@@ -5,7 +5,7 @@ namespace App\Vehicle\Http\Controllers;
 use Illuminate\Http\Response;
 use App\Structure\Http\Controllers\Controller;
 
-use App\Vehicle\Actions\DeleteVehicleLocalization\DeleteVehicleLocalizationCommand;
+use App\Vehicle\Actions\DeleteVehicleLocalization\DeleteVehicleLocalization;
 
 class DeleteVehicleLocalizationController extends Controller
 {
@@ -18,7 +18,7 @@ class DeleteVehicleLocalizationController extends Controller
      */
     public function __invoke(int $vehicleId): Response
     {
-        dispatch_sync( new DeleteVehicleLocalizationCommand($vehicleId) );
+        dispatch_sync( new DeleteVehicleLocalization($vehicleId) );
         return response()->noContent();
     }
 }

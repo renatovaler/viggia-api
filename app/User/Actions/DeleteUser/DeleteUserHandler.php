@@ -6,17 +6,17 @@ use Exception;
 use Illuminate\Support\Facades\DB;
 
 use App\User\Models\User;
-use App\User\Actions\DeleteUser\DeleteUserCommand;
+use App\User\Actions\DeleteUser\DeleteUser;
 
 final class DeleteUserHandler
 {
     /**
      * Executa a ação
      *
-     * @param \App\User\Actions\DeleteUser\DeleteUserCommand $command
+     * @param \App\User\Actions\DeleteUser\DeleteUser $command
      * @return void
      */
-    public function handle(DeleteUserCommand $command): void
+    public function handle(DeleteUser $command): void
     {
         try {
             DB::beginTransaction();

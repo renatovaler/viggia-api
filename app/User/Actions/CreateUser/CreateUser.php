@@ -5,7 +5,7 @@ namespace App\User\Actions\CreateUser;
 use Illuminate\Support\Carbon;
 use Illuminate\Foundation\Bus\Dispatchable;
 
-final class CreateUserCommand
+final class CreateUser
 {
     use Dispatchable;
 

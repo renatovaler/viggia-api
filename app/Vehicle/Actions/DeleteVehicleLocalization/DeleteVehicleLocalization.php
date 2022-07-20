@@ -4,7 +4,7 @@ namespace App\Vehicle\Actions\DeleteVehicleLocalization;
 
 use Illuminate\Foundation\Bus\Dispatchable;
 
-final class DeleteVehicleLocalizationCommand
+final class DeleteVehicleLocalization
 {
     use Dispatchable;
 

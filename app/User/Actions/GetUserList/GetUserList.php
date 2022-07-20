@@ -4,7 +4,7 @@ namespace App\User\Actions\GetUserList;
 
 use Illuminate\Foundation\Bus\Dispatchable;
 
-final class GetUserListCommand
+final class GetUserList
 {
     use Dispatchable;
 

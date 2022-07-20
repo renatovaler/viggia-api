@@ -8,17 +8,17 @@ use Illuminate\Database\QueryException;
 
 use App\Company\Models\CompanyBranch;
 use App\Company\Actions\CompanyBranchDto;
-use App\Company\Actions\CreateCompanyBranch\CreateCompanyBranchCommand;
+use App\Company\Actions\CreateCompanyBranch\CreateCompanyBranch;
 
 final class CreateCompanyBranchHandler
 {
     /**
      * Executa a ação
      *
-     * @param \App\Company\Actions\CreateCompanyBranch\CreateCompanyBranchCommand $command
+     * @param \App\Company\Actions\CreateCompanyBranch\CreateCompanyBranch $command
      * @return CompanyBranchDto
      */
-    public function handle(CreateCompanyBranchCommand $command): CompanyBranchDto
+    public function handle(CreateCompanyBranch $command): CompanyBranchDto
     {
         try {
             DB::beginTransaction();

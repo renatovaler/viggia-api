@@ -7,17 +7,17 @@ use Illuminate\Support\Facades\DB;
 
 use App\User\Models\User;
 use App\User\Actions\UserDto;
-use App\User\Actions\UpdateUserPersonalInformation\UpdateUserPersonalInformationCommand;
+use App\User\Actions\UpdateUserPersonalInformation\UpdateUserPersonalInformation;
 
 final class UpdateUserPersonalInformationHandler
 {
     /**
      * Executa a ação
      *
-     * @param \App\User\Actions\UpdateUserPersonalInformation\UpdateUserPersonalInformationCommand $command
+     * @param \App\User\Actions\UpdateUserPersonalInformation\UpdateUserPersonalInformation $command
      * @return \App\User\Actions\UserDto
      */
-    public function handle(UpdateUserPersonalInformationCommand $command): UserDto
+    public function handle(UpdateUserPersonalInformation $command): UserDto
     {
         try {
             DB::beginTransaction();

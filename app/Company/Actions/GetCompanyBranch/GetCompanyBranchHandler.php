@@ -8,17 +8,17 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 use App\Company\Models\CompanyBranch;
 use App\Company\Actions\CompanyBranchDto;
-use App\Company\Actions\GetCompanyBranch\GetCompanyBranchCommand;
+use App\Company\Actions\GetCompanyBranch\GetCompanyBranch;
 
 final class GetCompanyBranchHandler
 {
     /**
      * Executa a ação
      *
-     * @param \App\Company\Actions\GetCompanyBranch\GetCompanyBranchCommand $command
+     * @param \App\Company\Actions\GetCompanyBranch\GetCompanyBranch $command
      * @return \App\Company\Actions\CompanyBranchDto
      */
-    public function handle(GetCompanyBranchCommand $command): CompanyBranchDto
+    public function handle(GetCompanyBranch $command): CompanyBranchDto
     {
         try {
             $companyBranch = CompanyBranch::where('id', $command->id)->firstOrFail();

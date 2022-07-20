@@ -8,17 +8,17 @@ use Illuminate\Database\QueryException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 use App\Company\Models\CompanyBranch;
-use App\Company\Actions\AddCompanyBranchMember\AddCompanyBranchMemberCommand;
+use App\Company\Actions\AddCompanyBranchMember\AddCompanyBranchMember;
 
 final class AddCompanyBranchMemberHandler
 {
     /**
      * Executa a ação
      *
-     * @param \App\Company\Actions\AddCompanyBranchMember\AddCompanyBranchMemberCommand $command
+     * @param \App\Company\Actions\AddCompanyBranchMember\AddCompanyBranchMember $command
      * @return void
      */
-    public function handle(AddCompanyBranchMemberCommand $command): void
+    public function handle(AddCompanyBranchMember $command): void
     {
         try {
             DB::beginTransaction();

@@ -6,17 +6,17 @@ use Exception;
 use Illuminate\Support\Facades\DB;
 
 use App\Company\Models\Company;
-use App\Company\Actions\DeleteCompany\DeleteCompanyCommand;
+use App\Company\Actions\DeleteCompany\DeleteCompany;
 
 final class DeleteCompanyHandler
 {
     /**
      * Executa a ação
      *
-     * @param \App\Company\Actions\DeleteCompany\DeleteCompanyCommand $command
+     * @param \App\Company\Actions\DeleteCompany\DeleteCompany $command
      * @return void
      */
-    public function handle(DeleteCompanyCommand $command): void
+    public function handle(DeleteCompany $command): void
     {
         try {
             DB::beginTransaction();

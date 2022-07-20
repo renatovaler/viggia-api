@@ -10,17 +10,17 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 use App\User\Models\User;
 use App\User\Actions\UserDto;
-use App\User\Actions\DeleteUserProfilePhoto\DeleteUserProfilePhotoCommand;
+use App\User\Actions\DeleteUserProfilePhoto\DeleteUserProfilePhoto;
 
 final class DeleteUserProfilePhotoHandler
 {
     /**
      * Executa a ação
      *
-     * @param \App\User\Actions\DeleteUserProfilePhoto\DeleteUserProfilePhotoCommand $command
+     * @param \App\User\Actions\DeleteUserProfilePhoto\DeleteUserProfilePhoto $command
      * @return \App\User\Actions\UserDto
      */
-    public function handle(DeleteUserProfilePhotoCommand $command): UserDto
+    public function handle(DeleteUserProfilePhoto $command): UserDto
     {
         try {
 			$user = User::findUserByIdOrFail($command->id);

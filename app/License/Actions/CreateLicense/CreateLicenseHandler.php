@@ -8,17 +8,17 @@ use Illuminate\Database\QueryException;
 
 use App\License\Models\License;
 use App\License\Actions\LicenseInformationDto;
-use App\License\Actions\CreateLicense\CreateLicenseCommand;
+use App\License\Actions\CreateLicense\CreateLicense;
 
 final class CreateLicenseHandler
 {
     /**
      * Executa a ação
      *
-     * @param \App\License\Actions\CreateLicense\CreateLicenseCommand $command
+     * @param \App\License\Actions\CreateLicense\CreateLicense $command
      * @return LicenseInformationDto
      */
-    public function handle(CreateLicenseCommand $command): LicenseInformationDto
+    public function handle(CreateLicense $command): LicenseInformationDto
     {
         try {
             DB::beginTransaction();

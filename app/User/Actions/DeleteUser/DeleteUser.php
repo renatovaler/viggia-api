@@ -4,7 +4,7 @@ namespace App\User\Actions\DeleteUser;
 
 use Illuminate\Foundation\Bus\Dispatchable;
 
-final class DeleteUserCommand
+final class DeleteUser
 {
     use Dispatchable;
 

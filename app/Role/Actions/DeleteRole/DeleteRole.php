@@ -4,7 +4,7 @@ namespace App\Role\Actions\DeleteRole;
 
 use Illuminate\Foundation\Bus\Dispatchable;
 
-final class DeleteRoleCommand
+final class DeleteRole
 {
     use Dispatchable;
 

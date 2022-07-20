@@ -8,17 +8,17 @@ use Illuminate\Database\QueryException;
 
 use App\Company\Models\Company;
 use App\Company\Actions\CompanyDto;
-use App\Company\Actions\CreateCompany\CreateCompanyCommand;
+use App\Company\Actions\CreateCompany\CreateCompany;
 
 final class CreateCompanyHandler
 {
     /**
      * Executa a ação
      *
-     * @param \App\Company\Actions\CreateCompany\CreateCompanyCommand $command
+     * @param \App\Company\Actions\CreateCompany\CreateCompany $command
      * @return CompanyDto
      */
-    public function handle(CreateCompanyCommand $command): CompanyDto
+    public function handle(CreateCompany $command): CompanyDto
     {
         try {
             DB::beginTransaction();

@@ -8,7 +8,7 @@ use App\Structure\Http\Controllers\Controller;
 
 use App\Vehicle\Http\Resources\VehicleLocalizationResource;
 use App\Vehicle\Http\Requests\UpdateVehicleLocalizationRequest;
-use App\Vehicle\Actions\UpdateVehicleLocalization\UpdateVehicleLocalizationCommand;
+use App\Vehicle\Actions\UpdateVehicleLocalization\UpdateVehicleLocalization;
 
 class UpdateVehicleLocalizationController extends Controller
 {
@@ -22,7 +22,7 @@ class UpdateVehicleLocalizationController extends Controller
     public function __invoke(UpdateVehicleLocalizationRequest $request): JsonResponse
     {
 
-        $localization = dispatch_sync(new UpdateVehicleLocalizationCommand(
+        $localization = dispatch_sync(new UpdateVehicleLocalization(
             (int) $request->input('id'),
             $request->input('license_plate'),
             floatval( $request->input('localization_latitude') ),

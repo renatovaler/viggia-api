@@ -9,17 +9,17 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 use App\Company\Models\CompanyBranch;
 use App\Company\Actions\CompanyBranchDto;
-use App\Company\Actions\UpdateCompanyBranchInformation\UpdateCompanyBranchInformationCommand;
+use App\Company\Actions\UpdateCompanyBranchInformation\UpdateCompanyBranchInformation;
 
 final class UpdateCompanyBranchInformationHandler
 {
     /**
      * Executa a ação
      *
-     * @param \App\Company\Actions\UpdateCompanyBranchInformation\UpdateCompanyBranchInformationCommand $command
+     * @param \App\Company\Actions\UpdateCompanyBranchInformation\UpdateCompanyBranchInformation $command
      * @return \App\Company\Actions\CompanyBranchDto
      */
-    public function handle(UpdateCompanyBranchInformationCommand $command): CompanyBranchDto
+    public function handle(UpdateCompanyBranchInformation $command): CompanyBranchDto
     {
         try {
             DB::beginTransaction();

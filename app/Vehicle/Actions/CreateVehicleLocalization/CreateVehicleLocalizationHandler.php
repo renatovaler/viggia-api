@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 
 use App\Vehicle\Models\VehicleLocalization;
 use App\Vehicle\Actions\VehicleLocalizationDto;
-use App\Vehicle\Actions\CreateVehicleLocalization\CreateVehicleLocalizationCommand;
+use App\Vehicle\Actions\CreateVehicleLocalization\CreateVehicleLocalization;
 
 final class CreateVehicleLocalizationHandler
 {
@@ -17,7 +17,7 @@ final class CreateVehicleLocalizationHandler
      * @param \App\Vehicle\Actions\CreateVehicleLocalization\CreateVehicleLocalization $command
      * @return VehicleLocalizationDto
      */
-    public function handle(CreateVehicleLocalizationCommand $command): VehicleLocalizationDto
+    public function handle(CreateVehicleLocalization $command): VehicleLocalizationDto
     {
         try {
             DB::beginTransaction();

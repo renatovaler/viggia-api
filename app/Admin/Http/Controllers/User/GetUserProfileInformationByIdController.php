@@ -6,7 +6,7 @@ use App\Structure\Http\Controllers\Controller;
 
 use App\Admin\Http\Resources\User\UserResource;
 
-use App\User\Actions\GetUser\GetUserCommand;
+use App\User\Actions\GetUser\GetUser;
 
 class GetUserProfileInformationByIdController extends Controller
 {
@@ -19,7 +19,7 @@ class GetUserProfileInformationByIdController extends Controller
      */
     public function __invoke(int $userId): UserResource
     {
-        $user = dispatch_sync( new GetUserCommand($userId) );
+        $user = dispatch_sync( new GetUser($userId) );
         return ( new UserResource($user) );
     }
 }

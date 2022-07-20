@@ -4,7 +4,7 @@ namespace App\User\Actions\UpdateUserPersonalInformation;
 
 use Illuminate\Foundation\Bus\Dispatchable;
 
-final class UpdateUserPersonalInformationCommand
+final class UpdateUserPersonalInformation
 {
     use Dispatchable;
 

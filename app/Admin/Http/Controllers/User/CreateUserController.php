@@ -12,7 +12,7 @@ use App\Structure\Http\Controllers\Controller;
 use App\Admin\Http\Resources\User\UserResource;
 use App\Admin\Http\Requests\User\CreateUserRequest;
 
-use App\User\Actions\CreateUser\CreateUserCommand;
+use App\User\Actions\CreateUser\CreateUser;
 
 class CreateUserController extends Controller
 {    
@@ -26,7 +26,7 @@ class CreateUserController extends Controller
      */
     public function __invoke(CreateUserRequest $request): JsonResponse
     {
-        $user = dispatch_sync(new CreateUserCommand(
+        $user = dispatch_sync(new CreateUser(
             $request->name,
             $request->email,
 			$request->password

@@ -7,7 +7,7 @@ use App\Structure\Http\Controllers\Controller;
 
 use App\MyselfUser\Http\Requests\UpdateMyselfPasswordRequest;
 
-use App\User\Actions\UpdateUserPassword\UpdateUserPasswordCommand;
+use App\User\Actions\UpdateUserPassword\UpdateUserPassword;
 
 class UpdateMyselfPasswordController extends Controller
 {
@@ -20,7 +20,7 @@ class UpdateMyselfPasswordController extends Controller
      */
     public function __invoke(UpdateMyselfPasswordRequest $request): Response
     {
-        dispatch_sync(new UpdateUserPasswordCommand(
+        dispatch_sync(new UpdateUserPassword(
             auth()->user()->id,
             $request->input('password')
         ));

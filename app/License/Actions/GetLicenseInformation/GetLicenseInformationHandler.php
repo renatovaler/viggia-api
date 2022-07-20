@@ -8,17 +8,17 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 use App\License\Models\License;
 use App\License\Actions\LicenseInformationDto;
-use App\License\Actions\GetLicenseInformation\GetLicenseInformationCommand;
+use App\License\Actions\GetLicenseInformation\GetLicenseInformation;
 
 final class GetLicenseInformationHandler
 {
     /**
      * Executa a ação
      *
-     * @param \App\License\Actions\GetLicenseInformation\GetLicenseInformationCommand $command
+     * @param \App\License\Actions\GetLicenseInformation\GetLicenseInformation $command
      * @return \App\License\Actions\LicenseInformationDto
      */
-    public function handle(GetLicenseInformationCommand $command): LicenseInformationDto
+    public function handle(GetLicenseInformation $command): LicenseInformationDto
     {
         try {
             $license = License::where('id', $command->licenseId)->firstOrFail();

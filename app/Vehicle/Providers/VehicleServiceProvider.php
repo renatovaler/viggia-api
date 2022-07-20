@@ -2,15 +2,15 @@
 
 namespace App\Vehicle\Providers;
 
-use App\Vehicle\Actions\CreateVehicleLocalization\CreateVehicleLocalizationCommand;
+use App\Vehicle\Actions\CreateVehicleLocalization\CreateVehicleLocalization;
 use App\Vehicle\Actions\CreateVehicleLocalization\CreateVehicleLocalizationHandler;
-use App\Vehicle\Actions\DeleteVehicleLocalization\DeleteVehicleLocalizationCommand;
+use App\Vehicle\Actions\DeleteVehicleLocalization\DeleteVehicleLocalization;
 use App\Vehicle\Actions\DeleteVehicleLocalization\DeleteVehicleLocalizationHandler;
-use App\Vehicle\Actions\GetVehicleLocalizationList\GetVehicleLocalizationListCommand;
+use App\Vehicle\Actions\GetVehicleLocalizationList\GetVehicleLocalizationList;
 use App\Vehicle\Actions\GetVehicleLocalizationList\GetVehicleLocalizationListHandler;
-use App\Vehicle\Actions\GetVehicleLocalization\GetVehicleLocalizationCommand;
+use App\Vehicle\Actions\GetVehicleLocalization\GetVehicleLocalization;
 use App\Vehicle\Actions\GetVehicleLocalization\GetVehicleLocalizationHandler;
-use App\Vehicle\Actions\UpdateVehicleLocalization\UpdateVehicleLocalizationCommand;
+use App\Vehicle\Actions\UpdateVehicleLocalization\UpdateVehicleLocalization;
 use App\Vehicle\Actions\UpdateVehicleLocalization\UpdateVehicleLocalizationHandler;
 
 use Illuminate\Support\Facades\Bus;
@@ -49,7 +49,7 @@ class VehicleServiceProvider extends ServiceProvider
         $this->map();
 
         // commands and handlers
-        $this->registerCommandsAndHandlers();
+        $this->registersAndHandlers();
 
         // events
         $this->registerEventsAndHandlers();
@@ -60,14 +60,14 @@ class VehicleServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function registerCommandsAndHandlers(): void
+    public function registersAndHandlers(): void
     {
         Bus::map([
-            CreateVehicleLocalizationCommand::class => CreateVehicleLocalizationHandler::class,
-            DeleteVehicleLocalizationCommand::class => DeleteVehicleLocalizationHandler::class,			
-            GetVehicleLocalizationListCommand::class => GetVehicleLocalizationListHandler::class,
-            GetVehicleLocalizationCommand::class => GetVehicleLocalizationHandler::class,
-            UpdateVehicleLocalizationCommand::class => UpdateVehicleLocalizationHandler::class,
+            CreateVehicleLocalization::class => CreateVehicleLocalizationHandler::class,
+            DeleteVehicleLocalization::class => DeleteVehicleLocalizationHandler::class,			
+            GetVehicleLocalizationList::class => GetVehicleLocalizationListHandler::class,
+            GetVehicleLocalization::class => GetVehicleLocalizationHandler::class,
+            UpdateVehicleLocalization::class => UpdateVehicleLocalizationHandler::class,
         ]);
     }
 

@@ -5,7 +5,7 @@ namespace App\User\Actions\UpdateUserProfilePhoto;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Foundation\Bus\Dispatchable;
 
-final class UpdateUserProfilePhotoCommand
+final class UpdateUserProfilePhoto
 {
     use Dispatchable;
 

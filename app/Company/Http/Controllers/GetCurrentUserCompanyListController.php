@@ -7,7 +7,7 @@ use App\Company\Http\Resources\CompanyCollection;
 use App\Structure\Http\Controllers\Controller;
 
 use App\Company\Models\Company;
-use App\Company\Actions\GetCurrentUserCompanyList\GetCurrentUserCompanyListCommand;
+use App\Company\Actions\GetCurrentUserCompanyList\GetCurrentUserCompanyList;
 
 class GetCurrentUserCompanyListController extends Controller
 {
@@ -21,7 +21,7 @@ class GetCurrentUserCompanyListController extends Controller
         $this->authorize('viewAny', Company::class);
 
         $companies = dispatch_sync(
-            new GetCurrentUserCompanyListCommand()
+            new GetCurrentUserCompanyList()
         );
         return (new CompanyCollection($companies));
     }

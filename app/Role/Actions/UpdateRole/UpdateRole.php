@@ -4,7 +4,7 @@ namespace App\Role\Actions\UpdateRole;
 
 use Illuminate\Foundation\Bus\Dispatchable;
 
-final class UpdateRoleCommand
+final class UpdateRole
 {
     use Dispatchable;
 

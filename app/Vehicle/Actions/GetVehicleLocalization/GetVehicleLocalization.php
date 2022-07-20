@@ -4,7 +4,7 @@ namespace App\Vehicle\Actions\GetVehicleLocalization;
 
 use Illuminate\Foundation\Bus\Dispatchable;
 
-final class GetVehicleLocalizationCommand
+final class GetVehicleLocalization
 {
     use Dispatchable;
 

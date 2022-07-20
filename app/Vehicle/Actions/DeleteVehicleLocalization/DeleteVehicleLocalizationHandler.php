@@ -6,17 +6,17 @@ use Exception;
 use Illuminate\Support\Facades\DB;
 
 use App\Vehicle\Models\VehicleLocalization;
-use App\Vehicle\Actions\DeleteVehicleLocalization\DeleteVehicleLocalizationCommand;
+use App\Vehicle\Actions\DeleteVehicleLocalization\DeleteVehicleLocalization;
 
 final class DeleteVehicleLocalizationHandler
 {
     /**
      * Executa a ação
      *
-     * @param \App\Vehicle\Actions\DeleteVehicleLocalization\DeleteVehicleLocalizationCommand $command
+     * @param \App\Vehicle\Actions\DeleteVehicleLocalization\DeleteVehicleLocalization $command
      * @return void
      */
-    public function handle(DeleteVehicleLocalizationCommand $command): void
+    public function handle(DeleteVehicleLocalization $command): void
     {
         try {
             DB::beginTransaction();

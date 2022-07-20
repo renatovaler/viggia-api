@@ -6,7 +6,7 @@ use App\Structure\Http\Controllers\Controller;
 
 use App\Admin\Http\Resources\User\UserCollection;
 
-use App\User\Actions\GetUserList\GetUserListCommand;
+use App\User\Actions\GetUserList\GetUserList;
 
 class GetUserListController extends Controller
 {
@@ -17,7 +17,7 @@ class GetUserListController extends Controller
      */
     public function __invoke(): UserCollection
     {
-        $users = dispatch_sync( new GetUserListCommand() );
+        $users = dispatch_sync( new GetUserList() );
         return ( new UserCollection($users) );
     }
 }
