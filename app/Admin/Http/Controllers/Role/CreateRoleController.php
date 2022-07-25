@@ -10,7 +10,9 @@ use App\Structure\Http\Controllers\Controller;
 use App\Admin\Http\Resources\Role\RoleResource;
 use App\Admin\Http\Requests\Role\CreateRoleRequest;
 
+use App\Role\Models\Role;
 use App\Role\Actions\CreateRole\CreateRole;
+
 
 class CreateRoleController extends Controller
 {    
@@ -24,6 +26,8 @@ class CreateRoleController extends Controller
      */
     public function __invoke(CreateRoleRequest $request): JsonResponse
     {
+        $this->authorize('create', Role::class);
+
         $role = dispatch_sync(new CreateRole(
             $request->name,
             $request->description

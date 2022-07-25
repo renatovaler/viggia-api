@@ -69,16 +69,17 @@ trait RoleToUserForSystem
      * Attach system role to user by role name
      *
      * @param string $name
-     * @return bool
+     * @return null|bool
      */
-    public function addRoleToUserByName(string $name = null): bool
+    public function addRoleToUserByName(string $name = null): null|bool
     {
         $role = Role::where('name', $name)->first();
         return (
             is_null($role) ? false :
             (
                 $role->count() > 0 ?
-                $this->addRoleToUser($role->id) : false
+                $this->addRoleToUser($role->id) : // Return null
+                false // Return bool
             )
         );
     }

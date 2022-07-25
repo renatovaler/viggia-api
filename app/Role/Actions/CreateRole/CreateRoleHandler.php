@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Database\QueryException;
 
 use App\Role\Models\Role;
-use App\Role\Actions\RoleDto;
+use App\Role\Actions\RoleInformationDto;
 use App\Role\Actions\CreateRole\CreateRole;
 
 final class CreateRoleHandler
@@ -17,9 +17,9 @@ final class CreateRoleHandler
      * Executa a ação
      *
      * @param \App\Role\Actions\CreateRole\CreateRole $command
-     * @return RoleDto
+     * @return RoleInformationDto
      */
-    public function handle(CreateRole $command): RoleDto
+    public function handle(CreateRole $command): RoleInformationDto
     {
         try {
             DB::beginTransaction();
@@ -28,7 +28,7 @@ final class CreateRoleHandler
 					'description' => $command->description
 				]);
             DB::commit();
-			return RoleDto::fromModel($role);
+			return RoleInformationDto::fromModel($role);
 		} catch(QueryException $e) {
 			DB::rollBack();
 			throw new Exception(__('An internal error occurred while storing information in the database.'), 500);

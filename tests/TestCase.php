@@ -59,7 +59,33 @@ abstract class TestCase extends BaseTestCase
        parent::setUp();
        // set your headers here
        $this->withHeaders(['Accept' => 'application/json']);
+
+	   $this->createDefaultRoles();
     }
+
+	/*
+	* Create default roles for tests
+	*
+	* @return void
+	*/
+	public function createDefaultRoles(): void
+	{
+        $userSystemRoles = config('roles.all_user_system_roles');
+        $allUserCompanyRoles = config('roles.all_user_company_roles');
+        $allUserCompanyBranchRoles = config('roles.all_user_company_branch_roles');
+
+		$roles = collect([])
+				->merge($userSystemRoles)
+				->merge($allUserCompanyRoles)
+				->merge($allUserCompanyBranchRoles);		
+
+        foreach($roles as $key => $role) {
+            \App\Role\Models\Role::create([
+                'name' => $role,
+                'description' => 'Default '. $role
+            ]);
+        }
+	}
 
 	/*
 	* Create common user for test
@@ -84,8 +110,8 @@ abstract class TestCase extends BaseTestCase
 	{
         $user = User::factory()->create();
         $user->password_changed_at = now();
-        $user->addRoleToUserByName('SUPER_ADMIN');
-        $user->addRoleToUserByName('ADMIN');
+        $user->addRoleToUserByName('super_admin');
+        $user->addRoleToUserByName('admin');
         $user->save();
         return $user;
 	}

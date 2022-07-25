@@ -2,12 +2,22 @@
 
 namespace App\Admin\Providers;
 
-use App\User\Actions\GetUserList\GetUserList;
-use App\User\Actions\GetUserList\GetUserListHandler;
+use App\User\Models\User;
+use App\Admin\Policies\UserPolicy;
+
 use App\User\Actions\GetUser\GetUser;
 use App\User\Actions\GetUser\GetUserHandler;
+use App\User\Actions\GetUserList\GetUserList;
+use App\User\Actions\GetUserList\GetUserListHandler;
 use App\User\Actions\UpdateUserPersonalInformation\UpdateUserPersonalInformation;
 use App\User\Actions\UpdateUserPersonalInformation\UpdateUserPersonalInformationHandler;
+
+
+use App\Role\Models\Role;
+use App\Admin\Policies\RolePolicy;
+
+use App\Role\Actions\CreateRole\CreateRole;
+use App\Role\Actions\CreateRole\CreateRoleHandler;
 
 use Illuminate\Support\Facades\Bus;
 use Illuminate\Support\Facades\Route;
@@ -30,7 +40,8 @@ class AdminServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        //'App\User\Models\User' => 'App\Admin\Policies\UserPolicy',
+        User::class => UserPolicy::class,
+        Role::class => RolePolicy::class,
     ];
 
     /**
@@ -61,9 +72,13 @@ class AdminServiceProvider extends ServiceProvider
     public function registersAndHandlers(): void
     {
         Bus::map([
+            // User actions
             GetUserList::class => GetUserListHandler::class,
             GetUser::class => GetUserHandler::class,
             UpdateUserPersonalInformation::class => UpdateUserPersonalInformationHandler::class,
+
+            // Role actions
+            CreateRole::class => CreateRoleHandler::class,
         ]);
     }
 

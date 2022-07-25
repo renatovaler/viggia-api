@@ -15,10 +15,13 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         \App\User\Models\User::factory(50)->create();
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        
+        $userSystemRoles = config('roles.all_user_system_roles');
+        foreach($userSystemRoles as $key => $role) {
+            \App\Role\Models\Role::create([
+                'name' => $role,
+                'description' => 'Default '. $role
+            ]);
+        }
     }
 }

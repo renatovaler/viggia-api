@@ -10,7 +10,7 @@ use App\Admin\Http\Controllers\User\GetUserProfileInformationByIdController;
 use App\Admin\Http\Controllers\User\UpdateUserProfileInformationController;
 use App\Admin\Http\Controllers\User\UpdateUserPasswordController;
 
-// Roles
+// Roles 
 use App\Admin\Http\Controllers\Role\CreateRoleController;
 use App\Admin\Http\Controllers\Role\DeleteRoleController;
 use App\Admin\Http\Controllers\Role\GetRoleListController;
@@ -20,7 +20,7 @@ use App\Admin\Http\Controllers\Role\UpdateRoleInformationController;
 
 
 
-Route::group(['middleware' => ['auth:sanctum'], 'prefix' => 'users'], function () {
+Route::group(['middleware' => ['auth:sanctum']], function () {
 
 	/*
 	|--------------------------------------------------------------------------
