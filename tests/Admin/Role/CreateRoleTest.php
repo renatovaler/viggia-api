@@ -4,6 +4,7 @@ namespace Tests\Admin\Role;
 
 use Tests\TestCase;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -116,9 +117,13 @@ class CreateRoleTest extends TestCase
 		
 		if(true === $authenticated) {
 			$user = (true === $commonUser ? $this->createCommonUser() : $this->createAdminUser());
+			
+			// Faz login
+			Auth::loginUsingId($user->id);
+
 			return $this->actingAs($user)->post('/admin/roles/create', $data);
 		}
 		
-		return $this->post('/admin/roles/create', $data);		
+		return $this->post('/admin/roles/create', $data);
 	}
 }

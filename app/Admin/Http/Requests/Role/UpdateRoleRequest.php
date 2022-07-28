@@ -2,6 +2,7 @@
 
 namespace App\Admin\Http\Requests\Role;
 
+use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -18,6 +19,18 @@ class UpdateRoleRequest extends FormRequest
     }
 
     /**
+     * Prepare validation and override request if necessary
+     *
+     * @return void
+     */
+    public function prepareForValidation(): void
+    {
+        $this->merge([
+            'slug' => Str::slug($this->input('slug')),
+        ]);
+    }
+
+    /**
      * Get the validation rules that apply to the request.
      *
      * @return array<string, mixed>
@@ -26,7 +39,7 @@ class UpdateRoleRequest extends FormRequest
     {
         return [
             'id' => ['required', 'numeric', 'exists:roles,id'],
-            'name' => ['required', 'string', 'max:80','exists:roles,name'],
+            'name' => ['required', 'max:80','unique:roles,name'],
             'description' => ['required', 'string', 'max:80']
         ];
     }
