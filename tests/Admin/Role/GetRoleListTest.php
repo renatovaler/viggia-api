@@ -2,70 +2,55 @@
 
 namespace Tests\Admin\Role;
 
+use App\Role\Models\Role;
+
 use Tests\TestCase;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class GetRoleListTest extends TestCase
 {
     use RefreshDatabase;
-/*
-    public function test_get_user_list_with_not_authenticated_user()
+
+	/*
+	* Teste - buscar lista de roles com usuário não logado
+	* Usuário logado: NÃO
+	*/
+    public function test_get_role_list_with_not_authenticated_user()
     {
-        // Cria usuários
-		$this->createUsers(15);
-		
-		// Faz a requisição para obter os dados dos registros sem informar usuário logado
-        $response = $this->getJson('/admin/users');
-		
+		// Cria 10 roles
+		(new Role())->factory(10)->create();
+
 		// Verifica se o usuário não está logado
         $this->assertGuest();
+
+		// Faz a requisição para obter os dados do registro sem informar usuário logado
+        $response = $this->getJson('/admin/roles');
 		
 		// Verifica se a resposta foi do tipo "não autorizado" (401)
 		$response->assertUnauthorized();
     }
 
-    public function test_get_user_list_with_common_user()
+	/*
+	* Teste - buscar lista de roles com usuário logado
+	* Usuário logado: SIM
+	*/
+    public function test_get_role_list_with_with_authenticated_user()
     {
-        // Cria um usuário comum (não admin)
-        $user = $this->createCommonUser();
-		
-        // Cria usuários
-		$this->createUsers(15);
-		
-		// Faz a requisição para obter os dados dos registros informando um usuário comum logado
-        $response = $this->actingAs($user)->getJson('/admin/users');
-        
-		// Verifica se o usuário está logado
-		$this->assertAuthenticated();
-		
-		// Verifica se está correta a estrutura do JSON de resposta
-        $response->assertJsonStructure([
-			'data' => [
-				[
-					'id',
-					'name',
-					'email',
-					'email_verified_at'
-				]
-			]
-		]);
-		// Verifica se o código de resposta HTTP está correto (200)
-		$response->assertOk();
-    }
-
-    public function test_get_user_list_with_admin_user()
-    {
-        // Cria um usuário admin e super_admin
+        // Cria um usuário admin
         $user = $this->createAdminUser();
-		
-        // Cria usuários
-		$this->createUsers(15);
-		
-		// Faz a requisição para obter os dados dos registros informando um usuário admin/super_admin logado
-        $response = $this->actingAs($user)->getJson('/admin/users');
+        
+		// Faz login
+		Auth::loginUsingId($user->id);
         
 		// Verifica se o usuário está logado
 		$this->assertAuthenticated();
+
+		// Cria 10 roles
+		(new Role())->factory(10)->create();
+
+		// Faz a requisição para obter os dados do registro sem informar usuário logado
+        $response = $this->actingAs($user)->getJson('/admin/roles');
 		
 		// Verifica se está correta a estrutura do JSON de resposta
         $response->assertJsonStructure([
@@ -73,13 +58,12 @@ class GetRoleListTest extends TestCase
 				[
 					'id',
 					'name',
-					'email',
-					'email_verified_at'
+					'description'
 				]
 			]
 		]);
+		
 		// Verifica se o código de resposta HTTP está correto (200)
 		$response->assertOk();
-    }
-*/
+    }	
 }

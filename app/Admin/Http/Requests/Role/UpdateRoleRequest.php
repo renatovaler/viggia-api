@@ -26,8 +26,8 @@ class UpdateRoleRequest extends FormRequest
     {
         return [
             'id' => ['required', 'numeric', 'exists:roles,id'],
-            'name' => ['required', 'string', 'max:255','exists:roles,name'],
-            'description' => ['required', 'string', 'max:255']
+            'name' => ['required', 'string', 'max:80','exists:roles,name'],
+            'description' => ['required', 'string', 'max:80']
         ];
     }
 }

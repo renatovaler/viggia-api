@@ -20,11 +20,11 @@ class CreateRoleTest extends TestCase
 	*/
     public function test_create_role_with_not_authenticated_user()
     {
-		// Faz a requisição para criar o registro sem usuário logado
-		$response = $this->postCreateRole( self::NOT_AUTHENTICATED );
-		
 		// Verifica se o usuário não está logado
 		$this->assertGuest();
+		
+		// Faz a requisição para criar o registro sem usuário logado
+		$response = $this->postCreateRole( self::NOT_AUTHENTICATED );
 		
 		// Verifica se a resposta foi do tipo "não autorizado" (401)
 		$response->assertUnauthorized();
@@ -108,7 +108,7 @@ class CreateRoleTest extends TestCase
 		if(true === $validParam) {
 			$data = [
 				'name' => $this->faker->slug,
-				'description' => $this->faker->text,
+				'description' => $this->faker->text(50),
 			];
 		} else {
 			$data = [];

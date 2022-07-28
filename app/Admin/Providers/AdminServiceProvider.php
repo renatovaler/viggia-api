@@ -20,6 +20,12 @@ use App\Role\Actions\CreateRole\CreateRole;
 use App\Role\Actions\CreateRole\CreateRoleHandler;
 use App\Role\Actions\DeleteRole\DeleteRole;
 use App\Role\Actions\DeleteRole\DeleteRoleHandler;
+use App\Role\Actions\UpdateRole\UpdateRole;
+use App\Role\Actions\UpdateRole\UpdateRoleHandler;
+use App\Role\Actions\GetRoleList\GetRoleList;
+use App\Role\Actions\GetRoleList\GetRoleListHandler;
+use App\Role\Actions\GetRoleInformation\GetRoleInformation;
+use App\Role\Actions\GetRoleInformation\GetRoleInformationHandler;
 
 use Illuminate\Support\Facades\Bus;
 use Illuminate\Support\Facades\Route;
@@ -82,6 +88,9 @@ class AdminServiceProvider extends ServiceProvider
             // Role actions
             CreateRole::class => CreateRoleHandler::class,
             DeleteRole::class => DeleteRoleHandler::class,
+            UpdateRole::class => UpdateRoleHandler::class,
+            GetRoleList::class => GetRoleListHandler::class,
+            GetRoleInformation::class => GetRoleInformationHandler::class,
         ]);
     }
 
