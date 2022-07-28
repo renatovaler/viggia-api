@@ -46,9 +46,9 @@ class Role extends Model
 	 * A busca é feita por ID.
      *
      * @param  int $roleId
-     * @return \Illuminate\Database\Eloquent\Collection
+     * @return self
      */
-    public function roleById($roleId): Collection
+    public function roleById($roleId): self
     {
         return $this->where('id', $roleId)->firstOrFail();
     }

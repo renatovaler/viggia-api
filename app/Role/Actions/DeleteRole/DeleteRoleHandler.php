@@ -21,7 +21,7 @@ final class DeleteRoleHandler
     {
         try {
             DB::beginTransaction();
-				Role::removeRole($command->roleId);
+				(new Role())->removeRole($command->roleId);
             DB::commit();
 		} catch(QueryException $e) {
 			DB::rollBack();

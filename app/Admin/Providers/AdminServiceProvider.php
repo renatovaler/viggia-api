@@ -18,6 +18,8 @@ use App\Admin\Policies\RolePolicy;
 
 use App\Role\Actions\CreateRole\CreateRole;
 use App\Role\Actions\CreateRole\CreateRoleHandler;
+use App\Role\Actions\DeleteRole\DeleteRole;
+use App\Role\Actions\DeleteRole\DeleteRoleHandler;
 
 use Illuminate\Support\Facades\Bus;
 use Illuminate\Support\Facades\Route;
@@ -79,6 +81,7 @@ class AdminServiceProvider extends ServiceProvider
 
             // Role actions
             CreateRole::class => CreateRoleHandler::class,
+            DeleteRole::class => DeleteRoleHandler::class,
         ]);
     }
 
