@@ -6,6 +6,7 @@ use App\Structure\Http\Controllers\Controller;
 
 use App\Admin\Http\Resources\User\UserResource;
 
+use App\User\Models\User;
 use App\User\Actions\GetUser\GetUser;
 
 class GetUserProfileInformationByIdController extends Controller
@@ -19,6 +20,8 @@ class GetUserProfileInformationByIdController extends Controller
      */
     public function __invoke(int $userId): UserResource
     {
+        $this->authorize('view', User::class);
+
         $user = dispatch_sync( new GetUser($userId) );
         return ( new UserResource($user) );
     }

@@ -6,6 +6,7 @@ use App\Structure\Http\Controllers\Controller;
 
 use App\Admin\Http\Resources\User\UserCollection;
 
+use App\User\Models\User;
 use App\User\Actions\GetUserList\GetUserList;
 
 class GetUserListController extends Controller
@@ -17,6 +18,8 @@ class GetUserListController extends Controller
      */
     public function __invoke(): UserCollection
     {
+        $this->authorize('viewAny', User::class);
+
         $users = dispatch_sync( new GetUserList() );
         return ( new UserCollection($users) );
     }

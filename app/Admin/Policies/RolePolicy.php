@@ -17,7 +17,8 @@ class RolePolicy
      */
     public function viewAny(User $user)
     {
-        return $user->hasUserRoleByName('super_admin');
+        return true;
+        //return $user->hasUserRoleByName('super_admin');
     }
 
     /**
@@ -28,7 +29,8 @@ class RolePolicy
      */
     public function view(User $user)
     {
-        return $user->hasUserRoleByName('super_admin');
+        return true;
+        //return $user->hasUserRoleByName('super_admin');
     }
 
     /**

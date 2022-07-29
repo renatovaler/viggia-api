@@ -20,7 +20,7 @@ final class DeleteUserHandler
     {
         try {
             DB::beginTransaction();
-				User::deleteUser($command->id);
+				(new User())->deleteUser($command->id);
             DB::commit();
 		} catch(Exception $e) {
 			DB::rollBack();

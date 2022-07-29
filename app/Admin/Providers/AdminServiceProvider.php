@@ -9,6 +9,10 @@ use App\User\Actions\GetUser\GetUser;
 use App\User\Actions\GetUser\GetUserHandler;
 use App\User\Actions\GetUserList\GetUserList;
 use App\User\Actions\GetUserList\GetUserListHandler;
+use App\User\Actions\CreateUser\CreateUser;
+use App\User\Actions\CreateUser\CreateUserHandler;
+use App\User\Actions\DeleteUser\DeleteUser;
+use App\User\Actions\DeleteUser\DeleteUserHandler;
 use App\User\Actions\UpdateUserPersonalInformation\UpdateUserPersonalInformation;
 use App\User\Actions\UpdateUserPersonalInformation\UpdateUserPersonalInformationHandler;
 
@@ -81,8 +85,10 @@ class AdminServiceProvider extends ServiceProvider
     {
         Bus::map([
             // User actions
-            GetUserList::class => GetUserListHandler::class,
+            CreateUser::class => CreateUserHandler::class,
+            DeleteUser::class => DeleteUserHandler::class,
             GetUser::class => GetUserHandler::class,
+            GetUserList::class => GetUserListHandler::class,
             UpdateUserPersonalInformation::class => UpdateUserPersonalInformationHandler::class,
 
             // Role actions

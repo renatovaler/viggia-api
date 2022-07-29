@@ -9,6 +9,7 @@ use App\Structure\Http\Controllers\Controller;
 use App\Admin\Http\Resources\User\UserResource;
 use App\Admin\Http\Requests\User\UpdateUserPersonalInformationRequest;
 
+use App\User\Models\User;
 use App\User\Actions\UpdateUserPersonalInformation\UpdateUserPersonalInformation;
 
 class UpdateUserProfileInformationController extends Controller
@@ -22,6 +23,8 @@ class UpdateUserProfileInformationController extends Controller
      */
     public function __invoke(UpdateUserPersonalInformationRequest $request): JsonResponse
     {
+        $this->authorize('update', User::class);
+
         $userUpdated = dispatch_sync(new UpdateUserPersonalInformation(
             (int) $request->input('id'),
             $request->input('name'),

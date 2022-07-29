@@ -5,7 +5,7 @@ namespace App\Admin\Http\Controllers\User;
 use Illuminate\Http\Response;
 use App\Structure\Http\Controllers\Controller;
 
-use App\Admin\Actions\DeleteUser\DeleteUser;
+use App\User\Actions\DeleteUser\DeleteUser;
 
 class DeleteUserController extends Controller
 {
@@ -18,6 +18,8 @@ class DeleteUserController extends Controller
      */
     public function __invoke(int $userId): Response
     {
+        $this->authorize('delete', auth()->user());
+        
         dispatch_sync( new DeleteUser($userId) );
         return response()->noContent();
     }
