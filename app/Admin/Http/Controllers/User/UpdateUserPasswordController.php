@@ -22,7 +22,7 @@ class UpdateUserPasswordController extends Controller
      */
     public function __invoke(UpdateUserPasswordRequest $request): Response
     {
-        $this->authorize('update', User::class);
+        $this->authorize('update', auth()->user());
 
         $userUpdated = dispatch_sync(new UpdateUserPassword(
             (int) $request->input('id'),

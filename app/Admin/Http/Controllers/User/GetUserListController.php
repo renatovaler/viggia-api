@@ -18,7 +18,7 @@ class GetUserListController extends Controller
      */
     public function __invoke(): UserCollection
     {
-        $this->authorize('viewAny', User::class);
+        $this->authorize('viewAny', auth()->user());
 
         $users = dispatch_sync( new GetUserList() );
         return ( new UserCollection($users) );

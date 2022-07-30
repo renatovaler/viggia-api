@@ -20,14 +20,17 @@ class DeleteUserTest extends TestCase
 	*/
     public function test_delete_user_with_not_authenticated_user()
     {
+		// Verifica se o usuário não está logado
+        $this->assertGuest();
+
         // Cria um usuário qualquer
         $targetUser = $this->createCommonUser();
         
 		// Faz a requisição para deletar o registro
 		$response = $this->deleteJson('/admin/users/'.$targetUser->id);
 		
-		// Verifica se o usuário não está logado
-        $this->assertGuest();
+		// Verifica se o user ainda existe (não foi excluído)
+		$this->assertDatabaseHas('users', ['id' => $targetUser->id ]);
 		
 		// Verifica se a resposta foi do tipo "não autorizado" (401)
 		$response->assertUnauthorized();
@@ -55,6 +58,9 @@ class DeleteUserTest extends TestCase
 
 		// Faz a requisição para deletar o registro
 		$response = $this->actingAs($user)->deleteJson('/admin/users/'.$targetUser->id);
+		
+		// Verifica se o user foi mesmo excluído
+		$this->assertDatabaseMissing('users', ['id' => $targetUser->id ]);
 
 		// Verifica se a requisição foi um sucesso com retorno "NoContent"
 		$response->assertNoContent();
@@ -82,6 +88,9 @@ class DeleteUserTest extends TestCase
 
 		// Faz a requisição para deletar o registro
 		$response = $this->actingAs($commonUser)->deleteJson('/admin/users/'.$targetUser->id);
+		
+		// Verifica se o user ainda existe (não foi excluído)
+		$this->assertDatabaseHas('users', ['id' => $targetUser->id ]);
 
 		// Verifica se a resposta foi do tipo "proibido" (403)
 		// Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException
@@ -111,7 +120,7 @@ class DeleteUserTest extends TestCase
 		// Faz a requisição para deletar o registro especificando uma url inválida (param XXXXX)
 		$response = $this->actingAs($user)->deleteJson('/admin/users/XXXXX');
 
-		// Verifica se a role ainda existe
+		// Verifica se o user ainda existe (não foi excluído)
 		$this->assertDatabaseHas('users', ['id' => $targetUser->id]);
 
 		// Verifica se o código de resposta HTTP está correto (404)
