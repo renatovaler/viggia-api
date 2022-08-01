@@ -63,6 +63,18 @@ class CompanyPolicy
      * @param  \App\Company\Models\Company  $company
      * @return \Illuminate\Auth\Access\Response|bool
      */
+    public function invite(User $user, Company $company)
+    {
+        return $company->hasOwnerOrCompanyMember($user->id);
+    }
+
+    /**
+     * Determine whether the user can switch company.
+     *
+     * @param  \App\User\Models\User  $user
+     * @param  \App\Company\Models\Company  $company
+     * @return \Illuminate\Auth\Access\Response|bool
+     */
     public function switchCompany(User $user, Company $company)
     {
         return $company->hasOwnerOrCompanyMember($user->id);

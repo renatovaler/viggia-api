@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace App\Company\Actions\InviteCompanyMember;
+namespace App\Company\Actions\InviteNewCompanyMember;
 
 use Illuminate\Foundation\Bus\Dispatchable;
 
-final class InviteCompanyMember
+final class InviteNewCompanyMember
 {
     use Dispatchable;
 

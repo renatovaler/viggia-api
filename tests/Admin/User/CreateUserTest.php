@@ -94,6 +94,7 @@ class CreateUserTest extends TestCase
                 'email_verified_at'
             ]
 		]);
+		
 		// Verifica se o código de resposta HTTP está correto (200)
 		$response->assertOk();
     }

@@ -11,8 +11,8 @@ use App\Company\Http\Controllers\GetCurrentUserCompanyListController;
 use App\Company\Http\Controllers\SwitchCompanyController;
 
 // Company Member
-use App\Company\Http\Controllers\Member\AddCompanyMemberController;
 use App\Company\Http\Controllers\Member\RemoveCompanyMemberController;
+use App\Company\Http\Controllers\Member\InviteNewCompanyMemberController;
 use App\Company\Http\Controllers\Member\GetCompanyMemberInformationController;
 use App\Company\Http\Controllers\Member\GetCurrentCompanyMemberListController;
 
@@ -81,14 +81,14 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
 				->name('companies.current-company.members.profile.show');
 				
 				/**
-				 * Add new member to the current company
+				 * Invite new member to the current company
 				 *
 				 * @method  post
-				 * @route   domain.example/companies/current-company/members/add-member
-				 * @name    companies.current-company.members.add-member
+				 * @route   domain.example/companies/current-company/members/invite-member
+				 * @name    companies.current-company.members.invite-member
 				 */
-				Route::post('add-member', [AddCompanyMemberController::class, '__invoke'])
-				->name('companies.current-company.members.add-member');
+				Route::post('invite-member', [InviteNewCompanyMemberController::class, '__invoke'])
+				->name('companies.current-company.members.invite-member');
 
 				/**
 				 * Remove member to the current company
@@ -120,6 +120,7 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
 
 		Route::delete('/company-invitations/{invitation}', [CompanyInvitationController::class, 'destroy'])
 		->name('companies.company-invitations.destroy');
+		
 		/**
 		 * Switch company
 		 *

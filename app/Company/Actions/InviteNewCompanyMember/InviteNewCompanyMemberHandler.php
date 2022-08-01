@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace App\Company\Actions\InviteCompanyMember;
+namespace App\Company\Actions\InviteNewCompanyMember;
 
 use Exception;
 use Illuminate\Support\Facades\DB;
@@ -8,17 +8,17 @@ use Illuminate\Support\Facades\Mail;
 
 use App\Company\Mail\CompanyInvitation;
 use App\Company\Models\CompanyInvitation as CompanyInvitationModel;
-use App\Company\Actions\InviteCompanyMember\InviteCompanyMember;
+use App\Company\Actions\InviteNewCompanyMember\InviteNewCompanyMember;
 
-final class InviteCompanyMemberHandler
+final class InviteNewCompanyMemberHandler
 {
     /**
      * Executa a ação
      *
-     * @param \App\Company\Actions\InviteCompanyMember\InviteCompanyMember $command
+     * @param \App\Company\Actions\InviteNewCompanyMember\InviteNewCompanyMember $command
      * @return void
      */
-    public function handle(InviteCompanyMember $command): void
+    public function handle(InviteNewCompanyMember $command): void
     {
         try {
             DB::beginTransaction();
@@ -27,7 +27,7 @@ final class InviteCompanyMemberHandler
                 $invitation = CompanyInvitationModel::create([
                     'company_id' => $command->companyId,
                     'email' => $command->email,
-                    'roles' => $command->roles,
+                    'roles' => $command->roles
                 ]);
 
             DB::commit();
