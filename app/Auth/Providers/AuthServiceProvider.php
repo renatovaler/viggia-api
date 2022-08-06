@@ -7,6 +7,7 @@ use App\User\Actions\CreateUser\CreateUserHandler;
 
 use Illuminate\Support\Facades\Bus;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
@@ -21,7 +22,7 @@ class AuthServiceProvider extends ServiceProvider
     public const HOME = '/';
 
     /**
-     * Inicia os serviços
+     * Register any authentication / authorization services.
      *
      * @return void
      */
@@ -29,9 +30,14 @@ class AuthServiceProvider extends ServiceProvider
     {
         // map routes
         $this->map();
+        $this->registerPolicies();
 
         // commands and handlers
         $this->registersAndHandlers();
+
+        ResetPassword::createUrlUsing(function ($notifiable, $token) {
+            return config('app.frontend_url')."/auth/password-reset/$token?email={$notifiable->getEmailForPasswordReset()}";
+        });
     }
 
     /**

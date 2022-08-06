@@ -41,9 +41,12 @@ class CompanyInvitation extends Mailable
         return $this->markdown(
             'emails.company.company-invitation',
             [
+                'acceptUrl' => config('app.frontend_url'). "/companies/company-invitations/" . $this->invitation->token
+                /*
                 'acceptUrl' => URL::signedRoute(
                     'companies.company-invitations.accept', ['invitation' => $this->invitation]
                 )
+                */
             ]
         )->subject(__('Company Invitation'));
     }

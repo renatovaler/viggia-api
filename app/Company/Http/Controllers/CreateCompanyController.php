@@ -14,7 +14,7 @@ use Illuminate\Http\JsonResponse;
 class CreateCompanyController extends Controller
 {
     /**
-     * Update current user company information
+     * Create new company for current user
      *
      * @param App\Company\Http\Requests\CreateCompanyRequest $request
      *

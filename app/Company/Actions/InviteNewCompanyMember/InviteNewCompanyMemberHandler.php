@@ -3,6 +3,8 @@
 namespace App\Company\Actions\InviteNewCompanyMember;
 
 use Exception;
+use Illuminate\Support\Str;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 
@@ -27,7 +29,9 @@ final class InviteNewCompanyMemberHandler
                 $invitation = CompanyInvitationModel::create([
                     'company_id' => $command->companyId,
                     'email' => $command->email,
-                    'roles' => $command->roles
+                    'roles' => $command->roles,
+                    'token' => (string) Str::orderedUuid(),
+                    'expires_in' => Carbon::now()->addHours(48)
                 ]);
 
             DB::commit();

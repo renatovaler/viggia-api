@@ -206,7 +206,6 @@ return [
          * Kernel Service Providers...
          */
         App\Structure\Providers\AppServiceProvider::class,
-        App\Structure\Providers\AuthServiceProvider::class,
         // App\Structure\Providers\BroadcastServiceProvider::class,
         App\Structure\Providers\EventServiceProvider::class,
         App\Structure\Providers\RouteServiceProvider::class,

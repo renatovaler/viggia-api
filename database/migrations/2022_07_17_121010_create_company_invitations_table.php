@@ -1,8 +1,7 @@
 <?php
-
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 return new class extends Migration
 {
@@ -18,7 +17,9 @@ return new class extends Migration
             $table->foreignId('company_id')->constrained()->cascadeOnDelete();
             $table->string('email');
             $table->json('roles')->nullable();
+            $table->uuid('token');
             $table->timestamps();
+            $table->timestamp('expires_in')->nullable();
             $table->unique(['company_id', 'email']);
         });
     }

@@ -12,12 +12,14 @@ use App\Company\Http\Controllers\SwitchCompanyController;
 
 // Company Member
 use App\Company\Http\Controllers\Member\RemoveCompanyMemberController;
-use App\Company\Http\Controllers\Member\InviteNewCompanyMemberController;
 use App\Company\Http\Controllers\Member\GetCompanyMemberInformationController;
 use App\Company\Http\Controllers\Member\GetCurrentCompanyMemberListController;
 
-// Invite company member
-use App\Company\Http\Controllers\Member\CompanyInvitationController;
+// Company Member Invite
+use App\Company\Http\Controllers\Member\Invite\AcceptInviteController;
+use App\Company\Http\Controllers\Member\Invite\VerifyInviteController;
+use App\Company\Http\Controllers\Member\Invite\RefuseInviteController;
+use App\Company\Http\Controllers\Member\Invite\InviteNewCompanyMemberController;
 
 /*
 |--------------------------------------------------------------------------
@@ -79,16 +81,6 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
 				 */
 				Route::get('{companyMemberId}', [GetCompanyMemberInformationController::class, '__invoke'])
 				->name('companies.current-company.members.profile.show');
-				
-				/**
-				 * Invite new member to the current company
-				 *
-				 * @method  post
-				 * @route   domain.example/companies/current-company/members/invite-member
-				 * @name    companies.current-company.members.invite-member
-				 */
-				Route::post('invite-member', [InviteNewCompanyMemberController::class, '__invoke'])
-				->name('companies.current-company.members.invite-member');
 
 				/**
 				 * Remove member to the current company
@@ -114,13 +106,47 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
 
 		}); //End "current" company route group
 
-		Route::get('/company-invitations/{invitation}', [CompanyInvitationController::class, 'accept'])
-		->middleware(['signed'])
-		->name('companies.company-invitations.accept');
+				
+		/**
+		 * Invite new member to the current company
+		 *
+		 * @method  post
+		 * @route   domain.example/companies/company-invitations/invite
+		 * @name    companies.company-invitations.invite
+		 */
+		Route::post('company-invitations/invite', [InviteNewCompanyMemberController::class, '__invoke'])
+		->name('companies.current-company.members.invite');
 
-		Route::delete('/company-invitations/{invitation}', [CompanyInvitationController::class, 'destroy'])
-		->name('companies.company-invitations.destroy');
+		/**
+		 * Verify company invite
+		 *
+		 * @method  GET
+		 * @route   domain.example/companies/company-invitations/{invitation}
+		 * @name    companies.company-invitations.verify
+		 */
+		Route::get('company-invitations/{invitation}', [VerifyInviteController::class, '__invoke'])
+		->name('companies.company-invitations.verify');
+
+		/** 
+		 * Accept company invite
+		 * 
+		 * @method  POST
+		 * @route   domain.example/companies/company-invitations/accept 
+		 * @name    companies.company-invitations.accept
+		 */
+		Route::post('company-invitations/accept', [AcceptInviteController::class, '__invoke'])
+		->name('companies.company-invitations.accept');
 		
+		/** 
+		 * Refuse company invite
+		 * 
+		 * @method  DELETE
+		 * @route   domain.example/companies/company-invitations/refuse/{invitation}
+		 * @name    companies.company-invitations.refuse
+		 */
+		Route::delete('company-invitations/refuse/{invitation}', [RefuseInviteController::class, '__invoke'])
+		->name('companies.company-invitations.refuse');
+
 		/**
 		 * Switch company
 		 *

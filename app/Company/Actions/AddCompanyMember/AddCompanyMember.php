@@ -11,13 +11,13 @@ final class AddCompanyMember
     /**
      * Método construtor da classe
      *
-     * @param readonly int $companyId
+     * @param readonly string $inviteToken
      * @param readonly int $userId
      *
      * @return void (implicit)
      */
     public function __construct(
-      public readonly int $companyId,
+      public readonly string $inviteToken,
       public readonly int $userId
 	  ) {}
 }

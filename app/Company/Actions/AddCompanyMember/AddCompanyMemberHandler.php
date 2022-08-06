@@ -8,6 +8,7 @@ use Illuminate\Database\QueryException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 use App\Company\Models\Company;
+use App\Company\Models\CompanyInvitation;
 use App\Company\Actions\AddCompanyMember\AddCompanyMember;
 
 final class AddCompanyMemberHandler
@@ -20,20 +21,29 @@ final class AddCompanyMemberHandler
      */
     public function handle(AddCompanyMember $command): void
     {
-        try {
-            DB::beginTransaction();
-				$company = Company::where('id', $command->companyId)->firstOrFail();
-				$company->onlyCompanyMembers()->attach($command->userId);
-            DB::commit();
-		} catch(QueryException $e) {
-			DB::rollBack();
-			throw new Exception(__('An internal error occurred while storing information in the database.'), 500);
-        } catch(ModelNotFoundException $e) {
-			DB::rollBack();
-			throw new Exception(__('The informed company does not exist in our database.'), 404);
-        } catch(Exception $e) {
-			DB::rollBack();
-			throw new Exception(__('An unknown internal error has occurred.'), 500);
-        }
+        DB::beginTransaction();
+
+            // Pega os dados do convite
+            $invite = CompanyInvitation::where('token', $command->inviteToken)->firstOrFail();
+
+            // Pega os dados da company
+            $company = Company::where('id', $invite->company_id)->firstOrFail();
+
+            // Adiciona o usuário à equipe
+            $company->onlyCompanyMembers()->attach($command->userId);
+
+            // Pega os dados do usuário
+            $user = $company->companyMemberById($command->userId);
+
+            // Pega os dados das roles do usuário em relação à equipe
+            $roles = collect($invite->roles);
+
+            // Adiciona as permissões da company ao usuário
+            $user->fresh()->addRoleToCompanyMember($roles->values()->pluck('id')->toArray(), $company->id);
+
+            // Deleta o convite
+            $invite->delete();
+            
+        DB::commit();
     }
 }

@@ -150,7 +150,7 @@ class Company extends Model
      */
     public function hasOnlyCompanyMember(int $userId): bool
     {
-        return $this->onlyCompanyMembers()->contains('id', $userId);
+        return $this->onlyCompanyMembers->contains('id', $userId);
     }
 
     /**
@@ -191,9 +191,9 @@ class Company extends Model
 	 * A busca é feita por ID do usuário.
      *
      * @param  int $companyMemberId
-     * @return \Illuminate\Database\Eloquent\Collection as EloquentCollection
+     * @return \App\User\Models\User
      */
-    public function companyMemberById($companyMemberId): EloquentCollection
+    public function companyMemberById($companyMemberId): User
     {
         return $this->companyMembersAndOwner()->where('id', $companyMemberId)->firstOrFail();
     }

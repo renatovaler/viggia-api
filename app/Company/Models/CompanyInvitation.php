@@ -37,6 +37,8 @@ class CompanyInvitation extends Model
         'company_id',
         'email',
         'roles',
+        'token',
+        'expires_in'
     ];
 
     /**
@@ -53,6 +55,7 @@ class CompanyInvitation extends Model
      */
     protected $casts = [
         'roles' => 'array',
+        'expired_at' => 'datetime'
     ];
 
     /**
