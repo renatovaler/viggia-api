@@ -34,14 +34,6 @@ class AcceptInviteController extends Controller
                 null
             ));
 
-            // Adiciona as permissões de user padrão
-            foreach(config('roles.default_user_system_roles') as $key => $value) {
-                $user->addRoleToUserByName($value);
-            }
-
-            // Salva as alterações
-            $user->save();
-
             // Dispara o evento de criação do usuário
             event( new Registered($user) );
             

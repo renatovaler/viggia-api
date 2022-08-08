@@ -176,6 +176,17 @@ class Company extends Model
     }
 
     /**
+     * Determina se o usuário APENAS membro da empresa.
+     *
+     * @param  int $userId
+     * @return bool
+     */
+    public function hasOnlyCompanyMemberWithEmail(string $email): bool
+    {
+        return $this->onlyCompanyMembers->contains('email', $email);
+    }
+
+    /**
      * Determina se o usuário é membro ou proprietário da empresa. Busca por e-mail.
      *
      * @param  string  $email

@@ -47,10 +47,8 @@ class AcceptCompanyInviteRequest extends FormRequest
         ];
 
         if($doesntExist) {
-            $rules[] = [
-                'name' => ['required', 'string', 'max:255'],
-                'password' => ['required', 'confirmed', PasswordRules::defaults()],
-            ];
+            $rules['name'] = ['required', 'string', 'max:255'];
+            $rules['password'] = ['required', 'confirmed', PasswordRules::defaults()];
         }
 
         return $rules;
@@ -74,7 +72,7 @@ class AcceptCompanyInviteRequest extends FormRequest
 
                 if ( true === ($expiresIn < $now) ) {
                     $validator->errors()->add(
-                        'expired', __('This invite has been expired!')
+                        'invite_expired', __('This invite has been expired!')
                     );
                 }
         });

@@ -22,6 +22,7 @@ final class CreateUserHandler
     {
         try {
             DB::beginTransaction();
+            
 				// Create user
 				$user = User::forceCreate([
 					'name' => $command->name,
@@ -29,8 +30,12 @@ final class CreateUserHandler
 					'password' => Hash::make($command->password),
                     'password_changed_at' => $command->passwordChangedAt
 				]);
+
 				// Attach default system role
-				$user->addRoleToUserByName('common_user');
+                foreach(config('roles.default_user_system_roles') as $key => $value) {
+                    $user->addRoleToUserByName($value);
+                }
+
 				$user->save();
             DB::commit();
 			return UserDto::fromModel($user);

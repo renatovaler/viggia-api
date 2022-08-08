@@ -18,13 +18,13 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class AcceptInviteTest extends TestCase
+class AcceptInviteWithRegisteredUserTest extends TestCase
 {
 	use WithFaker;
     use RefreshDatabase;
 
 	/**
-	 * Teste - aceitar convite
+	 * Teste - aceitar convite com usuário já existente, convite válido e parâmetros válidos
 	 * Usuário já cadastrado: SIM
 	 * Autorizado: SIM
 	 * Parâmetros válidos: SIM

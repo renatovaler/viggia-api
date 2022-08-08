@@ -40,7 +40,6 @@ use App\Company\Http\Controllers\Member\Invite\InviteNewCompanyMemberController;
 |		DELETE		|	/photos/{photo}/comments/{comment}			|	destroy	|	photos.comments.destroy
 |
 */
-
 Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
 
 	// Company group
@@ -125,6 +124,7 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
 		 * @name    companies.company-invitations.verify
 		 */
 		Route::get('company-invitations/{invitation}', [VerifyInviteController::class, '__invoke'])
+		->withoutMiddleware(['auth:sanctum', 'verified'])
 		->name('companies.company-invitations.verify');
 
 		/** 
@@ -135,6 +135,7 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
 		 * @name    companies.company-invitations.accept
 		 */
 		Route::post('company-invitations/accept', [AcceptInviteController::class, '__invoke'])
+		->withoutMiddleware(['auth:sanctum', 'verified'])
 		->name('companies.company-invitations.accept');
 		
 		/** 
@@ -145,6 +146,7 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
 		 * @name    companies.company-invitations.refuse
 		 */
 		Route::delete('company-invitations/refuse/{invitation}', [RefuseInviteController::class, '__invoke'])
+		->withoutMiddleware(['auth:sanctum', 'verified'])
 		->name('companies.company-invitations.refuse');
 
 		/**
