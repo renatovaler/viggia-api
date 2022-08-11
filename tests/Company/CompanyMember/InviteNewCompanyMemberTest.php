@@ -77,9 +77,8 @@ class InviteNewCompanyMemberTest extends TestCase
 			'company_id' => $company->id,
 			'email' => $email,
 			'roles' => [
-				['id' => $systemRole = ( (new Role())->where('name', 'common_user')->first() )->id],
-				['id' => $companyRole = ( (new Role())->where('name', 'company_member')->first() )->id]
-			]
+				(new Role())->where('name', 'company_member')->first()->id
+			],
 		];
 
         // Faz o request
@@ -197,9 +196,8 @@ class InviteNewCompanyMemberTest extends TestCase
 			'company_id' => $company->id,
 			'email' => $email,
 			'roles' => [
-				['id' => $systemRole = ( (new Role())->where('name', 'common_user')->first() )->id],
-				['id' => $companyRole = ( (new Role())->where('name', 'company_member')->first() )->id]
-			]
+				(new Role())->where('name', 'company_member')->first()->id
+			],
 		];
 
         // Faz o request

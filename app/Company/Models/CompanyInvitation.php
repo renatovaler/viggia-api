@@ -2,6 +2,7 @@
 
 namespace App\Company\Models;
 
+use App\User\Models\User;
 use App\Company\Models\Company;
 
 use Database\Factories\Company\CompanyInvitationFactory;
@@ -77,4 +78,15 @@ class CompanyInvitation extends Model
     {
         return $this->belongsTo(Company::class, 'company_id');
     }
+
+    /**
+     * Retorna dados do usuário convidado, caso exista
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function invitedUser(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'email', 'email');
+    }
+    
 }

@@ -21,11 +21,11 @@ class VerifyInviteController extends Controller
      *
      * @param string $invitation
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return \App\Company\Http\Resources\CompanyInviteResource
     *
     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function __invoke(string $invitation): JsonResponse
+    public function __invoke(string $invitation): CompanyInviteResource
     {
         // Aqui usamos firstOfFail(), pois se o convite não existe, tem que stopar
         $invite = (new CompanyInvitation())->where('token', $invitation)->firstOrFail();
@@ -51,6 +51,6 @@ class VerifyInviteController extends Controller
             'expires_in' => $invite->expires_in
         ];
 
-        return (new CompanyInviteResource($response))->response($request);
+        return (new CompanyInviteResource($invite));
     }
 }

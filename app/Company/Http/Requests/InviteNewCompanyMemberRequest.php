@@ -27,7 +27,7 @@ class InviteNewCompanyMemberRequest extends FormRequest
             'company_id' => ['required', 'numeric', 'exists:companies,id'],
             'email' => ['required', 'string', 'email', 'max:255'],
             'roles' => ['required', 'array'],
-            'roles.*.id' => ['required', 'numeric', 'exists:roles,id'],
+            'roles.*' => ['required', 'numeric', 'exists:roles,id'],
         ];
     }
 
@@ -46,9 +46,9 @@ class InviteNewCompanyMemberRequest extends FormRequest
             'email.email' => __('É necessário informar um e-mail válido para o usuário.'),
             'roles.required' => __('É necessário informar as permissões do usuário.'),
             'roles.array' => __('O conjunto de permissões deve ser enviado como uma matriz.'),
-            'roles.*.id.required' => __('É necessário informar as permissões do usuário.'),
-            'roles.*.id.numeric' => __('O ID da permissão deve ser numérico.'),
-            'roles.*.id.exists' => __('A permissão informada não existe em nosso banco de dados.'),
+            'roles.*.required' => __('É necessário informar as permissões do usuário.'),
+            'roles.*.numeric' => __('O ID da permissão deve ser numérico.'),
+            'roles.*.exists' => __('A permissão informada não existe em nosso banco de dados.'),
         ];
     }
 }

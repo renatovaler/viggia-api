@@ -15,7 +15,9 @@ return new class extends Migration
         Schema::create('company_invitations', function (Blueprint $table) {
             $table->id();
             $table->foreignId('company_id')->constrained()->cascadeOnDelete();
-            $table->string('email');
+            $table->string('email')
+                ->references('email')
+                ->on('users');
             $table->json('roles')->nullable();
             $table->uuid('token');
             $table->timestamps();
@@ -25,7 +27,7 @@ return new class extends Migration
     }
 
     /**
-     * Reverse the migrations.
+     * Reverse the migrations. 
      *
      * @return void
      */

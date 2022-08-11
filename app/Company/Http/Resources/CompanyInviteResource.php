@@ -2,6 +2,7 @@
 
 namespace App\Company\Http\Resources;
 
+use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class CompanyInviteResource extends JsonResource
@@ -17,15 +18,15 @@ class CompanyInviteResource extends JsonResource
         return [
 			'id' => $this->id,
 			'token' => $this->token,
-			'company_id' => $this->companyId,
-            'user' => [
-                'id' => $this->user->id,
-                'email' => $this->user->email,
-                'name' => $this->user->name
-            ],
+			'company_id' => $this->company_id,
+            'user' => $this->whenLoaded('invitedUser', [
+                'id' => $this->invitedUser->id,
+                'email' => $this->invitedUser->email,
+                'name' => $this->invitedUser->name
+            ]),
             'roles' => $this->roles,
-            'expired' => $this->expired,
-            'expired_at' => $this->expired_at
+            'expired' => (Carbon::parse($this->expires_in) < Carbon::now()),
+            'expires_in' => $this->expires_in
         ];
     }
 }

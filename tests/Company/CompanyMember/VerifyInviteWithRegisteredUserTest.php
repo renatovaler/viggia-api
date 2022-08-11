@@ -18,30 +18,19 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class AcceptInviteWithNonExistingUserTest extends TestCase
+class VerifyInviteWithRegisteredUserTest extends TestCase
 {
 	use WithFaker;
     use RefreshDatabase;
 
-	protected function generateUniqueEmail()
-	{
-		// Gera um e-mail a ser convidado como membro
-		$email = $this->faker->unique()->safeEmail();
-		return (
-			(new User())->where('email', $email)->exists() ?
-			$this->generateUniqueEmail() :
-			$email
-		);
-	}
-
 	/**
-	 * Teste - aceitar convite com usuário não cadastrado, convite válido e parâmetros válidos
-	 * Usuário já cadastrado: NÃO
+	 * Teste - Verifica convite com usuário já existente, convite válido e parâmetros válidos
+	 * Usuário já cadastrado: SIM
 	 * Autorizado: SIM
 	 * Parâmetros válidos: SIM
 	 * Convite expirado: NÃO
 	*/
-	public function test_accept_invite_to_company_with_non_existing_user_valid_params_and_valid_invite()
+	public function test_verify_invite_to_company_with_existing_user()
 	{
 		// Cria um usuário Owner da empresa
 		$ownerUser = $this->createCommonUser();
@@ -80,19 +69,19 @@ class AcceptInviteWithNonExistingUserTest extends TestCase
 		// Verifica se o Owner foi mesmo deslogado
         $this->assertGuest();
 
-		// Gera um e-mail a para ser convidado como membro da equipe
+		// Cria um usuário a ser convidado para a empresa
+		$memberUser = $this->createCommonUser();
 
-		$email = $this->generateUniqueEmail();
-
-		// Confirma que esse usuário novo não existe
-		$this->assertDatabaseMissing('users', [
-			'email' => $email
-		]);
+		// Faz login do memberUser
+		Auth::loginUsingId($memberUser->id);
+		
+		// Verifica se o memberUser está logado
+		$this->assertAuthenticated();
 
 		// Cria o convite
 		$invitation = CompanyInvitationModel::create([
 			'company_id' => $company->id,
-			'email' => $email,
+			'email' => $memberUser->email,
 			'roles' => [
 				(new Role())->where('name', 'company_member')->first()->id
 			],
@@ -100,44 +89,45 @@ class AcceptInviteWithNonExistingUserTest extends TestCase
 			'expires_in' => Carbon::now()->addHours(48)
 		]);
 
-		// Monta o array com os parâmetros do request
-		$data = [
-			'token' => $invitation->token,
-			'email' => $invitation->email,
-			'name' => $this->faker->name(),
-            'password' => 'password',
-            'password_confirmation' => 'password',
-		];
-
-		// Faz o request para aceitar o convite
-        $response = $this->postJson('/companies/company-invitations/accept', $data);
-
-		// Verifica se o usuário foi criado com o e-mail do convite
-		$this->assertDatabaseHas('users', ['email' => $invitation->email]);
-
-		// Verifica se o convite foi deletado
-		$this->assertDatabaseMissing('company_invitations', [
+		// Verifica se o convite foi criado
+		$this->assertDatabaseHas('company_invitations', [
 			'id' => $invitation->id,
 			'token' => $invitation->token
 		]);
 
-		// Verifica se o usuário foi adicionado à equipe
-		$this->assertTrue(
-			$company->fresh()->hasOnlyCompanyMemberWithEmail($invitation->email)
-		);
+		// Faz o request para verificar o convite
+        $response = $this->getJson('/companies/company-invitations/' . $invitation->token);
 
-		// Verifica se a requisição foi um sucesso com retorno "NoContent"
-		$response->assertNoContent();
+		// Verifica se está correta a estrutura do JSON de resposta
+        $response->assertJsonStructure([
+			'data' => [
+				'id',
+				'token',
+				'company_id',
+				'user' => [
+					'id',
+					'email',
+					'name'
+				],
+				'roles',
+				'expired',
+				'expires_in'
+			]
+		]);
+
+		// Verifica se o código de resposta HTTP está correto (200)
+		$response->assertOk();
 	}
 	
+
 	/**
-	 * Teste - aceitar convite com usuário não cadastrado, convite válido, mas parâmetros de request inválidos
-	 * Usuário já cadastrado: NÃO
+	 * Teste - aceitar convite com usuário existente, convite válido, mas parâmetros de request inválidos
+	 * Usuário já cadastrado: SIM
 	 * Autorizado: SIM
 	 * Parâmetros válidos: NÃO
 	 * Convite expirado: NÃO
 	*/
-	public function test_accept_invite_to_company_with_non_existing_user_valid_invite_but_invalid_params()
+	public function test_accept_invite_to_company_with_existing_user_valid_invite_but_invalid_params()
 	{
 		// Cria um usuário Owner da empresa
 		$ownerUser = $this->createCommonUser();
@@ -176,19 +166,19 @@ class AcceptInviteWithNonExistingUserTest extends TestCase
 		// Verifica se o Owner foi mesmo deslogado
         $this->assertGuest();
 
-		// Gera um e-mail a para ser convidado como membro da equipe
+		// Cria um usuário a ser convidado para a empresa
+		$memberUser = $this->createCommonUser();
 
-		$email = $this->generateUniqueEmail();
-
-		// Confirma que esse usuário novo não existe
-		$this->assertDatabaseMissing('users', [
-			'email' => $email
-		]);
+		// Faz login do memberUser
+		Auth::loginUsingId($memberUser->id);
+		
+		// Verifica se o memberUser está logado
+		$this->assertAuthenticated();
 
 		// Cria o convite
 		$invitation = CompanyInvitationModel::create([
 			'company_id' => $company->id,
-			'email' => $email,
+			'email' => $memberUser->email,
 			'roles' => [
 				(new Role())->where('name', 'company_member')->first()->id
 			],
@@ -196,12 +186,12 @@ class AcceptInviteWithNonExistingUserTest extends TestCase
 			'expires_in' => Carbon::now()->addHours(48)
 		]);
 
-		// Faz o request para aceitar o convite
-        $response = $this->postJson('/companies/company-invitations/accept', []);
+		// Faz o request para aceitar o convite, mas com parâmetros inválidos
+        $response = $this->actingAs(Auth::user())->postJson('/companies/company-invitations/accept', []);
 
 		// Confirma que o usuário NÃO foi adicionado à equipe
 		$this->assertFalse(
-			$company->fresh()->hasOnlyCompanyMemberWithEmail($invitation->email)
+			$company->fresh()->hasOnlyCompanyMember($memberUser->id)
 		);
 
 		// Verifica se está correta a estrutura do JSON de resposta
@@ -221,8 +211,8 @@ class AcceptInviteWithNonExistingUserTest extends TestCase
 	}
 
 	/**
-	 * Teste - aceitar convite com usuário não cadastrado, mas com convite expirado
-	 * Usuário já cadastrado: NÃO
+	 * Teste - aceitar convite com usuário existente, mas com convite expirado
+	 * Usuário já cadastrado: SIM
 	 * Autorizado: SIM
 	 * Parâmetros válidos: SIM
 	 * Convite expirado: SIM
@@ -266,19 +256,19 @@ class AcceptInviteWithNonExistingUserTest extends TestCase
 		// Verifica se o Owner foi mesmo deslogado
         $this->assertGuest();
 
-		// Gera um e-mail a para ser convidado como membro da equipe
+		// Cria um usuário a ser convidado para a empresa
+		$memberUser = $this->createCommonUser();
 
-		$email = $this->generateUniqueEmail();
+		// Faz login do memberUser
+		Auth::loginUsingId($memberUser->id);
+		
+		// Verifica se o memberUser está logado
+		$this->assertAuthenticated();
 
-		// Confirma que esse usuário novo não existe
-		$this->assertDatabaseMissing('users', [
-			'email' => $email
-		]);
-
-		// Cria o convite com token já expirado
+		// Cria o convite
 		$invitation = CompanyInvitationModel::create([
 			'company_id' => $company->id,
-			'email' => $email,
+			'email' => $memberUser->email,
 			'roles' => [
 				(new Role())->where('name', 'company_member')->first()->id
 			],
@@ -290,17 +280,15 @@ class AcceptInviteWithNonExistingUserTest extends TestCase
 		$data = [
 			'token' => $invitation->token,
 			'email' => $invitation->email,
-			'name' => $this->faker->name(),
-            'password' => 'password',
-            'password_confirmation' => 'password',
+			'name' => $this->faker->name()
 		];
 
-		// Faz o request para aceitar o convite
-        $response = $this->postJson('/companies/company-invitations/accept', $data);
+		// Faz o request para aceitar o convite já expirado
+        $response = $this->actingAs(Auth::user())->postJson('/companies/company-invitations/accept', $data);
 
 		// Confirma que o usuário NÃO foi adicionado à equipe
 		$this->assertFalse(
-			$company->fresh()->hasOnlyCompanyMemberWithEmail($invitation->email)
+			$company->fresh()->hasOnlyCompanyMember($memberUser->id)
 		);
 
 		// Verifica se está correta a estrutura do JSON de resposta

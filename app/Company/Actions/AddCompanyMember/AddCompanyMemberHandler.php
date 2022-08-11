@@ -35,11 +35,10 @@ final class AddCompanyMemberHandler
             // Pega os dados do usuário
             $user = $company->companyMemberById($command->userId);
 
-            // Pega os dados das roles do usuário em relação à equipe
-            $roles = collect($invite->roles);
-
             // Adiciona as permissões da company ao usuário
-            $user->fresh()->addRoleToCompanyMember($roles->values()->pluck('id')->toArray(), $company->id);
+            //$user->fresh()->addRoleToCompanyMember($roles->values()->pluck('id')->toArray(), $company->id);
+
+            $user->fresh()->addRoleToCompanyMember($invite->roles, $company->id);
 
             // Deleta o convite
             $invite->delete();

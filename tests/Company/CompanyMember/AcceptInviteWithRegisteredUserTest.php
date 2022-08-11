@@ -83,8 +83,7 @@ class AcceptInviteWithRegisteredUserTest extends TestCase
 			'company_id' => $company->id,
 			'email' => $memberUser->email,
 			'roles' => [
-				['id' => $systemRole = ( (new Role())->where('name', 'common_user')->first() )->id],
-				['id' => $companyRole = ( (new Role())->where('name', 'company_member')->first() )->id]
+				(new Role())->where('name', 'company_member')->first()->id
 			],
 			'token' => (string) Str::orderedUuid(),
 			'expires_in' => Carbon::now()->addHours(48)
@@ -176,8 +175,7 @@ class AcceptInviteWithRegisteredUserTest extends TestCase
 			'company_id' => $company->id,
 			'email' => $memberUser->email,
 			'roles' => [
-				['id' => $systemRole = ( (new Role())->where('name', 'common_user')->first() )->id],
-				['id' => $companyRole = ( (new Role())->where('name', 'company_member')->first() )->id]
+				(new Role())->where('name', 'company_member')->first()->id
 			],
 			'token' => (string) Str::orderedUuid(),
 			'expires_in' => Carbon::now()->addHours(48)
@@ -267,8 +265,7 @@ class AcceptInviteWithRegisteredUserTest extends TestCase
 			'company_id' => $company->id,
 			'email' => $memberUser->email,
 			'roles' => [
-				['id' => $systemRole = ( (new Role())->where('name', 'common_user')->first() )->id],
-				['id' => $companyRole = ( (new Role())->where('name', 'company_member')->first() )->id]
+				(new Role())->where('name', 'company_member')->first()->id
 			],
 			'token' => (string) Str::orderedUuid(),
 			'expires_in' => Carbon::now()->subHours(48) // Token expirado
