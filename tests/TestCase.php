@@ -64,6 +64,22 @@ abstract class TestCase extends BaseTestCase
     }
 
 	/*
+	* Generate unique email (non registered user) for tests
+	*
+	* @return void
+	*/
+	public function generateUniqueEmail()
+	{
+		// Gera um e-mail ainda não cadastrado
+		$email = $this->faker->unique()->safeEmail();
+		return (
+			(new User())->where('email', $email)->exists() ?
+			$this->generateUniqueEmail() :
+			$email
+		);
+	}
+
+	/*
 	* Create default roles for tests
 	*
 	* @return void

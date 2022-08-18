@@ -23,17 +23,6 @@ class AcceptInviteWithNonExistingUserTest extends TestCase
 	use WithFaker;
     use RefreshDatabase;
 
-	protected function generateUniqueEmail()
-	{
-		// Gera um e-mail a ser convidado como membro
-		$email = $this->faker->unique()->safeEmail();
-		return (
-			(new User())->where('email', $email)->exists() ?
-			$this->generateUniqueEmail() :
-			$email
-		);
-	}
-
 	/**
 	 * Teste - aceitar convite com usuário não cadastrado, convite válido e parâmetros válidos
 	 * Usuário já cadastrado: NÃO
@@ -81,7 +70,6 @@ class AcceptInviteWithNonExistingUserTest extends TestCase
         $this->assertGuest();
 
 		// Gera um e-mail a para ser convidado como membro da equipe
-
 		$email = $this->generateUniqueEmail();
 
 		// Confirma que esse usuário novo não existe

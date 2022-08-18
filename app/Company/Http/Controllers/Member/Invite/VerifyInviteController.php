@@ -27,29 +27,8 @@ class VerifyInviteController extends Controller
      */
     public function __invoke(string $invitation): CompanyInviteResource
     {
-        // Aqui usamos firstOfFail(), pois se o convite não existe, tem que stopar
+        // Aqui usamos firstOrFail(), pois se o convite não existe, tem que stopar
         $invite = (new CompanyInvitation())->where('token', $invitation)->firstOrFail();
-
-        /*
-        * Não pode usar firstOfFail(), apenas first()
-        * Se o usuário não existir, o script não pode stopar
-        * pois nesse caso o convidado tem que poder se cadastrar
-        */        
-        $user = (new User())->where('email', $invite->email)->first();
-
-        $response = [
-			'id' => $invite->id,
-			'token' => $invite->token,
-			'companyId' => $invite->company_id,
-            'user' => collect([
-                'id' => $user->id,
-                'email' => $user->email,
-                'name' => $user->name
-            ]),
-            'roles' => $invite->roles,
-            'expired' => (Carbon::parse($invite->expires_in) < Carbon::now()),
-            'expires_in' => $invite->expires_in
-        ];
 
         return (new CompanyInviteResource($invite));
     }

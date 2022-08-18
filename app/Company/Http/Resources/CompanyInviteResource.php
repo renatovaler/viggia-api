@@ -19,11 +19,15 @@ class CompanyInviteResource extends JsonResource
 			'id' => $this->id,
 			'token' => $this->token,
 			'company_id' => $this->company_id,
-            'user' => $this->whenLoaded('invitedUser', [
-                'id' => $this->invitedUser->id,
-                'email' => $this->invitedUser->email,
-                'name' => $this->invitedUser->name
-            ]),
+            $this->mergeWhen(! is_null($this->invitedUser), function() {
+                return [
+                    'user' => [
+                        'id' => $this->invitedUser->id,
+                        'email' => $this->invitedUser->email,
+                        'name' => $this->invitedUser->name
+                    ]
+                ];
+            }),
             'roles' => $this->roles,
             'expired' => (Carbon::parse($this->expires_in) < Carbon::now()),
             'expires_in' => $this->expires_in

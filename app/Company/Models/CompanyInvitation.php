@@ -89,4 +89,27 @@ class CompanyInvitation extends Model
         return $this->belongsTo(User::class, 'email', 'email');
     }
     
+    /**
+     * Retorna informações de determinado convite.
+	 * A busca é feita por ID.
+     *
+     * @param  int $inviteId
+     * @return self
+     */
+    public function getInviteById(int $inviteId): self
+    {
+        return $this->where('id', $inviteId)->firstOrFail();
+    }
+
+    /**
+     * Exclui determinado convite
+	 * A busca é feita por ID.
+     *
+     * @param  int $inviteId
+     * @return bool
+     */
+    public function removeInvite(int $inviteId): bool
+    {
+        return $this->getInviteById($inviteId)->delete();
+    }
 }

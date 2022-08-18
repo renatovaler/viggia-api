@@ -20,8 +20,13 @@ use App\Company\Actions\CreateCompany\CreateCompanyHandler;
 use App\Company\Actions\UpdateCompanyInformation\UpdateCompanyInformation;
 use App\Company\Actions\UpdateCompanyInformation\UpdateCompanyInformationHandler;
 
+// Invite Company Member
 use App\Company\Actions\InviteNewCompanyMember\InviteNewCompanyMember;
 use App\Company\Actions\InviteNewCompanyMember\InviteNewCompanyMemberHandler;
+use App\Company\Actions\DeleteInviteToBeCompanyMember\DeleteInviteToBeCompanyMember;
+use App\Company\Actions\DeleteInviteToBeCompanyMember\DeleteInviteToBeCompanyMemberHandler;
+
+// Add/Remove Company Member
 use App\Company\Actions\AddCompanyMember\AddCompanyMember;
 use App\Company\Actions\AddCompanyMember\AddCompanyMemberHandler;
 use App\Company\Actions\RemoveCompanyMember\RemoveCompanyMember;
@@ -99,6 +104,7 @@ class CompanyServiceProvider extends ServiceProvider
             GetCurrentUserCompanyList::class => GetCurrentUserCompanyListHandler::class,
             GetCompanyList::class => GetCompanyListHandler::class,
             InviteNewCompanyMember::class => InviteNewCompanyMemberHandler::class,
+            DeleteInviteToBeCompanyMember::class => DeleteInviteToBeCompanyMemberHandler::class,
             AddCompanyMember::class => AddCompanyMemberHandler::class,
             RemoveCompanyMember::class => RemoveCompanyMemberHandler::class,
 
