@@ -68,13 +68,13 @@ class AcceptCompanyInviteRequest extends FormRequest
 
             $invite = (new CompanyInvitation())->where('token', $this->input('token'))->first();
             $now = Carbon::now();
-                $expiresIn = Carbon::parse($invite->expires_in);
+            $expiresIn = Carbon::parse($invite->expires_in);
 
-                if ( true === ($expiresIn < $now) ) {
-                    $validator->errors()->add(
-                        'invite_expired', __('This invite has been expired!')
-                    );
-                }
+            if ( true === ($expiresIn < $now) ) {
+                $validator->errors()->add(
+                    'invite_expired', __('This invite has been expired!')
+                );
+            }
         });
     }
 }

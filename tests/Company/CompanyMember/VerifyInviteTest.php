@@ -177,7 +177,7 @@ class VerifyInviteTest extends TestCase
 		// Verifica se o memberUser está logado
 		$this->assertAuthenticated();
 
-		// Cria o convite
+		// Cria o convite já expirado
 		$invitation = CompanyInvitationModel::create([
 			'company_id' => $company->id,
 			'email' => $memberUser->email,
