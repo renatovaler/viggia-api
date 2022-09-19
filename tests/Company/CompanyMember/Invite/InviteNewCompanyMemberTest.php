@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Company\CompanyMember;
+namespace Tests\Company\CompanyMember\Invite;
 
 use App\User\Models\User;
 use App\Company\Models\Company;
